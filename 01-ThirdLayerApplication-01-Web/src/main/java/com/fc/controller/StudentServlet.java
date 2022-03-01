@@ -14,7 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/page")
 public class StudentServlet extends HttpServlet {
-    // 获取业务层接口的实现类对象
+    // 获取业务层接口的实现类对象【BO】
     StudentService studentService = new StudentServiceImpl();
 
     @Override
@@ -33,12 +33,12 @@ public class StudentServlet extends HttpServlet {
         // 每页显示多少条内容
         int pageSize = 5;
 
-        // 获取分页数据对象
+        // 通过业务层对象获取分页数据对象
         PageInfo<Student> pageInfo = studentService.getPageInfo(pageNo, pageSize);
 
         req.setAttribute("pageInfo", pageInfo);
 
-        req.getRequestDispatcher("index.jsp").forward(req, resp);
+        req.getRequestDispatcher("page.jsp").forward(req, resp);
     }
 
     @Override
