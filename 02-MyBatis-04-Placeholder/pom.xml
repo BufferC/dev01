@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fc</groupId>
-    <artifactId>02-MyBatis-03-Character</artifactId>
+    <artifactId>02-MyBatis-04-Placeholder</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -39,5 +39,4 @@
             <version>1.18.20</version>
         </dependency>
     </dependencies>
-
 </project>
