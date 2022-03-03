@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.StudentDao">
+    <select id="findById" parameterType="Integer" resultType="com.fc.entity.Student">
+        select * from student where id = #{id}
+    </select>
+
+    <!--可以通过序号的形式进行绑定-->
+    <select id="findByIdAndName" resultType="com.fc.entity.Student">
+        select * from student where id = #{param1} and name = #{param2}
+    </select>
+
+    <select id="findByIdAndAge" resultType="com.fc.entity.Student">
+        select * from student where id = #{arg0} and age = #{arg1}
+    </select>
+
+    <!--通过注解进行参数绑定-->
+    <select id="findByNameAndAge" resultType="com.fc.entity.Student">
+        select * from student where name = #{name} and age = #{age}
+    </select>
+</mapper>
