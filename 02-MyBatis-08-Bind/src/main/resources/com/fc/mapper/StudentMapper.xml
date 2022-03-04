@@ -21,4 +21,12 @@
     <select id="findByNameAndAge" resultType="com.fc.entity.Student">
         select * from student where name = #{name} and age = #{age}
     </select>
+
+    <select id="findByIdAndGender" resultType="com.fc.entity.Student">
+        select * from student where id = #{id} and gender = #{gender}
+    </select>
+
+    <insert id="insert">
+        insert into student(name, age, gender, birthday, info) values (#{name}, #{age}, #{gender}, #{birthday}, #{info})
+    </insert>
 </mapper>
