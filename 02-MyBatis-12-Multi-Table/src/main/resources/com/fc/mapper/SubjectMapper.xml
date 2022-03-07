@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.SubjectDao">
+    <resultMap id="studentMap" type="com.fc.entity.Student">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result property="gender" column="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result property="info" column="info"/>
+    </resultMap>
+
+    <resultMap id="findAllWithStudentMap" type="com.fc.entity.Subject">
+        <id column="sub_id" property="id"/>
+        <result column="sub_name" property="name"/>
+
+        <!--引用其他mapper映射文件中的resultMap-->
+        <!--<collection property="students" resultMap="com.fc.dao.StudentDao.findAllWithSubjectMap"/>-->
+
+        <!--引用当前mapper映射文件中的resultMap-->
+        <collection property="students" resultMap="studentMap"/>
+
+        <!--<collection property="students" javaType="List" ofType="com.fc.entity.Student">-->
+        <!--    <id column="id" property="id"/>-->
+        <!--    <result column="name" property="name"/>-->
+        <!--    <result column="age" property="age"/>-->
+        <!--    <result property="gender" column="gender"/>-->
+        <!--    <result column="birthday" property="birthday"/>-->
+        <!--    <result property="info" column="info"/>-->
+        <!--</collection>-->
+    </resultMap>
+
+    <select id="findAllWithStudent" resultMap="findAllWithStudentMap">
+        select stu.*, sub.id as sub_id, sub.name as sub_name
+        from subject sub
+                 inner join student_ref_subject srs
+                            on sub.id = srs.sub_id
+                 inner join student stu
+                            on stu.id = srs.stu_id
+    </select>
+</mapper>

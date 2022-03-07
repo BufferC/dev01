@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.EmployeeDao">
+    <resultMap id="employeeMap" type="com.fc.entity.Employee">
+        <id property="id" column="emp_id"/>
+        <result property="name" column="emp_name"/>
+
+        <!--一对一的关系映射标签，必须配置property和javaType-->
+        <association property="department" javaType="com.fc.entity.Department">
+            <id column="dept_id" property="id"/>
+            <result column="dept_name" property="name"/>
+        </association>
+    </resultMap>
+
+    <select id="findAll" resultMap="employeeMap">
+        select * from employee
+        inner join department d
+        on employee.dept_id = d.dept_id
+    </select>
+</mapper>

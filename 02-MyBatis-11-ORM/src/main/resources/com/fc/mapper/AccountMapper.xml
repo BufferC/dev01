@@ -19,4 +19,9 @@
     <select id="findAllOnMap" resultMap="accountMap">
         select * from t_account
     </select>
+
+    <select id="findById" resultType="com.fc.entity.TAcount">
+        select *
+        from t_account where t_id = #{id};
+    </select>
 </mapper>
