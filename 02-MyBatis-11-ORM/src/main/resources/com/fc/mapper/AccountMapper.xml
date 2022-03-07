@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.AccountDao">
+    <!--映射的规则，id对应当前规则的唯一标识，type对应JavaBean的数据类型-->
+    <resultMap id="accountMap" type="com.fc.entity.Account">
+        <!--id标签用来映射主键，column对应列名，property对应变量名-->
+        <id column="t_id" property="id"/>
+        <result column="t_name" property="username"/>
+        <result column="t_pwd" property="password"/>
+    </resultMap>
+
+    <select id="findAll" resultType="com.fc.entity.Account">
+        select t_id as id, t_name as username, t_pwd as password from t_account
+    </select>
+
+    <select id="findAllOnMap" resultMap="accountMap">
+        select * from t_account
+    </select>
+</mapper>
