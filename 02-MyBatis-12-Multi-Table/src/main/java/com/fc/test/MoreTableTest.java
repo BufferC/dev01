@@ -10,7 +10,6 @@ import com.fc.entity.Student;
 import com.fc.entity.Subject;
 import com.fc.util.MyBatisUtil;
 import org.junit.Test;
-
 import java.util.List;
 
 public class MoreTableTest {

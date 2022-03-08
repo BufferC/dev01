@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <!-- 配置日志信息输出目的地 -->
+    <Appenders>
+        <!-- 输出到控制台 -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--配置日志信息的格式 -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %style{[%t]}{bright,magenta} %highlight{%-5level}{ERROR=Bright RED, WARN=Bright Yellow, INFO=Bright Green, DEBUG=Bright Cyan, TRACE=Bright White} %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <!-- 定义logger,只有定义了logger并引入了appender,appender才会有效 -->
+    <Loggers>
+        <!-- 将dao接口所在的包填写进去,并用在控制台和文件中输出 -->
+        <logger name="com.fc.dao" level="TRACE" additivity="false">
+            <AppenderRef ref="Console"/>
+        </logger>
+
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
