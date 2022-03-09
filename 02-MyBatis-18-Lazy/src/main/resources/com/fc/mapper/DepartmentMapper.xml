@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
+<mapper namespace="com.fc.dao.DepartmentDao">
+    <resultMap id="findByDepartmentIdMap" type="com.fc.entity.Department">
+        <id property="id" column="dept_id"/>
+        <result column="dept_name" property="name"/>
+
+        <!--员工的映射没有写
+        column是查询的参数，select是另一个查询语句-->
+        <collection fetchType="lazy" property="employees" javaType="List"
+                    ofType="com.fc.entity.Employee" column="dept_id"
+                    select="com.fc.dao.EmployeeDao.findByDepartmentId"/>
+    </resultMap>
+
+    <select id="findByDepartmentId" resultMap="findByDepartmentIdMap">
+        select * from department where dept_id = #{id}
+    </select>
+</mapper>
