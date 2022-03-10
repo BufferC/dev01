@@ -10,7 +10,7 @@
         select * from student where id = #{id}
     </select>
 
-    <update flushCache="false" id="update">
+    <update flushCache="true" id="update">
         update student set info = #{info} where id = #{id}
     </update>
 </mapper>
