@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
 <mapper namespace="com.fc.dao.StudentDao">
-    <resultMap id="findAllWithSubjectMap" type="com.fc.entity.Student">
+    <resultMap id="findAllWithSubjectMap" type="com.fc.entity.com.fc.entity.Student">
         <id property="id" column="stu_id"/>
         <result property="name" column="stu_name"/>
         <result property="age" column="age"/>

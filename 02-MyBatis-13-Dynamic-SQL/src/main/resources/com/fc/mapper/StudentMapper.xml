@@ -9,17 +9,17 @@
         id, name, age, gender, birthday, info
     </sql>
 
-    <select id="findAll" resultType="com.fc.entity.Student">
+    <select id="findAll" resultType="com.fc.entity.com.fc.entity.Student">
         select <include refid="field"/>
         from student
     </select>
 
-    <select id="findById" resultType="com.fc.entity.Student">
+    <select id="findById" resultType="com.fc.entity.com.fc.entity.Student">
         select <include refid="field"/>
         from student
     </select>
 
-    <select id="findByKeyword" resultType="com.fc.entity.Student">
+    <select id="findByKeyword" resultType="com.fc.entity.com.fc.entity.Student">
         select <include refid="field"/>
         from student
         where 1 = 1
@@ -33,7 +33,7 @@
     </select>
 
     <!--where标签能够自动去除多余的and和or-->
-    <select id="findByStudent" resultType="com.fc.entity.Student">
+    <select id="findByStudent" resultType="com.fc.entity.com.fc.entity.Student">
         select <include refid="field"/>
         from student
         <where>
@@ -64,7 +64,7 @@
     </select>
 
     <!--trim可以声明指定的前后缀以及忽略指定的前后缀-->
-    <select id="findByStudentOnTrim" resultType="com.fc.entity.Student">
+    <select id="findByStudentOnTrim" resultType="com.fc.entity.com.fc.entity.Student">
         select <include refid="field"/>
         from student
         <trim prefix="where" prefixOverrides="or">

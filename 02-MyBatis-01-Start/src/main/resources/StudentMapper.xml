@@ -6,8 +6,8 @@
 <mapper namespace="com.fc.dao.StudentDao">
     <!--这是一个select语句的标签，id必须和对应接口中的方法名完全相同，但是必须唯一。resultType对应返回值的类型，也就是orm映射的O
     ，必须使用完全的全限定名-->
-    <select id="selectOne" resultType="com.fc.entity.Student">
-        select * from Student where id = 1
+    <select id="selectOne" resultType="com.fc.entity.com.fc.entity.Student">
+        select * from com.fc.entity.Student where id = 1
     </select>
 
     <!--用于添加的标签，id必须保持唯一，必须和接口中的方法名保持一致-->
@@ -16,7 +16,7 @@
     </insert>
 
     <!--通过id查询学生对应的SQL语句-->
-    <select id="findById" resultType="com.fc.entity.Student" parameterType="Integer">
+    <select id="findById" resultType="com.fc.entity.com.fc.entity.Student" parameterType="Integer">
         select * from student where id = #{id}
     </select>
 </mapper>

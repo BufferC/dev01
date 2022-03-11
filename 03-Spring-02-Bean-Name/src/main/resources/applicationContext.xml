@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--id一定要写-->
+    <!--name也能够用来起名字，但是不怎么用-->
+    <!--id属性可以不写，会默认使用小驼峰命名，不写的话就不能通过id去获取bean对象了-->
+    <bean id="student1" name="student student2 student3 student4 student5" class="com.fc.entity.Student"/>
+</beans>

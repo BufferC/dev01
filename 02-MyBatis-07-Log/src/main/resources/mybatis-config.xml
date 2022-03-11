@@ -15,7 +15,7 @@
 
     <!--声明类型别名-->
     <typeAliases>
-        <typeAlias type="com.fc.entity.Student" alias="Student"/>
+        <typeAlias type="com.fc.entity.com.fc.entity.Student" alias="com.fc.entity.Student"/>
     </typeAliases>
 
     <!--mybatis运行环境配置-->

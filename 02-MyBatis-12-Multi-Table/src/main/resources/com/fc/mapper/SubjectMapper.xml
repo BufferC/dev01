@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--映射文件，namespace命名空间：对应一个完全的全限定名，必须和对应的接口的路径相匹配-->
 <mapper namespace="com.fc.dao.SubjectDao">
-    <resultMap id="studentMap" type="com.fc.entity.Student">
+    <resultMap id="studentMap" type="com.fc.entity.com.fc.entity.Student">
         <id column="id" property="id"/>
         <result column="name" property="name"/>
         <result column="age" property="age"/>
@@ -23,7 +23,7 @@
         <!--引用当前mapper映射文件中的resultMap-->
         <collection property="students" resultMap="studentMap"/>
 
-        <!--<collection property="students" javaType="List" ofType="com.fc.entity.Student">-->
+        <!--<collection property="students" javaType="List" ofType="com.fc.entity.com.fc.entity.Student">-->
         <!--    <id column="id" property="id"/>-->
         <!--    <result column="name" property="name"/>-->
         <!--    <result column="age" property="age"/>-->

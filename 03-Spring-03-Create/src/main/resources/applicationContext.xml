@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--在容器中声明一个对象-->
+    <bean id="userDao" class="com.fc.dao.impl.UserDaoImpl"/>
+
+    <!--声明工厂-->
+    <bean id="userDaoFactory" class="com.fc.util.UserDaoFactory"/>
+
+    <!--通过工厂中的方法获取对象-->
+    <bean id="userDao2" factory-bean="userDaoFactory" factory-method="getUserDao"/>
+
+    <!--直接调用工厂的静态方法获取对象-->
+    <bean id="userDao3" class="com.fc.util.UserDaoStaticFactory" factory-method="getUserDao"/>
+</beans>

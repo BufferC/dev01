@@ -6,7 +6,7 @@
 <mapper namespace="com.fc.dao.StudentDao">
     <!--开启二级缓存，作用于当前dao下的所有方法-->
     <cache/>
-    <select id="findById" parameterType="Integer" resultType="com.fc.entity.Student">
+    <select id="findById" parameterType="Integer" resultType="com.fc.entity.com.fc.entity.Student">
         select * from student where id = #{id}
     </select>
 
