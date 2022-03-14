@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+    init-method:会在Spring容器创建完对象之后执行
+    destroy-method：会在Spring容器关闭之前，销毁对象时执行
+    -->
+    <bean id="student" init-method="eat" destroy-method="sleep" class="com.fc.entity.Student"/>
+</beans>
