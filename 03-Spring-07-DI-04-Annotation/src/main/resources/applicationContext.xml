@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--持久层对象-->
+    <bean id="userDao" class="com.fc.dao.impl.UserDaoImpl"/>
+
+    <!--业务层对象-->
+    <bean id="userService" class="com.fc.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="userController" class="com.fc.controller.UserController">
+        <property name="userService" ref="userService"/>
+    </bean>
+</beans>
