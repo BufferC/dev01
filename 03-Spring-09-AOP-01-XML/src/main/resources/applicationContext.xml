@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--Target:真实对象-->
+    <bean id="userService" class="com.fc.service.impl.UserServiceImpl"/>
+
+    <!--增强、通知-->
+    <bean id="advice" class="com.fc.advice.XMLAdvice"/>
+
+    <!--此标签用于设置所有aop相关的配置-->
+    <!--proxy-target-class:用于设置代理的类型，如果是false，默认就是走JDK动态代理，设置为true就是CGLIB动态代理-->
+    <aop:config proxy-target-class="false">
+        <!--切点-->
+        <aop:pointcut id="pointcut" expression="execution(* com.fc.service.impl.*ServiceImpl.*(..))"/>
+
+        <!--切面-->
+        <aop:aspect ref="advice">
+            <!--前置通知-->
+            <aop:before method="before" pointcut-ref="pointcut"/>
+            <aop:after method="after" pointcut-ref="pointcut"/>
+            <aop:after-throwing method="afterThrowing" pointcut-ref="pointcut"/>
+            <aop:after-returning method="afterReturning" pointcut-ref="pointcut"/>
+            <aop:around method="around" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
