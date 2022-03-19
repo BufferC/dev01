@@ -2,7 +2,9 @@ package com.fc.config;
 
 import com.alibaba.druid.pool.DruidDataSourceFactory;
 import com.fc.dao.AccountDao;
+import com.fc.dao.LocationDao;
 import com.fc.dao.impl.AccountDaoImpl;
+import com.fc.dao.impl.LocationDaoImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -20,8 +22,7 @@ import java.util.Properties;
 @ComponentScan("com.fc")
 // 声明了此注解，说明当前类是一个配置类，替换掉配置文件
 @Configuration
-// 开启注解支持
-@EnableTransactionManagement(proxyTargetClass = true)
+@EnableTransactionManagement
 public class TxtConfig {
     @Value("${jdbc.driver}")
     private String driverClassName;
@@ -65,5 +66,14 @@ public class TxtConfig {
         accountDao.setDataSource(dataSource);
 
         return accountDao;
+    }
+
+    @Bean
+    public LocationDao locationDao(DataSource dataSource) {
+        LocationDaoImpl locationDao = new LocationDaoImpl();
+
+        locationDao.setDataSource(dataSource);
+
+        return locationDao;
     }
 }

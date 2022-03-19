@@ -12,7 +12,7 @@ public class AccountTest {
     public void testAnnotation() {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext(TxtConfig.class);
 
-        AccountService service = applicationContext.getBean("annotationServiceImpl", AccountService.class);
+        AccountService service = applicationContext.getBean(AccountService.class);
 
         service.transfer(1, 2, 500L);
     }

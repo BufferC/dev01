@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("annotationServiceImpl")
+@Service
 public class AnnotationServiceImpl implements AccountService {
     @Autowired
     private AccountDao accountDao;
@@ -22,9 +22,4 @@ public class AnnotationServiceImpl implements AccountService {
         int num = 1 / 0;
 
         accountDao.increaseMoney(to, money);
-    }
-
-    public void setAccountDao(AccountDao accountDao) {
-        this.accountDao = accountDao;
-    }
-}
+    }}
