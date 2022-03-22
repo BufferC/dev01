@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <!--配置SpringMVC自带的字符编码集过滤器
+    用于解决post请求乱码问题-->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <!--加载初始化编码集作为参数-->
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+
+    <!--设置映射的路径-->
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <!--拦截所有的内容，全部都会经过这个过滤器-->
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!--配置前端控制器-->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <!--加载Spring容器-->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:springMvc.xml</param-value>
+        </init-param>
+        <!--启动时加载-->
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!--映射的路径-->
+    <servlet-mapping>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+</web-app>

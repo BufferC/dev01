@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--扫描指定路径下的所有注解-->
+    <context:component-scan base-package="com.fc"/>
+
+    <!--用于放行静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--用于放行动态资源-->
+    <mvc:annotation-driven/>
+
+    <!--location：位置，当前项目中的真实位置-->
+    <!--mapping：映射，URL访问的路径-->
+    <!--通过访问mapping中的路径就能够访问到location中真实的路径-->
+    <mvc:resources mapping="/image/**" location="/WEB-INF/image"/>
+    <mvc:resources mapping="/html/**" location="/WEB-INF/html"/>
+    <mvc:resources mapping="/css/**" location="/WEB-INF/css"/>
+    <mvc:resources mapping="/js/**" location="/WEB-INF/js"/>
+    <mvc:resources mapping="/font/**" location="/WEB-INF/font"/>
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--配置指定的前后缀-->
+        <property name="prefix" value="/WEB-INF/jsp/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+</beans>
