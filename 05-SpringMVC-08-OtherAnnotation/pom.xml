@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fc</groupId>
-    <artifactId>05-SpringMVC-07-ResponseData</artifactId>
+    <artifactId>05-SpringMVC-08-OtherAnnotation</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>05-SpringMVC-07-ResponseData</name>
+    <name>05-SpringMVC-08-OtherAnnotation</name>
     <packaging>war</packaging>
 
     <properties>
@@ -24,15 +24,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.20</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.12.3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
         </dependency>
 
         <dependency>

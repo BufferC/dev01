@@ -13,6 +13,5 @@
     <!--扫描指定路径下的所有注解-->
     <context:component-scan base-package="com.fc"/>
 
-    <!--可以开启一些额外的附加功能，日期格式转换器，Json解析-->
     <mvc:annotation-driven/>
 </beans>
