@@ -9,8 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 // 可以对Controller进行增强
+// 对应AOP切点
 @ControllerAdvice
 public class ExceptionAdvice {
+    // 通知
     @ExceptionHandler(MyException.class)
     @ResponseBody
     public Map<String, Object> handleMyException() {

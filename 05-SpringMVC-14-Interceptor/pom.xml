@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.fc</groupId>
-    <artifactId>05-SpringMVC-13-ControllerAdvice</artifactId>
+    <artifactId>05-SpringMVC-14-Interceptor</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>05-SpringMVC-13-ControllerAdvice</name>
+    <name>05-SpringMVC-14-Interceptor</name>
     <packaging>war</packaging>
 
     <properties>
