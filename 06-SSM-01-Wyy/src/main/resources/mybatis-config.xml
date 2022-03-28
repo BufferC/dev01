@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis配置-->
+<configuration>
+    <!--指定Mapper.xml的路径位置-->
+    <mappers>
+        <mapper resource="com/fc/mapper/TbMusicMapper.xml"/>
+    </mappers>
+</configuration>
