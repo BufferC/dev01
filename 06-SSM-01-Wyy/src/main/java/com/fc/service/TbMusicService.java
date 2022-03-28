@@ -8,4 +8,6 @@ public interface TbMusicService {
     List<TbMusic> findAll();
 
     TbMusic findById(Integer musicId);
+
+    TbMusic nextSong(Integer musicId);
 }

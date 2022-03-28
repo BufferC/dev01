@@ -24,4 +24,17 @@ public class TbMusicServiceImpl implements TbMusicService {
     public TbMusic findById(Integer musicId) {
         return musicMapper.selectByPrimaryKey(musicId);
     }
+
+    @Override
+    public TbMusic nextSong(Integer musicId) {
+        int maxId = musicMapper.findMaxId();
+
+        if (musicId != maxId) {
+            musicId++;
+        } else {
+            musicId = 1;
+        }
+
+        return musicMapper.selectByPrimaryKey(musicId);
+    }
 }
