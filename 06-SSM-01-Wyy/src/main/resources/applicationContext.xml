@@ -56,7 +56,7 @@
     <tx:annotation-driven/>
 
     <!--通知-->
-    <tx:advice id="advice">
+    <tx:advice id="txAdvice">
         <tx:attributes>
             <tx:method name="find*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
             <tx:method name="select*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
@@ -72,6 +72,6 @@
     <aop:config>
         <!--切点-->
         <aop:pointcut id="pointcut" expression="execution(* com.fc.service.impl.*ServiceImpl.*(..))"/>
-        <aop:advisor advice-ref="advice" pointcut-ref="pointcut"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
     </aop:config>
 </beans>
