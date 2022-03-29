@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.TbMusicMapper;
 import com.fc.entity.TbMusic;
+import com.fc.entity.TbMusicExample;
 import com.fc.service.TbMusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,27 @@ public class TbMusicServiceImpl implements TbMusicService {
         }
 
         return musicMapper.selectByPrimaryKey(musicId);
+    }
+
+    @Override
+    public TbMusic prevSong(Integer musicId) {
+        if (musicId != 1) {
+            musicId--;
+        } else {
+            musicId = musicMapper.findMaxId();
+        }
+
+        return musicMapper.selectByPrimaryKey(musicId);
+    }
+
+    @Override
+    public List<TbMusic> search(String keyword) {
+        TbMusicExample tbMusicExample = new TbMusicExample();
+
+        TbMusicExample.Criteria criteria = tbMusicExample.createCriteria();
+
+        criteria.andMusicNameLike("%" + keyword + "%");
+
+        return musicMapper.selectByExample(tbMusicExample);
     }
 }

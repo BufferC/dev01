@@ -10,4 +10,8 @@ public interface TbMusicService {
     TbMusic findById(Integer musicId);
 
     TbMusic nextSong(Integer musicId);
+
+    TbMusic prevSong(Integer musicId);
+
+    List<TbMusic> search(String keyword);
 }

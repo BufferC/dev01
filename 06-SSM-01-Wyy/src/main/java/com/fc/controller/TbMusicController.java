@@ -28,4 +28,14 @@ public class TbMusicController {
     public TbMusic nextSong(Integer musicId) {
         return tbMusicService.nextSong(musicId);
     }
+
+    @RequestMapping("prevSong")
+    public TbMusic prevSong(Integer musicId) {
+        return tbMusicService.prevSong(musicId);
+    }
+
+    @RequestMapping("search")
+    public List<TbMusic> search(String keyword) {
+        return tbMusicService.search(keyword);
+    }
 }
