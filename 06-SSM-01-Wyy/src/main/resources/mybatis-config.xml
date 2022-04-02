@@ -36,6 +36,4 @@
             <property name="reasonable" value="true"/>
         </plugin>
     </plugins>
-
-    <!--指定Mapper.xml的路径位置-->
 </configuration>
