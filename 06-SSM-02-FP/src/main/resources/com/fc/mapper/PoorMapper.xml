@@ -1,0 +1,443 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.dao.PoorMapper">
+  <resultMap id="BaseResultMap" type="com.fc.entity.Poor">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="sn" jdbcType="VARCHAR" property="sn" />
+    <result column="member" jdbcType="VARCHAR" property="member" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="income" jdbcType="INTEGER" property="income" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="audit" jdbcType="VARCHAR" property="audit" />
+    <result column="last_click_time" jdbcType="TIMESTAMP" property="lastClickTime" />
+    <result column="click_num" jdbcType="INTEGER" property="clickNum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.PoorWithBLOBs">
+    <result column="condition" jdbcType="LONGVARCHAR" property="condition" />
+    <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
+    <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, create_time, sn, member, number, address, cover, income, username, name, audit, 
+    last_click_time, click_num
+  </sql>
+  <sql id="Blob_Column_List">
+    condition, introduce, reply
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.PoorExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from poor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.fc.entity.PoorExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from poor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from poor
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from poor
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.entity.PoorExample">
+    delete from poor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fc.entity.PoorWithBLOBs">
+    insert into poor (id, create_time, sn, 
+      member, number, address, 
+      cover, income, username, 
+      name, audit, last_click_time, 
+      click_num, condition, introduce, 
+      reply)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{sn,jdbcType=VARCHAR}, 
+      #{member,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{address,jdbcType=VARCHAR}, 
+      #{cover,jdbcType=VARCHAR}, #{income,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{audit,jdbcType=VARCHAR}, #{lastClickTime,jdbcType=TIMESTAMP}, 
+      #{clickNum,jdbcType=INTEGER}, #{condition,jdbcType=LONGVARCHAR}, #{introduce,jdbcType=LONGVARCHAR}, 
+      #{reply,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fc.entity.PoorWithBLOBs">
+    insert into poor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="sn != null">
+        sn,
+      </if>
+      <if test="member != null">
+        member,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="cover != null">
+        cover,
+      </if>
+      <if test="income != null">
+        income,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="audit != null">
+        audit,
+      </if>
+      <if test="lastClickTime != null">
+        last_click_time,
+      </if>
+      <if test="clickNum != null">
+        click_num,
+      </if>
+      <if test="condition != null">
+        condition,
+      </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sn != null">
+        #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null">
+        #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        #{income,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        #{audit,jdbcType=VARCHAR},
+      </if>
+      <if test="lastClickTime != null">
+        #{lastClickTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickNum != null">
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="condition != null">
+        #{condition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fc.entity.PoorExample" resultType="java.lang.Long">
+    select count(*) from poor
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update poor
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.sn != null">
+        sn = #{record.sn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.member != null">
+        member = #{record.member,jdbcType=VARCHAR},
+      </if>
+      <if test="record.number != null">
+        number = #{record.number,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cover != null">
+        cover = #{record.cover,jdbcType=VARCHAR},
+      </if>
+      <if test="record.income != null">
+        income = #{record.income,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.audit != null">
+        audit = #{record.audit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastClickTime != null">
+        last_click_time = #{record.lastClickTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.clickNum != null">
+        click_num = #{record.clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.condition != null">
+        condition = #{record.condition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.introduce != null">
+        introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.reply != null">
+        reply = #{record.reply,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update poor
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      member = #{record.member,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      income = #{record.income,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      audit = #{record.audit,jdbcType=VARCHAR},
+      last_click_time = #{record.lastClickTime,jdbcType=TIMESTAMP},
+      click_num = #{record.clickNum,jdbcType=INTEGER},
+      condition = #{record.condition,jdbcType=LONGVARCHAR},
+      introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+      reply = #{record.reply,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update poor
+    set id = #{record.id,jdbcType=BIGINT},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      sn = #{record.sn,jdbcType=VARCHAR},
+      member = #{record.member,jdbcType=VARCHAR},
+      number = #{record.number,jdbcType=INTEGER},
+      address = #{record.address,jdbcType=VARCHAR},
+      cover = #{record.cover,jdbcType=VARCHAR},
+      income = #{record.income,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      audit = #{record.audit,jdbcType=VARCHAR},
+      last_click_time = #{record.lastClickTime,jdbcType=TIMESTAMP},
+      click_num = #{record.clickNum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.entity.PoorWithBLOBs">
+    update poor
+    <set>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sn != null">
+        sn = #{sn,jdbcType=VARCHAR},
+      </if>
+      <if test="member != null">
+        member = #{member,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="cover != null">
+        cover = #{cover,jdbcType=VARCHAR},
+      </if>
+      <if test="income != null">
+        income = #{income,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="audit != null">
+        audit = #{audit,jdbcType=VARCHAR},
+      </if>
+      <if test="lastClickTime != null">
+        last_click_time = #{lastClickTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="clickNum != null">
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="condition != null">
+        condition = #{condition,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fc.entity.PoorWithBLOBs">
+    update poor
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      sn = #{sn,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      income = #{income,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      audit = #{audit,jdbcType=VARCHAR},
+      last_click_time = #{lastClickTime,jdbcType=TIMESTAMP},
+      click_num = #{clickNum,jdbcType=INTEGER},
+      condition = #{condition,jdbcType=LONGVARCHAR},
+      introduce = #{introduce,jdbcType=LONGVARCHAR},
+      reply = #{reply,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fc.entity.Poor">
+    update poor
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      sn = #{sn,jdbcType=VARCHAR},
+      member = #{member,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      address = #{address,jdbcType=VARCHAR},
+      cover = #{cover,jdbcType=VARCHAR},
+      income = #{income,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      audit = #{audit,jdbcType=VARCHAR},
+      last_click_time = #{lastClickTime,jdbcType=TIMESTAMP},
+      click_num = #{clickNum,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
