@@ -51,7 +51,7 @@ public class JwtTest {
 
         Calendar instance = Calendar.getInstance();
 
-        instance.add(Calendar.SECOND, 20);
+        instance.add(Calendar.MINUTE, 20);
 
         payload.put("id", 1);
         payload.put("username", "易烊千玺");
@@ -74,7 +74,7 @@ public class JwtTest {
         // 获取验证器
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256("123456")).build();
 
-        DecodedJWT decodedJWT = verifier.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVUaW1lIjoxNjQ4ODk1OTc4LCJpc3MiOiLnjpvljaHlt7TljaEiLCJpZCI6MSwiZXhwIjoxNjQ4ODk1OTk4LCJpYXQiOjE2NDg4OTU5NzgsInVzZXJuYW1lIjoi5piT54OK5Y2D5466IiwiaW5mbyI6IueuoeeQhuWRmCJ9.-otFvS01SFTmztZ92LLcy9Bic6MONDm1iqq_Qfgobj4");
+        DecodedJWT decodedJWT = verifier.verify("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJsYXN0QWNjZXNzVGltZSI6MTY0OTAzODk0MSwiY3JlYXRlVGltZSI6MTY0OTAzODk0MSwiaWQiOjEsImV4cCI6MTY0OTAzODk2MSwidXNlcm5hbWUiOiLmmJPng4rljYPnjroiLCJpbmZvIjoi566h55CG5ZGYIn0.QnJhCwtJBMsDZX9NLb3GLqe7AuaivFJLRJ8ogrvyw7E");
 
         System.out.println(decodedJWT.getHeader());
         System.out.println(decodedJWT.getPayload());
