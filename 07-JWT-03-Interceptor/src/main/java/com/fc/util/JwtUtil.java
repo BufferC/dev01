@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-// JWT工具类
 public class JwtUtil {
     private static final String ALG = "HS256";
     private static final String TYP = "JWT";

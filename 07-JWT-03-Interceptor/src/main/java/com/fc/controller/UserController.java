@@ -1,9 +1,5 @@
 package com.fc.controller;
 
-import com.auth0.jwt.exceptions.AlgorithmMismatchException;
-import com.auth0.jwt.exceptions.InvalidClaimException;
-import com.auth0.jwt.exceptions.SignatureVerificationException;
-import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fc.entity.User;
 import com.fc.service.UserService;
 import com.fc.util.JwtUtil;
@@ -12,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,33 +47,12 @@ public class UserController {
     }
 
     @RequestMapping("verifyToken")
-    public Map<String, Object> verify(String token) {
+    public Map<String, Object> verify(HttpServletRequest request) {
         Map<String, Object> map = new HashMap<>();
-        map.put("success", false);
+        map.put("success", true);
         map.put("code", -1);
-
-        if (token == null) {
-            map.put("message", "token不存在");
-        }
-
-        try {
-            Map<String, Object> claim = JwtUtil.getClaim(token);
-
-            map.put("code", 200);
-            map.put("message", "token验证成功");
-            map.put("success", true);
-            map.put("data", claim);
-        } catch (AlgorithmMismatchException e) {
-            map.put("message", "算法不匹配");
-        } catch (InvalidClaimException e) {
-            map.put("message", "非法载荷");
-        } catch (SignatureVerificationException e) {
-            map.put("message", "签名验证失败");
-        } catch (TokenExpiredException e) {
-            map.put("message", "token已过期");
-        } catch (Exception e) {
-            map.put("message", "token发生异常");
-        }
+        map.put("message", "该干啥干啥");
+        map.put("data", request.getAttribute("claim"));
 
         return map;
     }

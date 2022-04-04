@@ -9,7 +9,9 @@
     <h1 align="center" style="color: yellowgreen"><span id="username"></span>登录成功</h1>
 </body>
     <script type="application/javascript">
+        // 页面渲染时就会执行
         $(function () {
+            // 从本地存储中获取token
             var token = localStorage.getItem("token");
 
             if (token === null) {
