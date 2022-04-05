@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <script src="js/jquery-1.8.3.min.js"></script>
+</head>
+<body>
+<button type="button" onclick="add()">添加学生</button>
+<button type="button" onclick="show()">查看学生</button>
+</body>
+<script type="application/javascript">
+    // 从本地存储中获取token
+    var token = localStorage.getItem("token");
+
+    if (token === null) {
+        alert("token不存在，请重新登录");
+        $(location).attr('href', "/login.html");
+    } else {
+        function add() {
+            $.ajax({
+                type: "post",
+                url: "/user/add",
+                data: {"token": token},
+                success: function (resp) {
+                    alert(resp.message);
+                    if (!resp.success) {
+                        $(location).attr('href', "/login.html");
+                    }
+                }
+            })
+        }
+
+        function show() {
+            $.ajax({
+                type: "post",
+                url: "/user/show",
+                data: {"token": token},
+                success: function (resp) {
+                    alert(resp.message);
+                    if (!resp.success) {
+                        $(location).attr('href', "/login.html");
+                    }
+                }
+            })
+        }
+    }
+</script>
+</html>

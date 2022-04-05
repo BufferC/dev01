@@ -17,7 +17,7 @@ public class FileController {
     @RequestMapping("upload")
     public ModelAndView upload(MultipartFile upload, ModelAndView mv) {
         // 准备路径
-        String path = "http://localhost:8081/upload/";
+        String path = "http://bufferc.store/images/";
 
         // 获取文件名
         String filename = upload.getOriginalFilename();

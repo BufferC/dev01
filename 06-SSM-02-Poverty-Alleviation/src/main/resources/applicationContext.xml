@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-4.2.xsd ">
+
+<!--component-scan:用来扫描指定包下的所有注解-->
+    <context:component-scan base-package="com.fc">
+        <!--不扫描指定的注解-->
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
+    <!--location用于指定位置，ignore-unresolvable防止多个配置文件找不到的问题-->
+    <context:property-placeholder
+            location="classpath:jdbc.properties"
+            ignore-unresolvable="true"/>
+
+    <!--配置Druid数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+
+    <!--配置SqlSessionFactoryBean-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--配置数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--找到mybatis的配置文件-->
+        <property name="configLocation" value="classpath:mybatis-config.xml"/>
+        <!--配置映射文件的路径-->
+        <property name="mapperLocations" value="classpath:com/fc/mapper/*.xml"/>
+    </bean>
+
+    <!--用于扫描dao层的接口，并且生成代理对象注入到容器中-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fc.dao"/>
+    </bean>
+
+    <!--事务平台管理器-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--注解事务支持-->
+    <tx:annotation-driven/>
+
+    <!--通知-->
+    <tx:advice id="txAdvice">
+        <tx:attributes>
+            <tx:method name="find*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="select*" read-only="true" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="add*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="delete*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="modify*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="update*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="insert*" read-only="false" isolation="DEFAULT" propagation="REQUIRED"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--切面-->
+    <aop:config>
+        <!--切点-->
+        <aop:pointcut id="pointcut" expression="execution(* com.fc.service.impl.*ServiceImpl.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="pointcut"/>
+    </aop:config>
+</beans>

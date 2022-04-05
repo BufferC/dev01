@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis配置-->
+<configuration>
+    <settings>
+        <!--日志框架-->
+        <setting name="logImpl" value="LOG4J2"/>
+        <!--二级缓存-->
+        <setting name="cacheEnabled" value="true"/>
+        <!--启用延时加载-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!--每种属性按需加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!--开启将下划线映射到驼峰命名的规则规则-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--允许多种结果集从一个单独的语句中返回-->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <!--使用列标签代替列名-->
+        <setting name="useColumnLabel" value="true"/>
+        <!--允许插入数据中设置主键并返回-->
+        <setting name="useGeneratedKeys" value="true"/>
+        <!--设置默认执行器-->
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!--设置超时时间-->
+        <setting name="defaultStatementTimeout" value="25000"/>
+    </settings>
+
+    <!--分页插件-->
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--数据库方言-->
+            <property name="helperDialect" value="mysql"/>
+            <!--分页参数合理化-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+</configuration>
