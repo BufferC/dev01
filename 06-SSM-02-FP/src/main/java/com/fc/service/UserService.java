@@ -12,5 +12,5 @@ public interface UserService {
 
     Map<String, Object> add(User user);
 
-    Map<String, Object> list(Integer pageNo, Integer pageSize, Integer id);
+    Map<String, Object> list(String pageNo, String pageSize, String id);
 }

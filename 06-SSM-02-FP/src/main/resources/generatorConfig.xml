@@ -51,6 +51,7 @@
         <table schema="" tableName="poor"/>
         <table schema="" tableName="user"/>
         <table schema="" tableName="volunteer_recruitment"/>
+        <table schema="" tableName="carousel"/>
 
         <!-- 有些表的字段需要指定java类型-->
         <!--<table schema="" tableName="">-->

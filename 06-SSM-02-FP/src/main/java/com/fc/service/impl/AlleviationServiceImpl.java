@@ -30,7 +30,7 @@ public class AlleviationServiceImpl implements AlleviationService {
             map.put("message","添加失败!");
             map.put("code",500);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
         return map;
     }
@@ -48,7 +48,7 @@ public class AlleviationServiceImpl implements AlleviationService {
             map.put("message","修改失败!");
             map.put("code",404);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
 
         return map;
@@ -67,7 +67,7 @@ public class AlleviationServiceImpl implements AlleviationService {
             map.put("message","删除失败!");
             map.put("code",404);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
 
         return map;
@@ -96,7 +96,7 @@ public class AlleviationServiceImpl implements AlleviationService {
                 map.put("message","用户获取失败!");
                 map.put("code",404);
                 map.put("success",false);
-                map.put("data",map.put("errMsg","错误描述"));
+                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
             }
         return map;
     }
@@ -120,7 +120,7 @@ public class AlleviationServiceImpl implements AlleviationService {
             map.put("message","设置失败!");
             map.put("code",404);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
 
         return map;

@@ -6,9 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
-public interface UserMapper  {
+public interface UserMapper {
     long countByExample(UserExample example);
 
     int deleteByExample(UserExample example);

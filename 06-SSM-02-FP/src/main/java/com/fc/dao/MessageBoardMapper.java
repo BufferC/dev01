@@ -3,10 +3,17 @@ package com.fc.dao;
 import com.fc.entity.MessageBoard;
 import com.fc.entity.MessageBoardExample;
 import com.fc.entity.MessageBoardWithBLOBs;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface MessageBoardMapper {
+    int rPicture(@Param("picture") String picture,@Param("id") long id);
+
+    int upReply(@Param("reply") String reply,@Param("id") long id);
+
     long countByExample(MessageBoardExample example);
 
     int deleteByExample(MessageBoardExample example);

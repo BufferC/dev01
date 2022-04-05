@@ -20,6 +20,7 @@
   <update id="clickUp" parameterType="com.fc.entity.Alleviation">
     update alleviation set click_num = #{clickNum} , last_click_time = #{lastClickTime} where id = #{id}
   </update>
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

@@ -29,7 +29,7 @@ public class CollectionServiceImpl implements CollectionService {
             map.put("message","收藏失败!");
             map.put("code",500);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
         return map;
     }
@@ -47,7 +47,7 @@ public class CollectionServiceImpl implements CollectionService {
             map.put("message","删除失败!");
             map.put("code",500);
             map.put("success",false);
-            map.put("data",map.put("errMsg","错误描述"));
+            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
         }
         return map;
     }
@@ -76,7 +76,7 @@ public class CollectionServiceImpl implements CollectionService {
                 map.put("message","获取失败!");
                 map.put("code",404);
                 map.put("success",false);
-                map.put("data",map.put("errMsg","错误描述"));
+                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
             }
 
         }else {
@@ -92,7 +92,7 @@ public class CollectionServiceImpl implements CollectionService {
                 map.put("message","用户获取失败!");
                 map.put("code",404);
                 map.put("success",false);
-                map.put("data",map.put("errMsg","错误描述"));
+                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
             }
         }
         return map;

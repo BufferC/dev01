@@ -11,7 +11,7 @@ import java.util.List;
 public interface AlleviationMapper {
     Integer clickNum(Integer id);
 
-    int clickUp(@Param("id") long id,@Param("lastClickTime") Date lastClickTime,@Param("clickNum") Integer clickNum);
+    int clickUp(@Param("id") long id, @Param("lastClickTime") Date lastClickTime, @Param("clickNum") Integer clickNum);
 
     long countByExample(AlleviationExample example);
 

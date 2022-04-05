@@ -15,18 +15,18 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public Map<String,Object> del(String id){
         return userService.del(id);
     }
 
-    @RequestMapping("updata")
+    @RequestMapping("update")
     public Map<String,Object> updata(User user){
         return userService.updata(user);
     }
 
-    @RequestMapping("list")
-    public Map<String,Object> list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo,@RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,@RequestParam(value = "id" ,required = false) Integer id){
+    @RequestMapping("getlist")
+    public Map<String,Object> list(@RequestParam(value = "pageNo",defaultValue = "1") String pageNo,@RequestParam(value = "pageSize",defaultValue = "5") String pageSize,@RequestParam(value = "id" ,required = false) String id){
         return userService.list(pageNo,pageSize,id);
     }
 
