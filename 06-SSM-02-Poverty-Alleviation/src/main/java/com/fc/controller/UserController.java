@@ -12,24 +12,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("getlist")
+    @GetMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                             @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize,
                                             Long id) {
         return userService.getList(pageNum, pageSize, id);
     }
 
-    @RequestMapping("add")
+    @PostMapping("add")
     public ResultVO add(@RequestBody User user) {
         return userService.add(user);
     }
 
-    @RequestMapping("update")
+    @PostMapping("update")
     public ResultVO update(@RequestBody User user) {
         return userService.update(user);
     }
 
-    @RequestMapping("delete")
+    @GetMapping("delete")
     public ResultVO delete(Long id) {
         return userService.delete(id);
     }
