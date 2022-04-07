@@ -46,13 +46,6 @@
         </javaClientGenerator>
         <!-- 指定数据库表 -->
         <table schema="poverty_alleviation" tableName="alleviation"/>
-        <table schema="poverty_alleviation" tableName="carousel"/>
-        <table schema="poverty_alleviation" tableName="collection"/>
-        <table schema="poverty_alleviation" tableName="message_board"/>
-        <table schema="poverty_alleviation" tableName="poor"/>
-        <table schema="poverty_alleviation" tableName="user"/>
-        <table schema="poverty_alleviation" tableName="volunteer_recruitment"/>
-
         <!-- 有些表的字段需要指定java类型-->
         <!--<table schema="" tableName="">-->
         <!--    <columnOverride column="" javaType=""/>-->

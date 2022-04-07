@@ -15,7 +15,7 @@ public class UserController {
     @GetMapping("getlist")
     public ResultVO getList(@RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                             @RequestParam(value = "pageSize", defaultValue = "3") Integer pageSize,
-                                            Long id) {
+                            @RequestParam Long id) {
         return userService.getList(pageNum, pageSize, id);
     }
 
