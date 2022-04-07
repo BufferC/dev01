@@ -1,16 +1,15 @@
 package com.fc.service;
 
 import com.fc.entity.User;
-
-import java.util.Map;
+import com.fc.vo.ResultVo;
 
 
 public interface UserService {
-    Map<String, Object> del(String id);
+    ResultVo del(Long id);
 
-    Map<String, Object> updata(User user);
+    ResultVo update(User user);
 
-    Map<String, Object> add(User user);
+    ResultVo add(User user);
 
-    Map<String, Object> list(String pageNo, String pageSize, String id);
+    ResultVo list(Integer pageNo, Integer pageSize, Long id);
 }

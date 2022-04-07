@@ -11,7 +11,7 @@ public class Alleviation {
 
     private String type;
 
-    private Integer releaseTime;
+    private Date releaseTime;
 
     private String cover;
 
@@ -53,11 +53,11 @@ public class Alleviation {
         this.type = type == null ? null : type.trim();
     }
 
-    public Integer getReleaseTime() {
+    public Date getReleaseTime() {
         return releaseTime;
     }
 
-    public void setReleaseTime(Integer releaseTime) {
+    public void setReleaseTime(Date releaseTime) {
         this.releaseTime = releaseTime;
     }
 

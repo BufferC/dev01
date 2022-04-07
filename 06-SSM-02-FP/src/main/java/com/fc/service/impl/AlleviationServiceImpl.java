@@ -3,14 +3,14 @@ package com.fc.service.impl;
 import com.fc.dao.AlleviationMapper;
 import com.fc.entity.Alleviation;
 import com.fc.service.AlleviationService;
+import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class AlleviationServiceImpl implements AlleviationService {
@@ -18,111 +18,87 @@ public class AlleviationServiceImpl implements AlleviationService {
     private AlleviationMapper alleviationMapper;
 
     @Override
-    public Map<String, Object> add(Alleviation alleviation) {
+    public ResultVo add(Alleviation alleviation) {
+        ResultVo resultVo;
         int affection = alleviationMapper.insertSelective(alleviation);
-        Map<String, Object> map = new HashMap<>();
-        if(affection == 1){
-            map.put("message","添加成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","添加失败!");
-            map.put("code",500);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> updata(Alleviation alleviation) {
-        int affection = alleviationMapper.updateByPrimaryKey(alleviation);
-        Map<String, Object> map = new HashMap<>();
         if (affection == 1){
-            map.put("message","修改成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
+            resultVo = new ResultVo("添加成功!",affection,true,200);
         }else {
-            map.put("message","修改失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+            resultVo = new ResultVo("添加失败!",null,false,404);
         }
-
-        return map;
+        return resultVo;
     }
 
     @Override
-    public Map<String, Object> del(Integer id) {
-        int affection = alleviationMapper.deleteByPrimaryKey(id.longValue());
-        Map<String, Object> map = new HashMap<>();
+    public ResultVo update(Alleviation alleviation) {
+        ResultVo resultVo;
+        int affection = alleviationMapper.updateByPrimaryKeySelective(alleviation);
         if (affection == 1){
-            map.put("message","删除成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
+            resultVo = new ResultVo("修改成功!",alleviationMapper.selectByPrimaryKey(alleviation.getId()),true,200);
         }else {
-            map.put("message","删除失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+            resultVo = new ResultVo("修改失败!", null, false, 404);
         }
-
-        return map;
+        return resultVo;
     }
 
     @Override
-    public Map<String, Object> list(Integer pageNo, Integer pageSize) {
-        Map<String, Object> map = new HashMap<>();
+    public ResultVo del(Long id) {
+        ResultVo resultVo;
+        int affection = alleviationMapper.deleteByPrimaryKey(id);
+        if (affection == 1){
+            resultVo = new ResultVo("删除成功!",affection,true,200);
+        }else {
+            resultVo = new ResultVo("删除失败!",null,false,404);
+        }
+        return resultVo;
+    }
 
-        //数据总数
-        long l = alleviationMapper.countByExample(null);
+    @Override
+    public ResultVo list(Integer pageNo, Integer pageSize) {
+        List<Alleviation> arrayList;
+        PageInfo<Alleviation> userPageInfo;
+        ResultVo resultVo ;
 
-        Map<String, Object> maps = new HashMap<>();
-        maps.put( "total", l);
-
-
+        try {
             PageHelper.startPage(pageNo, pageSize);
-            List<Alleviation> page = alleviationMapper.selectByExample(null);
-            maps.put("list",page);
-            if(!page.isEmpty()){
-                map.put("message","用户获取成功!");
-                map.put("code",200);
-                map.put("success",true);
-                map.put("data",maps);
+            arrayList = alleviationMapper.selectByExample(null);
+            //DataVo<Object> dataVo = new DataVo<>();
+            userPageInfo = new PageInfo<>(arrayList);
+            if (userPageInfo.getPageNum() != 0) {
+                resultVo = new ResultVo("获取成功!", userPageInfo, true, 200);
             }else {
-                map.put("message","用户获取失败!");
-                map.put("code",404);
-                map.put("success",false);
-                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+                resultVo = new ResultVo("获取失败!",null,false,404);
             }
-        return map;
+        }catch (Exception e){
+            resultVo = new ResultVo("获取异常!",null,false,500);
+        }
+
+        return resultVo;
     }
 
     @Override
-    public Map<String, Object> click(Integer id, Date clicktime) {
-        Integer num = alleviationMapper.clickNum(id);
-        if (num == null){
-            num = 0;
+    public ResultVo click(Long id, Date clickTime) {
+        ResultVo resultVo ;
+        if(clickTime == null){
+            clickTime = new Date();
         }
-        num++;
-        System.out.println(id+"******"+clicktime+"********"+num);
-        int affection = alleviationMapper.clickUp(id.longValue(),clicktime, num);
-        Map<String, Object> map = new HashMap<>();
-        if (affection == 1){
-            map.put("message","设置成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","设置失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+        if (id == null){
+            return new ResultVo("请求参数异常",null,false,404);
         }
 
-        return map;
+        try {
+            Integer click = alleviationMapper.click(id, clickTime);
+
+            if (click == 1){
+                resultVo = new ResultVo("点击成功!", click, true, 200);
+            }else {
+                resultVo = new ResultVo("点击失败!",null,false,404);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVo = new ResultVo("执行异常",null,false,500);
+        }
+
+        return resultVo;
     }
 }

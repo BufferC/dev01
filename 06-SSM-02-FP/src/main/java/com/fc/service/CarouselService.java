@@ -1,17 +1,14 @@
 package com.fc.service;
 
 import com.fc.entity.Carousel;
-
-import java.util.List;
+import com.fc.vo.ResultVo;
 
 public interface CarouselService {
-    List<Carousel> getList(String pageNo, String pageSize, String id);
+    ResultVo getList(Integer pageNo, Integer pageSize, int id);
 
-    long count();
+    ResultVo add(Carousel carousel);
 
-    Carousel add(Carousel carousel);
+    ResultVo update(Carousel carousel);
 
-    Carousel update(int id, String name, String picture, Integer available);
-
-    int delete(String id);
+    ResultVo delete(int id);
 }

@@ -272,4 +272,5 @@
       recommend_type = #{recommendType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

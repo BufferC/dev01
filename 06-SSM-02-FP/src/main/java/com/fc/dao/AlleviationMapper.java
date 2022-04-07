@@ -9,10 +9,6 @@ import java.util.Date;
 import java.util.List;
 @Repository
 public interface AlleviationMapper {
-    Integer clickNum(Integer id);
-
-    int clickUp(@Param("id") long id, @Param("lastClickTime") Date lastClickTime, @Param("clickNum") Integer clickNum);
-
     long countByExample(AlleviationExample example);
 
     int deleteByExample(AlleviationExample example);
@@ -40,4 +36,6 @@ public interface AlleviationMapper {
     int updateByPrimaryKeyWithBLOBs(Alleviation record);
 
     int updateByPrimaryKey(Alleviation record);
+
+    Integer click(@Param("id") Long id,@Param("lastClickTime") Date lastClickTime);
 }

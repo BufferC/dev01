@@ -21,13 +21,9 @@
     <result column="introduce" jdbcType="LONGVARCHAR" property="introduce" />
     <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
   </resultMap>
-  <select id="clickNum" resultType="Integer">
-    select click_num from poor where id = #{id}
-  </select>
-  <update id="clickUp" parameterType="com.fc.entity.Poor">
-    update poor set click_num = #{clickNum} , last_click_time = #{lastClickTime} where id = #{id}
+  <update id="click">
+    update poor set click_num = click_num + 1 , last_click_time = #{lastClickTime} where id = #{id}
   </update>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -91,7 +87,7 @@
     last_click_time, click_num
   </sql>
   <sql id="Blob_Column_List">
-    condition, introduce, reply
+    'condition', 'introduce', reply
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.PoorExample" resultMap="ResultMapWithBLOBs">
     select
@@ -447,4 +443,5 @@
       click_num = #{clickNum,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

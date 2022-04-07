@@ -3,7 +3,9 @@ package com.fc.service.impl;
 import com.fc.dao.CarouselMapper;
 import com.fc.entity.Carousel;
 import com.fc.service.CarouselService;
+import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,55 +18,69 @@ public class CarouselServiceImpl implements CarouselService {
     private CarouselMapper carouselMapper;
 
     @Override
-    public List<Carousel> getList(String pageNo, String pageSize, String id) {
-        List<Carousel> carousels = new ArrayList<>();
-        if (id == null || id.equals("")){
-            PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-            carousels = carouselMapper.selectByExample(null);
+    public ResultVo getList(Integer pageNo, Integer pageSize, int id) {
+        List<Carousel> arrayList;
+        PageInfo<Carousel> userPageInfo;
+        ResultVo resultVo ;
+
+        try {
+            if (id == 0){
+                PageHelper.startPage(pageNo, pageSize);
+                arrayList = carouselMapper.selectByExample(null);
+            }else {
+                Carousel carousel = carouselMapper.selectByPrimaryKey(id);
+                arrayList = new ArrayList<>();
+                if(carousel != null){
+                    arrayList.add(carousel);
+                }
+            }
+            //DataVo<Object> dataVo = new DataVo<>();
+            userPageInfo = new PageInfo<>(arrayList);
+            if (userPageInfo.getPageNum() != 0) {
+                resultVo = new ResultVo("获取成功!", userPageInfo, true, 200);
+            }else {
+                resultVo = new ResultVo("获取失败!",null,false,404);
+            }
+        }catch (Exception e){
+            resultVo = new ResultVo("获取异常!",null,false,500);
+        }
+
+        return resultVo;
+    }
+
+    @Override
+    public ResultVo add(Carousel carousel) {
+        ResultVo resultVo;
+        int affection = carouselMapper.insertSelective(carousel);
+        if (affection == 1){
+            resultVo = new ResultVo("添加成功!",affection,true,200);
         }else {
-            carousels.add(carouselMapper.selectByPrimaryKey(Integer.valueOf(id)));
+            resultVo = new ResultVo("添加失败!",null,false,404);
         }
-
-        return carousels;
+        return resultVo;
     }
 
     @Override
-    public long count() {
-        return carouselMapper.countByExample(null);
-    }
-
-    @Override
-    public Carousel add(Carousel carousel) {
-        int i = carouselMapper.insertSelective(carousel);
-        if (i == 1){
-            return carousel;
-        }
-        return null;
-    }
-
-    @Override
-    public Carousel update(int id, String name, String picture, Integer available) {
-        Carousel carousel = carouselMapper.selectByPrimaryKey(id);
-        if (name != null){
-            carousel.setName(name);
-        }
-        if (picture != null){
-            carousel.setPicture(picture);
-        }
-        if (available != null){
-            carousel.setAvailable(true);
+    public ResultVo update(Carousel carousel) {
+        ResultVo resultVo;
+        int affection = carouselMapper.updateByPrimaryKeySelective(carousel);
+        if (affection == 1){
+            resultVo = new ResultVo("用户修改成功!",carouselMapper.selectByPrimaryKey(carousel.getId()),true,200);
         }else {
-            carousel.setAvailable(false);
+            resultVo = new ResultVo("用户修改失败!", null, false, 404);
         }
-        int i = carouselMapper.updateByPrimaryKey(carousel);
-        if (i == 1){
-            return carousel;
-        }
-        return null;
+        return resultVo;
     }
 
     @Override
-    public int delete(String id) {
-        return carouselMapper.deleteByPrimaryKey(Integer.valueOf(id));
+    public ResultVo delete(int id) {
+        ResultVo resultVo;
+        int affection = carouselMapper.deleteByPrimaryKey(id);
+        if (affection == 1){
+            resultVo = new ResultVo("删除成功!",affection,true,200);
+        }else {
+            resultVo = new ResultVo("删除失败!",null,false,404);
+        }
+        return resultVo;
     }
 }

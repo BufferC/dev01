@@ -22,13 +22,6 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.VolunteerRecruitment">
     <result column="work_require" jdbcType="LONGVARCHAR" property="workRequire" />
   </resultMap>
-  <select id="clickNum" resultType="Integer">
-    select click_num from volunteer_recruitment where id = #{id}
-  </select>
-  <update id="clickUp" parameterType="com.fc.entity.VolunteerRecruitment">
-    update volunteer_recruitment set click_num = #{clickNum} , last_click_time = #{lastClickTime} where id = #{id}
-  </update>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

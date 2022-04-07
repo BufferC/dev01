@@ -8,13 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Date;
 import java.util.List;
-
 @Repository
 public interface PoorMapper {
-    Integer clickNum(Integer id);
-
-    int clickUp(@Param("id") long id, @Param("lastClickTime") Date lastClickTime, @Param("clickNum") Integer clickNum);
-
     long countByExample(PoorExample example);
 
     int deleteByExample(PoorExample example);
@@ -42,4 +37,6 @@ public interface PoorMapper {
     int updateByPrimaryKeyWithBLOBs(PoorWithBLOBs record);
 
     int updateByPrimaryKey(Poor record);
+
+    Integer click(@Param("id") Long id,@Param("lastClickTime") Date lastClickTime);
 }

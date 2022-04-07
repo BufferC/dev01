@@ -1,20 +1,19 @@
 package com.fc.service;
 
-import com.fc.entity.Poor;
 import com.fc.entity.PoorWithBLOBs;
+import com.fc.vo.ResultVo;
 
 import java.util.Date;
-import java.util.Map;
 
 public interface PoorService {
 
-    Map<String, Object> add(PoorWithBLOBs poor);
+    ResultVo add(PoorWithBLOBs poor);
 
-    Map<String, Object> del(Integer id);
+    ResultVo del(Long id);
 
-    Map<String, Object> updata(Poor poor);
+    ResultVo update(PoorWithBLOBs poor);
 
-    Map<String, Object> list(Integer pageNo, Integer pageSize,String username);
+    ResultVo list(Integer pageNo, Integer pageSize,Long id);
 
-    Map<String, Object> click(Integer id, Date clicktime);
+    ResultVo click(Long id, Date clickTime);
 }

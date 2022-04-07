@@ -1,16 +1,18 @@
 package com.fc.service.impl;
 
 import com.fc.dao.MessageBoardMapper;
-import com.fc.entity.MessageBoard;
+import com.fc.entity.MessageBoardExample;
 import com.fc.entity.MessageBoardWithBLOBs;
 import com.fc.service.MessageBoardService;
+import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class MessageBoardServiceImpl implements MessageBoardService {
@@ -18,126 +20,107 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     private MessageBoardMapper messageBoardMapper;
 
     @Override
-    public Map<String, Object> add(MessageBoardWithBLOBs messageBoard) {
+    public ResultVo add(MessageBoardWithBLOBs messageBoard) {
+        if (messageBoard.getCreateTime() == null){
+            messageBoard.setCreateTime(new Date());
+        }
+        ResultVo resultVo;
         int affection = messageBoardMapper.insertSelective(messageBoard);
-
-        Map<String, Object> map = new HashMap<>();
-
-        if (affection == 1){
-            map.put("message","留言成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","留言失败!");
-            map.put("code",500);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> del(long id) {
-        int affection = messageBoardMapper.deleteByPrimaryKey(id);
-        Map<String, Object> map = new HashMap<>();
-        if (affection == 1){
-            map.put("message","删除留言成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","删除留言失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> list(Integer pageNo, Integer pageSize, long id) {
-        Map<String, Object> map = new HashMap<>();
-
-        //数据总数
-        long l = messageBoardMapper.countByExample(null);
-
-        Map<String, Object> maps = new HashMap<>();
-
-        maps.put( "total", l);
-
-        if (id == -1){
-            PageHelper.startPage(pageNo, pageSize);
-            List<MessageBoardWithBLOBs> page = messageBoardMapper.selectByExampleWithBLOBs(null);
-            maps.put("list",page);
-            if(!page.isEmpty()){
-                map.put("message","获取成功!");
-                map.put("code",200);
-                map.put("success",true);
-                map.put("data",maps);
+        try {
+            if (affection == 1){
+                resultVo = new ResultVo("添加成功!",affection,true,200);
             }else {
-                map.put("message","获取失败!");
-                map.put("code",404);
-                map.put("success",false);
-                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+                resultVo = new ResultVo("添加失败!",null,false,404);
             }
-
-        }else {
-            MessageBoard messageBoard = messageBoardMapper.selectByPrimaryKey(id);
-            maps.put("list",messageBoard);
-            if(messageBoard != null){
-                map.put("message","用户获取成功!");
-                map.put("code",200);
-                map.put("success",true);
-                map.put("data",maps);
-            }else {
-                map.put("message","用户获取失败!");
-                map.put("code",404);
-                map.put("success",false);
-                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-            }
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVo = new ResultVo("添加参数异常!",null,false,404);
         }
-        return map;
+        return resultVo;
     }
 
     @Override
-    public Map<String, Object> reply(Integer id, String reply, String rpicture, String isdel) {
-        long rid = id.longValue();
-        Map<String, Object> map = new HashMap<>();
+    public ResultVo del(Long id) {
+        ResultVo resultVo;
+        try {
+            int affection = messageBoardMapper.deleteByPrimaryKey(id);
+            if (affection == 1){
+                resultVo = new ResultVo("用户删除成功!",affection,true,200);
+            }else {
+                resultVo = new ResultVo("用户删除失败!",null,false,404);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVo = new ResultVo("参数异常!",null,false,404);
+        }
+        return resultVo;
+    }
+
+    @Override
+    public ResultVo list(Integer pageNo, Integer pageSize, Long id) {
+        List<MessageBoardWithBLOBs> arrayList;
+        PageInfo<MessageBoardWithBLOBs> userPageInfo;
+        ResultVo resultVo ;
+
+        try {
+            if (id == null){
+                PageHelper.startPage(pageNo, pageSize);
+                arrayList = messageBoardMapper.selectByExampleWithBLOBs(null);
+            }else {
+                MessageBoardExample messageBoardExample = new MessageBoardExample();
+                MessageBoardExample.Criteria criteria = messageBoardExample.createCriteria();
+                criteria.andIdEqualTo(id);
+                List<MessageBoardWithBLOBs> messageBoardWithBLOBs = messageBoardMapper.selectByExampleWithBLOBs(messageBoardExample);
+                arrayList = new ArrayList<>();
+                if(messageBoardWithBLOBs != null){
+                    arrayList.add(messageBoardWithBLOBs.get(0));
+                }
+            }
+            //DataVo<Object> dataVo = new DataVo<>();
+            userPageInfo = new PageInfo<>(arrayList);
+            if (userPageInfo.getPageNum() != 0) {
+                resultVo = new ResultVo("用户获取成功!", userPageInfo, true, 200);
+            }else {
+                resultVo = new ResultVo("用户获取失败!",null,false,404);
+            }
+        }catch (Exception e){
+            resultVo = new ResultVo("用户获取异常!",null,false,500);
+        }
+
+        return resultVo;
+    }
+
+    @Override
+    public ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs, String isDel) {
+        if (messageBoardWithBLOBs.getId() == null){
+            return new ResultVo("请求参数异常",null,false,404);
+        }
         //删除回复
         int delReply = -86;
-        //修改回复
+        //修改
         int upReply = -13;
-        //修改图片
-        int rPicture = -14;
 
-        //不删除
-        if (isdel == null || isdel.equals("false")||isdel.equals("")){
+        ResultVo resultVo;
 
-        }else if(reply == null){//删除
-            delReply = messageBoardMapper.upReply(null, rid);
-        }
-        if (reply != null){
-            upReply = messageBoardMapper.upReply(reply, rid);
-        }
+        try{
+            //不删除,只修改
+            if (isDel == null || isDel.equals("false")||isDel.equals("")){
+                upReply = messageBoardMapper.updateByPrimaryKeyWithBLOBs(messageBoardWithBLOBs);
+            }else if(messageBoardWithBLOBs.getReply()== null){//删除，修改
+                delReply = messageBoardMapper.upReply(messageBoardWithBLOBs.getId(), messageBoardWithBLOBs.getReplyPicture());
+            }else {//只修改，不删除
+                upReply = messageBoardMapper.updateByPrimaryKeyWithBLOBs(messageBoardWithBLOBs);
+            }
 
-        if (rpicture != null){
-            rPicture = messageBoardMapper.rPicture(rpicture, rid);
+            if (delReply != -86 || upReply != -13){
+                resultVo = new ResultVo("修改成功!",1, true, 200);
+            }else {
+                resultVo = new ResultVo("修改失败!",null,false,404);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            resultVo = new ResultVo("执行异常",null,false,500);
         }
-
-        if (delReply != -86 || upReply != -13 || rPicture != -14){
-            map.put("message","回复成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",1);
-        }else {
-            map.put("message","回复失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-        return map;
+        return resultVo;
     }
 }

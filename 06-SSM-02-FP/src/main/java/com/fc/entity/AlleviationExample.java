@@ -375,52 +375,52 @@ public class AlleviationExample {
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeEqualTo(Integer value) {
+        public Criteria andReleaseTimeEqualTo(Date value) {
             addCriterion("release_time =", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotEqualTo(Integer value) {
+        public Criteria andReleaseTimeNotEqualTo(Date value) {
             addCriterion("release_time <>", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeGreaterThan(Integer value) {
+        public Criteria andReleaseTimeGreaterThan(Date value) {
             addCriterion("release_time >", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeGreaterThanOrEqualTo(Integer value) {
+        public Criteria andReleaseTimeGreaterThanOrEqualTo(Date value) {
             addCriterion("release_time >=", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeLessThan(Integer value) {
+        public Criteria andReleaseTimeLessThan(Date value) {
             addCriterion("release_time <", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeLessThanOrEqualTo(Integer value) {
+        public Criteria andReleaseTimeLessThanOrEqualTo(Date value) {
             addCriterion("release_time <=", value, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeIn(List<Integer> values) {
+        public Criteria andReleaseTimeIn(List<Date> values) {
             addCriterion("release_time in", values, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotIn(List<Integer> values) {
+        public Criteria andReleaseTimeNotIn(List<Date> values) {
             addCriterion("release_time not in", values, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeBetween(Integer value1, Integer value2) {
+        public Criteria andReleaseTimeBetween(Date value1, Date value2) {
             addCriterion("release_time between", value1, value2, "releaseTime");
             return (Criteria) this;
         }
 
-        public Criteria andReleaseTimeNotBetween(Integer value1, Integer value2) {
+        public Criteria andReleaseTimeNotBetween(Date value1, Date value2) {
             addCriterion("release_time not between", value1, value2, "releaseTime");
             return (Criteria) this;
         }

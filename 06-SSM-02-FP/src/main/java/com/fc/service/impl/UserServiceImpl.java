@@ -3,13 +3,15 @@ package com.fc.service.impl;
 import com.fc.dao.UserMapper;
 import com.fc.entity.User;
 import com.fc.service.UserService;
+import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 @Service
 public class UserServiceImpl implements UserService {
     //声明Dao层接口
@@ -17,114 +19,77 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public Map<String, Object> del(String id) {
-        long userId = Long.parseLong(id);
-
-        Map<String, Object> map = new HashMap<>();
-
-        int affection = userMapper.deleteByPrimaryKey(userId);
-
+    public ResultVo del(Long id) {
+        ResultVo resultVo;
+        int affection = userMapper.deleteByPrimaryKey(id);
         if (affection == 1){
-            map.put("message","用户删除成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
+            resultVo = new ResultVo("用户删除成功!",affection,true,200);
         }else {
-            map.put("message","用户删除失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+            resultVo = new ResultVo("用户删除失败!",null,false,404);
         }
-
-
-
-        return map;
+        return resultVo;
     }
 
     @Override
-    public Map<String, Object> updata(User user) {
-        int affection = userMapper.updateByPrimaryKey(user);
-        Map<String, Object> map = new HashMap<>();
-        if (affection == 1){
-            map.put("message","用户删除成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","用户删除失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> add(User user) {
-        int affection = userMapper.insertSelective(user);
-
-        Map<String, Object> map = new HashMap<>();
-
-        if (affection == 1){
-            map.put("message","用户添加成功!");
-            map.put("code",200);
-            map.put("success",true);
-            map.put("data",affection);
-        }else {
-            map.put("message","用户添加失败!");
-            map.put("code",404);
-            map.put("success",false);
-            map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-        }
-
-        return map;
-    }
-
-    @Override
-    public Map<String, Object> list(String pageNo, String pageSize, String id) {
-        Map<String, Object> map = new HashMap<>();
-
-        //数据总数
-        long l = userMapper.countByExample(null);
-
-        Map<String, Object> maps = new HashMap<>();
-        maps.put( "total", l);
-        maps.put("pageNum" ,pageNo);
-        maps.put("pageSize",pageSize);
-        if (id == null){
-            PageHelper.startPage(Integer.parseInt(pageNo), Integer.parseInt(pageSize));
-            List<User> page = userMapper.selectByExample(null);
-            maps.put("list",page);
-            if(!page.isEmpty()){
-                map.put("message","用户获取成功!");
-                map.put("code",200);
-                map.put("success",true);
-                map.put("data",maps);
+    public ResultVo update(User user) {
+        ResultVo resultVo;
+            int affection = userMapper.updateByPrimaryKeySelective(user);
+            if (affection == 1){
+                resultVo = new ResultVo("用户修改成功!",userMapper.selectByPrimaryKey(user.getId()),true,200);
             }else {
-                map.put("message","用户获取失败!");
-                map.put("code",404);
-                map.put("success",false);
-                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
+                resultVo = new ResultVo("用户修改失败!", null, false, 404);
             }
+        return resultVo;
+    }
 
-        }else {
-            long userId =  Long.parseLong(id);
-            User user = userMapper.selectByPrimaryKey(userId);
-            maps.put("list",user);
-            if(user != null){
-                map.put("message","用户获取成功!");
-                map.put("code",200);
-                map.put("success",true);
-                map.put("data",maps);
-            }else {
-                map.put("message","用户获取失败!");
-                map.put("code",404);
-                map.put("success",false);
-                map.put("data",new HashMap<String,Object>().put("errMsg","错误描述"));
-            }
+    @Override
+    public ResultVo add(User user) {
+        if (user.getCreateTime() == null){
+            user.setCreateTime(new Date());
         }
-        return map;
+        ResultVo resultVo;
+        try {
+            int affection = userMapper.insertSelective(user);
+            if (affection == 1){
+                resultVo = new ResultVo("用户添加成功!",userMapper.selectByPrimaryKey(user.getId()),true,200);
+            }else {
+                resultVo = new ResultVo("用户添加失败!",null,false,404);
+            }
+        }catch (Exception e){
+            resultVo = new ResultVo("参数异常!",null,false,404);
+        }
+        return resultVo;
+    }
+
+    @Override
+    public ResultVo list(Integer pageNo, Integer pageSize, Long id) {
+        List<User> arrayList;
+        PageInfo<User> userPageInfo;
+        ResultVo resultVo ;
+
+        try {
+            if (id == null){
+                PageHelper.startPage(pageNo, pageSize);
+                arrayList = userMapper.selectByExample(null);
+            }else {
+                User user = userMapper.selectByPrimaryKey(id);
+                arrayList = new ArrayList<>();
+                if(user != null){
+                    arrayList.add(user);
+                }
+            }
+            //DataVo<Object> dataVo = new DataVo<>();
+            userPageInfo = new PageInfo<>(arrayList);
+            if (userPageInfo.getPageNum() != 0) {
+                resultVo = new ResultVo("用户获取成功!", userPageInfo, true, 200);
+            }else {
+                resultVo = new ResultVo("用户获取失败!",null,false,404);
+            }
+        }catch (Exception e){
+            resultVo = new ResultVo("用户获取异常!",null,false,500);
+        }
+
+        return resultVo;
     }
 
 

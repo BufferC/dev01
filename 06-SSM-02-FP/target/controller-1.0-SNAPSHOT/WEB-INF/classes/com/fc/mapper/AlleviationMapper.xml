@@ -6,7 +6,7 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="VARCHAR" property="type" />
-    <result column="release_time" jdbcType="INTEGER" property="releaseTime" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
     <result column="cover" jdbcType="VARCHAR" property="cover" />
     <result column="last_click_time" jdbcType="TIMESTAMP" property="lastClickTime" />
     <result column="click_num" jdbcType="INTEGER" property="clickNum" />
@@ -14,13 +14,9 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.Alleviation">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
-  <select id="clickNum" resultType="Integer">
-    select click_num from alleviation where id = #{id}
-  </select>
-  <update id="clickUp" parameterType="com.fc.entity.Alleviation">
-    update alleviation set click_num = #{clickNum} , last_click_time = #{lastClickTime} where id = #{id}
+  <update id="click">
+    update alleviation set click_num = click_num + 1 , last_click_time = #{lastClickTime} where id = #{id}
   </update>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -139,11 +135,11 @@
       last_click_time, click_num, content
       )
     values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{title,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{releaseTime,jdbcType=INTEGER}, #{cover,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{releaseTime,jdbcType=TIMESTAMP}, #{cover,jdbcType=VARCHAR}, 
       #{lastClickTime,jdbcType=TIMESTAMP}, #{clickNum,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fc.entity.Alleviation">
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.fc.entity.Alleviation">
     insert into alleviation
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -188,7 +184,7 @@
         #{type,jdbcType=VARCHAR},
       </if>
       <if test="releaseTime != null">
-        #{releaseTime,jdbcType=INTEGER},
+        #{releaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="cover != null">
         #{cover,jdbcType=VARCHAR},
@@ -226,7 +222,7 @@
         type = #{record.type,jdbcType=VARCHAR},
       </if>
       <if test="record.releaseTime != null">
-        release_time = #{record.releaseTime,jdbcType=INTEGER},
+        release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.cover != null">
         cover = #{record.cover,jdbcType=VARCHAR},
@@ -251,7 +247,7 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       title = #{record.title,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
-      release_time = #{record.releaseTime,jdbcType=INTEGER},
+      release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
       cover = #{record.cover,jdbcType=VARCHAR},
       last_click_time = #{record.lastClickTime,jdbcType=TIMESTAMP},
       click_num = #{record.clickNum,jdbcType=INTEGER},
@@ -266,7 +262,7 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       title = #{record.title,jdbcType=VARCHAR},
       type = #{record.type,jdbcType=VARCHAR},
-      release_time = #{record.releaseTime,jdbcType=INTEGER},
+      release_time = #{record.releaseTime,jdbcType=TIMESTAMP},
       cover = #{record.cover,jdbcType=VARCHAR},
       last_click_time = #{record.lastClickTime,jdbcType=TIMESTAMP},
       click_num = #{record.clickNum,jdbcType=INTEGER}
@@ -287,7 +283,7 @@
         type = #{type,jdbcType=VARCHAR},
       </if>
       <if test="releaseTime != null">
-        release_time = #{releaseTime,jdbcType=INTEGER},
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
@@ -309,7 +305,7 @@
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
-      release_time = #{releaseTime,jdbcType=INTEGER},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
       cover = #{cover,jdbcType=VARCHAR},
       last_click_time = #{lastClickTime,jdbcType=TIMESTAMP},
       click_num = #{clickNum,jdbcType=INTEGER},
@@ -321,7 +317,7 @@
     set create_time = #{createTime,jdbcType=TIMESTAMP},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
-      release_time = #{releaseTime,jdbcType=INTEGER},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
       cover = #{cover,jdbcType=VARCHAR},
       last_click_time = #{lastClickTime,jdbcType=TIMESTAMP},
       click_num = #{clickNum,jdbcType=INTEGER}

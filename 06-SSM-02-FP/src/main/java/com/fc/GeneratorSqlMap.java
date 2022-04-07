@@ -1,4 +1,3 @@
-/*
 package com.fc;
 
 import org.mybatis.generator.api.MyBatisGenerator;
@@ -30,4 +29,3 @@ public class GeneratorSqlMap {
         }
     }
 }
-*/

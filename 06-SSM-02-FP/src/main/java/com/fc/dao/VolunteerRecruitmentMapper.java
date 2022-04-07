@@ -5,15 +5,9 @@ import com.fc.entity.VolunteerRecruitmentExample;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.Date;
 import java.util.List;
-
 @Repository
 public interface VolunteerRecruitmentMapper {
-    Integer clickNum(Integer id);
-
-    int clickUp(@Param("id") long id, @Param("lastClickTime") Date lastClickTime, @Param("clickNum") Integer clickNum);
-
     long countByExample(VolunteerRecruitmentExample example);
 
     int deleteByExample(VolunteerRecruitmentExample example);

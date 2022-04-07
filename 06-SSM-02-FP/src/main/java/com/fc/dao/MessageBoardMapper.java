@@ -7,13 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
 @Repository
 public interface MessageBoardMapper {
-    int rPicture(@Param("picture") String picture,@Param("id") long id);
-
-    int upReply(@Param("reply") String reply,@Param("id") long id);
-
     long countByExample(MessageBoardExample example);
 
     int deleteByExample(MessageBoardExample example);
@@ -41,4 +36,6 @@ public interface MessageBoardMapper {
     int updateByPrimaryKeyWithBLOBs(MessageBoardWithBLOBs record);
 
     int updateByPrimaryKey(MessageBoard record);
+
+    int upReply(@Param("id") Long id, @Param("rPicture") String replyPicture);
 }

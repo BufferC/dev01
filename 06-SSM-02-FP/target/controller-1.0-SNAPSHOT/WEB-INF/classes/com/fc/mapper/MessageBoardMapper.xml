@@ -13,13 +13,10 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
     <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
   </resultMap>
-  <update id="upReply" parameterType="com.fc.entity.MessageBoardWithBLOBs">
-    update message_board set reply = #{reply} where id = #{id}
+  <update id="upReply">
+    update message_board set reply = null , reply_picture = #{rPicture}
+    where id = #{id}
   </update>
-  <update id="rPicture" parameterType="com.fc.entity.MessageBoard">
-    update message_board set picture = #{picture} where id = #{id}
-  </update>
-
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -306,4 +303,5 @@
       reply_picture = #{replyPicture,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>
