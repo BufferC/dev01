@@ -194,7 +194,7 @@
                 click_num,
             </if>
             <if test="condition != null">
-                condition,
+                `condition`,
             </if>
             <if test="introduce != null">
                 introduce,
