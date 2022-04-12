@@ -1,21 +1,23 @@
 package com.fc.controller;
 
-import com.fc.entity.VolunteerRecruitment;
+import com.fc.entity.VolunteerRecruitmentWithBLOBs;
 import com.fc.service.RecruitmentService;
 import com.fc.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @RestController
-@RequestMapping("recruitment")
+@RequestMapping("volunteer")
 public class RecruitmentController {
     @Autowired
     private RecruitmentService recruitmentService;
 
     @RequestMapping("add")
-    public ResultVo add(VolunteerRecruitment volunteerRecruitment){
+    public ResultVo add(@RequestBody VolunteerRecruitmentWithBLOBs volunteerRecruitment){
         return recruitmentService.add(volunteerRecruitment);
     }
 
@@ -25,13 +27,13 @@ public class RecruitmentController {
     }
 
     @RequestMapping("update")
-    public ResultVo updata(VolunteerRecruitment volunteerRecruitment){
+    public ResultVo updata(@RequestBody VolunteerRecruitmentWithBLOBs volunteerRecruitment){
         return recruitmentService.update(volunteerRecruitment);
     }
 
-    @RequestMapping("list")
-    public ResultVo list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
-        return recruitmentService.list(pageNo,pageSize,id);
+    @RequestMapping("getlist")
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
+        return recruitmentService.list(pageNum,pageSize,id);
     }
 
 }

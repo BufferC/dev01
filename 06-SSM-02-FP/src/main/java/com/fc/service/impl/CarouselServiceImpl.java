@@ -18,13 +18,13 @@ public class CarouselServiceImpl implements CarouselService {
     private CarouselMapper carouselMapper;
 
     @Override
-    public ResultVo getList(Integer pageNo, Integer pageSize, int id) {
+    public ResultVo getList(Integer pageNo, Integer pageSize, Integer id) {
         List<Carousel> arrayList;
         PageInfo<Carousel> userPageInfo;
         ResultVo resultVo ;
 
         try {
-            if (id == 0){
+            if (id == null){
                 PageHelper.startPage(pageNo, pageSize);
                 arrayList = carouselMapper.selectByExample(null);
             }else {

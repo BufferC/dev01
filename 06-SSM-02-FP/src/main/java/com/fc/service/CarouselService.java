@@ -4,7 +4,7 @@ import com.fc.entity.Carousel;
 import com.fc.vo.ResultVo;
 
 public interface CarouselService {
-    ResultVo getList(Integer pageNo, Integer pageSize, int id);
+    ResultVo getList(Integer pageNo, Integer pageSize, Integer id);
 
     ResultVo add(Carousel carousel);
 

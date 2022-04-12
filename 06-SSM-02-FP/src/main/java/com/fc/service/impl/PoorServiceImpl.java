@@ -1,7 +1,6 @@
 package com.fc.service.impl;
 
 import com.fc.dao.PoorMapper;
-import com.fc.entity.Poor;
 import com.fc.entity.PoorWithBLOBs;
 import com.fc.service.PoorService;
 import com.fc.vo.ResultVo;
@@ -59,14 +58,14 @@ public class PoorServiceImpl implements PoorService {
 
     @Override
     public ResultVo list(Integer pageNo, Integer pageSize,Long id) {
-        List<Poor> arrayList;
-        PageInfo<Poor> userPageInfo;
+        List<PoorWithBLOBs> arrayList;
+        PageInfo<PoorWithBLOBs> userPageInfo;
         ResultVo resultVo ;
 
         try {
             if (id == null){
                 PageHelper.startPage(pageNo, pageSize);
-                arrayList = poorMapper.selectByExample(null);
+                arrayList = poorMapper.selectByExampleWithBLOBs(null);
             }else {
                 PoorWithBLOBs poor = poorMapper.selectByPrimaryKey(id);
                 arrayList = new ArrayList<>();

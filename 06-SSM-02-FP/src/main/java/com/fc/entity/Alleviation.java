@@ -19,8 +19,6 @@ public class Alleviation {
 
     private Integer clickNum;
 
-    private String content;
-
     public Long getId() {
         return id;
     }
@@ -85,11 +83,4 @@ public class Alleviation {
         this.clickNum = clickNum;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
 }

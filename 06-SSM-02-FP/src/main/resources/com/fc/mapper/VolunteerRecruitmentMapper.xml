@@ -19,7 +19,7 @@
     <result column="last_click_time" jdbcType="TIMESTAMP" property="lastClickTime" />
     <result column="click_num" jdbcType="INTEGER" property="clickNum" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.VolunteerRecruitment">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.VolunteerRecruitmentWithBLOBs">
     <result column="work_require" jdbcType="LONGVARCHAR" property="workRequire" />
   </resultMap>
   <sql id="Example_Where_Clause">

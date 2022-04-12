@@ -35,7 +35,6 @@ public class VolunteerRecruitment {
 
     private Integer clickNum;
 
-    private String workRequire;
 
     public Long getId() {
         return id;
@@ -163,13 +162,5 @@ public class VolunteerRecruitment {
 
     public void setClickNum(Integer clickNum) {
         this.clickNum = clickNum;
-    }
-
-    public String getWorkRequire() {
-        return workRequire;
-    }
-
-    public void setWorkRequire(String workRequire) {
-        this.workRequire = workRequire == null ? null : workRequire.trim();
     }
 }

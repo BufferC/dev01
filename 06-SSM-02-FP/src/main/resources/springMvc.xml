@@ -11,21 +11,34 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
     <!--扫描指定路径下的所有注解-->
     <context:component-scan base-package="com.fc.controller"/>
-
+    <!--文件解析器-->
     <mvc:annotation-driven/>
 
     <!--用于导入其他的配置文件-->
     <import resource="classpath:applicationContext.xml"/>
 
     <!--跨域配置-->
-    <!--<mvc:cors>-->
-    <!--    <mvc:mapping path="/crossOrigin/*" max-age="3600" allowed-methods="GET,POST,PUT,DELETE,OPTIONS" allowed-origins="*"/>-->
-    <!--</mvc:cors>-->
+    <mvc:cors>
+        <mvc:mapping path="/**" max-age="3600" allowed-methods="GET,POST,PUT,DELETE,OPTIONS" allowed-origins="*"/>
+    </mvc:cors>
 
-    <!--<mvc:interceptors>-->
-    <!--    <mvc:interceptor>-->
-    <!--        <mvc:mapping path="/crossOrigin/*"/>-->
-    <!--        <bean class="com.fc.interceptor.CrossInterceptor"/>-->
-    <!--    </mvc:interceptor>-->
-    <!--</mvc:interceptors>-->
+    <!--放行静态资源-->
+    <mvc:default-servlet-handler/>
+
+
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!--所有文件的最大size，（字节）-->
+        <property name="maxUploadSize" value="50000000000"/>
+
+        <property name="maxInMemorySize" value="51200"/>
+        <!--单个文件的最大size-->
+        <property name="maxUploadSizePerFile" value="3068000"/>
+        <property name="defaultEncoding" value="defaultEncoding"/>
+    </bean>
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/crossOrigin/*"/>
+            <bean class="com.fc.interceptor.CrossInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
 </beans>

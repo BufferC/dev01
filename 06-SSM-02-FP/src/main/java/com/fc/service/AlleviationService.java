@@ -1,14 +1,14 @@
 package com.fc.service;
 
-import com.fc.entity.Alleviation;
+import com.fc.entity.AlleviationWithBLOBs;
 import com.fc.vo.ResultVo;
 
 import java.util.Date;
 
 public interface AlleviationService {
-    ResultVo add(Alleviation alleviation);
+    ResultVo add(AlleviationWithBLOBs alleviation);
 
-    ResultVo update(Alleviation alleviation);
+    ResultVo update(AlleviationWithBLOBs alleviation);
 
     ResultVo del(Long id);
 

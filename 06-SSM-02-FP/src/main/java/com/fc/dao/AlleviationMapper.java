@@ -2,6 +2,7 @@ package com.fc.dao;
 
 import com.fc.entity.Alleviation;
 import com.fc.entity.AlleviationExample;
+import com.fc.entity.AlleviationWithBLOBs;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -19,21 +20,21 @@ public interface AlleviationMapper {
 
     int insertSelective(Alleviation record);
 
-    List<Alleviation> selectByExampleWithBLOBs(AlleviationExample example);
+    List<AlleviationWithBLOBs> selectByExampleWithBLOBs(AlleviationExample example);
 
     List<Alleviation> selectByExample(AlleviationExample example);
 
     Alleviation selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") Alleviation record, @Param("example") AlleviationExample example);
+    int updateByExampleSelective(@Param("record") AlleviationWithBLOBs record, @Param("example") AlleviationExample example);
 
-    int updateByExampleWithBLOBs(@Param("record") Alleviation record, @Param("example") AlleviationExample example);
+    int updateByExampleWithBLOBs(@Param("record") AlleviationWithBLOBs record, @Param("example") AlleviationExample example);
 
     int updateByExample(@Param("record") Alleviation record, @Param("example") AlleviationExample example);
 
-    int updateByPrimaryKeySelective(Alleviation record);
+    int updateByPrimaryKeySelective(AlleviationWithBLOBs record);
 
-    int updateByPrimaryKeyWithBLOBs(Alleviation record);
+    int updateByPrimaryKeyWithBLOBs(AlleviationWithBLOBs record);
 
     int updateByPrimaryKey(Alleviation record);
 

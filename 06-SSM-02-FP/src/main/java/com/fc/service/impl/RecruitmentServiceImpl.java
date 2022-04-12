@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.VolunteerRecruitmentMapper;
 import com.fc.entity.VolunteerRecruitment;
+import com.fc.entity.VolunteerRecruitmentWithBLOBs;
 import com.fc.service.RecruitmentService;
 import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
@@ -18,7 +19,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     @Autowired
     private VolunteerRecruitmentMapper volunteerRecruitmentMapper;
     @Override
-    public ResultVo add(VolunteerRecruitment volunteerRecruitment) {
+    public ResultVo add(VolunteerRecruitmentWithBLOBs volunteerRecruitment) {
         if (volunteerRecruitment.getCreateTime() == null){
             volunteerRecruitment.setCreateTime(new Date());
         }
@@ -45,7 +46,7 @@ public class RecruitmentServiceImpl implements RecruitmentService {
     }
 
     @Override
-    public ResultVo update(VolunteerRecruitment volunteerRecruitment) {
+    public ResultVo update(VolunteerRecruitmentWithBLOBs volunteerRecruitment) {
         ResultVo resultVo;
         int affection = volunteerRecruitmentMapper.updateByPrimaryKeySelective(volunteerRecruitment);
         if (affection == 1){
@@ -58,14 +59,14 @@ public class RecruitmentServiceImpl implements RecruitmentService {
 
     @Override
     public ResultVo list(Integer pageNo, Integer pageSize,Long id) {
-        List<VolunteerRecruitment> arrayList;
-        PageInfo<VolunteerRecruitment> vPageInfo;
+        List<VolunteerRecruitmentWithBLOBs> arrayList;
+        PageInfo<VolunteerRecruitmentWithBLOBs> vPageInfo;
         ResultVo resultVo ;
 
         try {
             if (id == null){
                 PageHelper.startPage(pageNo, pageSize);
-                arrayList = volunteerRecruitmentMapper.selectByExample(null);
+                arrayList = volunteerRecruitmentMapper.selectByExampleWithBLOBs(null);
             }else {
                 arrayList = new ArrayList<>();
                 arrayList.add(volunteerRecruitmentMapper.selectByPrimaryKey(id));

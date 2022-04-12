@@ -1,7 +1,7 @@
 package com.fc.service.impl;
 
 import com.fc.dao.AlleviationMapper;
-import com.fc.entity.Alleviation;
+import com.fc.entity.AlleviationWithBLOBs;
 import com.fc.service.AlleviationService;
 import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
@@ -18,7 +18,7 @@ public class AlleviationServiceImpl implements AlleviationService {
     private AlleviationMapper alleviationMapper;
 
     @Override
-    public ResultVo add(Alleviation alleviation) {
+    public ResultVo add(AlleviationWithBLOBs alleviation) {
         ResultVo resultVo;
         int affection = alleviationMapper.insertSelective(alleviation);
         if (affection == 1){
@@ -30,7 +30,7 @@ public class AlleviationServiceImpl implements AlleviationService {
     }
 
     @Override
-    public ResultVo update(Alleviation alleviation) {
+    public ResultVo update(AlleviationWithBLOBs alleviation) {
         ResultVo resultVo;
         int affection = alleviationMapper.updateByPrimaryKeySelective(alleviation);
         if (affection == 1){
@@ -55,13 +55,13 @@ public class AlleviationServiceImpl implements AlleviationService {
 
     @Override
     public ResultVo list(Integer pageNo, Integer pageSize) {
-        List<Alleviation> arrayList;
-        PageInfo<Alleviation> userPageInfo;
+        List<AlleviationWithBLOBs> arrayList;
+        PageInfo<AlleviationWithBLOBs> userPageInfo;
         ResultVo resultVo ;
 
         try {
             PageHelper.startPage(pageNo, pageSize);
-            arrayList = alleviationMapper.selectByExample(null);
+            arrayList = alleviationMapper.selectByExampleWithBLOBs(null);
             //DataVo<Object> dataVo = new DataVo<>();
             userPageInfo = new PageInfo<>(arrayList);
             if (userPageInfo.getPageNum() != 0) {

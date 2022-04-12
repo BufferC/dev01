@@ -4,9 +4,8 @@ import com.fc.entity.PoorWithBLOBs;
 import com.fc.service.PoorService;
 import com.fc.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequestMapping("poor")
@@ -15,7 +14,7 @@ public class PoorController {
     private PoorService poorService;
     
     @RequestMapping("add")
-    public ResultVo add(PoorWithBLOBs poor){
+    public ResultVo add(@RequestBody PoorWithBLOBs poor){
         return poorService.add(poor);
     }
 
@@ -25,13 +24,13 @@ public class PoorController {
     }
 
     @RequestMapping("update")
-    public ResultVo update(PoorWithBLOBs poor){
+    public ResultVo update(@RequestBody PoorWithBLOBs poor){
         return poorService.update(poor);
     }
 
-    @RequestMapping("list")
-    public ResultVo list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
-        return poorService.list(pageNo,pageSize,id);
+    @RequestMapping("getlist")
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
+        return poorService.list(pageNum,pageSize,id);
     }
 
     @RequestMapping("click")

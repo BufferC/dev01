@@ -2,6 +2,7 @@ package com.fc.controller;
 
 
 import com.fc.entity.Alleviation;
+import com.fc.entity.AlleviationWithBLOBs;
 import com.fc.service.AlleviationService;
 import com.fc.vo.ResultVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +12,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("policy")
+@RequestMapping("alleviation")
 public class AlleviationController {
     @Autowired
     private AlleviationService alleviationService;
 
     @RequestMapping("add")
-    public ResultVo add(@RequestBody Alleviation alleviation){
+    public ResultVo add(@RequestBody AlleviationWithBLOBs alleviation){
         return alleviationService.add(alleviation);
     }
 
     @RequestMapping("update")
-    public ResultVo update(@RequestBody Alleviation alleviation){
+    public ResultVo update(@RequestBody AlleviationWithBLOBs alleviation){
         return alleviationService.update(alleviation);
     }
 
@@ -31,9 +32,9 @@ public class AlleviationController {
         return alleviationService.del(id);
     }
 
-    @RequestMapping("list")
-    public ResultVo list(@RequestParam(value = "pageNo",defaultValue = "1") Integer pageNo, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
-        return alleviationService.list(pageNo,pageSize);
+    @RequestMapping("getlist")
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
+        return alleviationService.list(pageNum,pageSize);
     }
 
     @RequestMapping("click")
