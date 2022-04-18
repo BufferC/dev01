@@ -1,0 +1,21 @@
+server:
+  port: 8848
+  servlet:
+    context-path: /yml
+
+student:
+  name: '易烊\r\n千玺'
+  age: 22
+  gender: '男'
+  married: false                      # 布尔
+  birthday: 2000/11/28 10:00:01       # 日期
+  hobby: ["唱", "跳", "Rap", "篮球"]  # 数组
+  food:                                # 集合
+    - 一份惆怅
+    - 一份凄凉
+    - 老坛酸菜面
+    - 双汇火腿肠
+  score: {"Java": 100, "MySQL": 10}   # Map
+  car:                                # 对象
+    name: BYD·唐
+    color: 白色

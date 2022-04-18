@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!--起步依赖的父模块-->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.4.5</version>
+        <!--我们可以配置当前父模块的加载路径-->
+        <!--如果直接写一个单边标签，那么就不会走相对路径，直接走仓库-->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <!--GAV坐标-->
+    <groupId>com.fc</groupId>
+    <artifactId>08-SpringBoot-01-Starter</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>08-SpringBoot-01-Starter</name>
+    <description>Demo project for Spring Boot</description>
+
+    <!--公共版本声明-->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <!--web相关的起步依赖，包含了web的所有功能jar包-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
