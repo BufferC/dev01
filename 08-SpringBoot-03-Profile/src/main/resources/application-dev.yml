@@ -1,0 +1,9 @@
+# 开发环境
+server:
+  port: 8080
+  servlet:
+    context-path: /dev
+
+person:
+  name: "灰太狼"
+  age: 36

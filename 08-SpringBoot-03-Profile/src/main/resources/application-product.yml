@@ -1,0 +1,9 @@
+# 生产环境
+server:
+  port: 8888
+  servlet:
+    context-path: /product
+
+person:
+  name: "黑太狼"
+  age: -1

@@ -1,0 +1,4 @@
+# 配置活动的环境
+spring:
+  profiles:
+    active: test

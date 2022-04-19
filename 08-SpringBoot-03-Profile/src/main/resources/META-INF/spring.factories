@@ -1,0 +1,2 @@
+# 告知SpringBoot使用我们自定义的环境处理类
+org.springframework.boot.env.EnvironmentPostProcessor=com.fc.config.CustomEnvironmentPostProcessor
