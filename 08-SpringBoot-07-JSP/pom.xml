@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.6.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.fc</groupId>
+    <artifactId>08-SpringBoot-07-JSP</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>08-SpringBoot-07-JSP</name>
+    <description>Demo project for Spring Boot</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--因为我们的SpringBoot自带了Tomcat，默认是不支持对JSP页面的解析-->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+
+        <!-- SpringBoot要求jsp文件必须编译到指定的META-INF/resources目录下才能访问，否则访问不到。 -->
+        <resources>
+            <resource>
+                <!--源文件位置-->
+                <directory>src/main/webapp</directory>
+                <!--指定编译到META-INF/resources，固定格式-->
+                <targetPath>META-INF/resources</targetPath>
+                <!--指定要把哪些文件编译进去，**表示webapp目录及子目录，*.*表示所有文件-->
+                <includes>
+                    <include>**/*.*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

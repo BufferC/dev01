@@ -1,0 +1,6 @@
+spring:
+  mvc:
+    view:
+      # 配置视图解析指定的前缀和后缀
+      prefix: /
+      suffix: .jsp

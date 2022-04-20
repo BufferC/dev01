@@ -1,0 +1,12 @@
+# 静态资源的访问路径前缀
+#spring:
+#  mvc:
+#    static-path-pattern: /static/**
+#    # 配置本地路径，静态资源必须在指定的路径下才有效
+#  web:
+#    resources:
+#      static-locations: classpath:/index/
+spring:
+  banner:
+    image:
+      location: classpath:001.jpg
