@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    # 默认支持的数据源，性能很高
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dev01?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
+    username: root
+    password: root

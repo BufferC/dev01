@@ -50,18 +50,18 @@
         </plugins>
 
         <!-- SpringBoot要求jsp文件必须编译到指定的META-INF/resources目录下才能访问，否则访问不到。 -->
-        <resources>
-            <resource>
-                <!--源文件位置-->
-                <directory>src/main/webapp</directory>
-                <!--指定编译到META-INF/resources，固定格式-->
-                <targetPath>META-INF/resources</targetPath>
-                <!--指定要把哪些文件编译进去，**表示webapp目录及子目录，*.*表示所有文件-->
-                <includes>
-                    <include>**/*.*</include>
-                </includes>
-            </resource>
-        </resources>
+        <!--<resources+>-->
+        <!--    <resource>-->
+        <!--        &lt;!&ndash;源文件位置&ndash;&gt;-->
+        <!--        <directory>src/main/webapp</directory>-->
+        <!--        &lt;!&ndash;指定编译到META-INF/resources，固定格式&ndash;&gt;-->
+        <!--        <targetPath>META-INF/resources</targetPath>-->
+        <!--        &lt;!&ndash;指定要把哪些文件编译进去，**表示webapp目录及子目录，*.*表示所有文件&ndash;&gt;-->
+        <!--        <includes>-->
+        <!--            <include>**/*.*</include>-->
+        <!--        </includes>-->
+        <!--    </resource>-->
+        <!--</resources>-->
     </build>
 
 </project>
