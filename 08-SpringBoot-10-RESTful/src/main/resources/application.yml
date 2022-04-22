@@ -1,9 +1,4 @@
-#  spring.main.allow-circular-references
-
 spring:
-#  # 避免循环依赖
-#  main:
-#    allow-circular-references: true
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
@@ -11,9 +6,10 @@ spring:
     username: root
     password: root
 
+
 mybatis:
-# mybatis-config.xml配置文件所在的路径
-#  config-location:
+  # mybatis-config.xml配置文件所在的路径
+  #  config-location:
   # 扫描指定路径下的映射文件（sql）
   mapper-locations: classpath:com/fc/mapper/*.xml
   configuration:
@@ -31,3 +27,9 @@ mybatis:
     aggressive-lazy-loading: false
   # 别名所在的包
   type-aliases-package: com.fc.entity
+
+#pagehelper:
+#  # 分页参数合理化
+#  reasonable: true
+#  # 配置数据库方言
+#  dialect: mysql
