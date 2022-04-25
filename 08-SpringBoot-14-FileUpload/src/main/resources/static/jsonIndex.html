@@ -12,6 +12,8 @@
         照片：<input type="file" name="photo" multiple>
         <button onclick="upload()" type="button">上传</button>
     </form>
+
+    <img src="" id="headerImg">
 </body>
 <script>
     function upload() {
@@ -26,6 +28,12 @@
             processData: false,
             success: function (resp) {
                 alert(resp.message);
+
+                var array = resp.data;
+
+                var headerImgPath = resp.data[0];
+
+                $("#headerImg").attr("src", headerImgPath);
             }
         })
     }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>测试表单提交RESTful</title>
+</head>
+<body>
+    <!--模拟删除操作-->
+    <form method="post" action="/user/1">
+        <input name="_method" value="delete" hidden>
+        <input type="submit" value="delete提交">
+    </form>
+
+    <!--模拟修改操作-->
+    <form method="post" action="/user/1/易烊千玺/123456">
+        <input name="_method" value="put" hidden>
+        <input type="submit" value="put提交">
+    </form>
+
+    <!--模拟添加操作-->
+    <form method="post" action="/user/易烊千玺/123456">
+        <input type="submit" value="post提交">
+    </form>
+
+    <!--模拟查询操作-->
+    <form method="get" action="/user">
+        <input type="submit" value="get提交">
+    </form>
+</body>
+</html>
