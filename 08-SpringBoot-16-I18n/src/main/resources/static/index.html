@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title id="title"></title>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<form>
+    <table align="center">
+        <caption><h1 align="center" style="color: yellowgreen" id="welcome">测试国际化</h1></caption>
+
+        <tr>
+            <td id="username">用户名</td>
+            <td><input type="text"></td>
+        </tr>
+        <tr>
+            <td id="password">密码</td>
+            <td><input type="password"></td>
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="checkbox">
+            </td>
+            <td align="center">
+                <span id="rememberMe">记住我</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input id="loginButton" type="submit" value="登录">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button id="changeButton" onclick="changeLanguage()" type="button">中文</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+<script>
+    var lang = 'zh_CN';
+
+    $(function () {
+        changeLanguage()
+    })
+
+    function changeLanguage() {
+        // 如果是中文，
+        if (lang === 'zh_CN') {
+            lang = 'en_US';
+            $("#changeButton").text('英文')
+        } else {
+            lang = 'zh_CN';
+            $("#changeButton").text('中文')
+        }
+
+        $.ajax({
+            url: "i18n/get",
+            type: "get",
+            data: {"lang": lang},
+            success: function (resp) {
+                $("#loginButton").val(resp.login);
+                $("#rememberMe").text(resp.rememberMe);
+                $("#username").text(resp.username);
+                $("#password").text(resp.password);
+                $("#welcome").text(resp.welcome);
+                $("#title").text(resp.title);
+            }
+        })
+
+    }
+</script>
+</html>
