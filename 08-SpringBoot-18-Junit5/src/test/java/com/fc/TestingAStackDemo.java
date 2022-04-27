@@ -23,6 +23,7 @@ class TestingAStackDemo {
         @BeforeEach
         void createNewStack() {
             stack = new Stack<>();
+            System.out.println("初始化栈，此时栈不为null");
         }
 
         @Test
@@ -35,6 +36,7 @@ class TestingAStackDemo {
         @DisplayName("throws EmptyStackException when popped")
         void throwsExceptionWhenPopped() {
             Assertions.assertThrows(EmptyStackException.class, () -> {
+                System.out.println("从栈中弹出一个元素");
                 stack.pop();
             });
         }
@@ -43,6 +45,7 @@ class TestingAStackDemo {
         @DisplayName("throws EmptyStackException when peeked")
         void throwsExceptionWhenPeeked() {
             Assertions.assertThrows(EmptyStackException.class, () -> {
+                System.out.println("从栈中拿到一个元素，元素没有被栈删除");
                 stack.peek();
             });
         }

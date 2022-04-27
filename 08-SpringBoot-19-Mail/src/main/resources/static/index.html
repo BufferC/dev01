@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>测试发送邮件</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+
+</body>
+<div class="container">
+    <form id="form" class="form-horizontal">
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputFrom">发件人</label>
+            <div class="col-sm-10">
+                <input type="text" name="from" class="form-control" id="inputFrom" placeholder="请输入发件人">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputTo">收件人</label>
+            <div class="col-sm-10">
+                <input type="text" name="to" class="form-control" id="inputTo" placeholder="请输入收件人">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputCc">抄送人</label>
+            <div class="col-sm-10">
+                <input type="text" name="cc" class="form-control" id="inputCc" placeholder="请输入抄送人">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputBcc">秘密抄送</label>
+            <div class="col-sm-10">
+                <input type="text" name="bcc" class="form-control" id="inputBcc" placeholder="请输入秘密抄送人">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputSubject">邮件主题</label>
+            <div class="col-sm-10">
+                <input type="text" name="subject" class="form-control" id="inputSubject" placeholder="请输入邮件主题">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">邮件内容</label>
+            <div class="col-sm-10">
+                <textarea name="content" class="form-control" placeholder="请输入邮件的内容" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label" for="inputFile">上传附件</label>
+            <div class="col-sm-10">
+                <input type="file" name="file" id="inputFile" multiple>
+                <p class="help-block">请选择您要上传的附件</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" onclick="send()" class="btn btn-default">发送邮件</button>
+        </div>
+    </form>
+</div>
+<script>
+    function send() {
+        var formData = new FormData(document.getElementById("form"));
+
+        formData.set("to", formData.get('to').split(";"));
+        formData.set("cc", formData.get('cc').split(";"));
+        formData.set("bcc", formData.get('bcc').split(";"));
+
+        $.ajax({
+            url: "/mail/send",
+            type: "post",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (resp) {
+                alert(resp);
+            }
+        })
+    }
+</script>
+</html>
