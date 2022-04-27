@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>测试发送邮件</title>
@@ -76,7 +76,9 @@
             url: "/mail/send",
             type: "post",
             data: formData,
+            // 不会转为字符串
             processData: false,
+            // 自动解析请求的内容类型
             contentType: false,
             success: function (resp) {
                 alert(resp);

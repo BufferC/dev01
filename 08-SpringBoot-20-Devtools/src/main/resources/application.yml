@@ -1,0 +1,9 @@
+spring:
+  devtools:
+    restart:
+      # 开启devtools
+      enabled: true
+      # 轮询间隔：多久查询一次是否做了修改。默认是1s
+      poll-interval: 2s
+      # 在重启之前多长时间内没有做操作
+      quiet-period: 1s

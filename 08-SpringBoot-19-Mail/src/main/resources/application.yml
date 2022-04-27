@@ -1,4 +1,9 @@
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-request-size: 100MB
+      max-file-size: 10MB
   mail:
     # 发送邮件的服务器主机地址
     host: smtp.qq.com
