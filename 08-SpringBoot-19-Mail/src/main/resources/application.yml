@@ -10,7 +10,7 @@ spring:
     # 邮箱
     username: 2937753364@qq.com
     # 这个密码是第三方服务的授权码，并不是QQ密码
-    password: nijzdagluxbudeda
+    password: xxxxxxxxxxxxxxxx
     default-encoding: UTF-8
     port: 587
     properties:
