@@ -1,0 +1,5 @@
+spring:
+  mvc:
+    pathmatch:
+      # 使用Swagger支持的字符串路径匹配方式
+      matching-strategy: ant_path_matcher
