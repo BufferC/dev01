@@ -11,10 +11,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("user")
-@Api(value = "user controller", description = "用户相关的所有操作")
+@Api(tags = "用户处理器", description = "用户相关的所有操作")
 public class UserController {
     @GetMapping("findAll")
-    @ApiOperation("查询所有用户")
+    @ApiOperation(value = "查询所有用户",
+            nickname = "查询所有用户（昵称）")
     public Map<String, Object> findAll() {
 
         Map<String, Object> map = new HashMap<>();

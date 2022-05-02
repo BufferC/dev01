@@ -3,6 +3,7 @@ package com.fc.controller;
 import com.fc.entity.TbNote;
 import com.fc.entity.TbUser;
 import com.fc.service.IndexService;
+import com.fc.vo.NoteVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("index")
@@ -39,9 +41,19 @@ public class IndexController {
         // 获取用户id
         Integer userId = user.getId();
 
+        // 所有的日记
         PageInfo<TbNote> pageInfo = indexService.page(pageNum, pageSize, userId, id, title, date);
-
         mv.addObject("page", pageInfo);
+
+        // 获取所有日记的日期分类
+        List<NoteVO> dateInfo = indexService.findDateInfo(userId);
+
+        mv.addObject("dateInfo", dateInfo);
+
+        // 获取所有日记的类别
+        List<NoteVO> typeInfo = indexService.findTypeInfo(userId);
+        mv.addObject("typeInfo", typeInfo);
+
 
         mv.addObject("changePage", "/note/list.jsp");
 

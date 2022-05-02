@@ -5,6 +5,7 @@ import com.fc.service.UserService;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -52,12 +53,26 @@ public class UserController {
             // 发送到浏览器
             response.addCookie(cookie);
 
-            mv.setViewName("/index.jsp");
+            mv.setViewName("forward:/index/page");
         } else {
             // 登录失败的情况
             mv.addObject("resultInfo", result);
-            mv.setViewName("redirect:/login.jsp");
+            mv.setViewName("forward:/login.jsp");
         }
+
+        return mv;
+    }
+
+    @GetMapping("logout")
+    public ModelAndView logout(ModelAndView mv, HttpSession session, HttpServletResponse response) {
+        // 销毁session
+        session.invalidate();
+
+        Cookie cookie = new Cookie("JSESSIONID", null);
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        mv.setViewName("redirect:/login.jsp");
 
         return mv;
     }
