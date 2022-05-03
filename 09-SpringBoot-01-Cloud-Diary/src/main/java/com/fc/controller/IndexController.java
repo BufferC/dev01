@@ -7,6 +7,7 @@ import com.fc.vo.NoteVO;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,16 +49,55 @@ public class IndexController {
         // 获取所有日记的日期分类
         List<NoteVO> dateInfo = indexService.findDateInfo(userId);
 
-        mv.addObject("dateInfo", dateInfo);
+        session.setAttribute("dateInfo", dateInfo);
 
         // 获取所有日记的类别
         List<NoteVO> typeInfo = indexService.findTypeInfo(userId);
-        mv.addObject("typeInfo", typeInfo);
+        session.setAttribute("typeInfo", typeInfo);
 
+        if (id != null) {
+            mv.addObject("typeId", id);
+        }
+
+        if (title != null && !title.equals("")) {
+            mv.addObject("title", title);
+        }
+
+        if (date != null && !date.equals("")) {
+            mv.addObject("date", date);
+        }
 
         mv.addObject("changePage", "/note/list.jsp");
+        mv.addObject("menu_page", "index");
 
         mv.setViewName("forward:/index.jsp");
+
+        return mv;
+    }
+
+    @GetMapping("searchType")
+    public ModelAndView searchType(Integer id, ModelAndView mv) {
+        mv.addObject("id", id);
+
+        mv.setViewName("forward:/index/page");
+
+        return mv;
+    }
+
+    @GetMapping("searchTitle")
+    public ModelAndView searchTitle(String title, ModelAndView mv) {
+        mv.addObject("title", title);
+
+        mv.setViewName("forward:/index/page");
+
+        return mv;
+    }
+
+    @GetMapping("searchDate")
+    public ModelAndView searchDate(String date, ModelAndView mv) {
+        mv.addObject("date", date);
+
+        mv.setViewName("forward:/index/page");
 
         return mv;
     }

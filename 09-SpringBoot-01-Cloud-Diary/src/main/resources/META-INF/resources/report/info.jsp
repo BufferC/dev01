@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <div class="col-md-9">
     <div class="data_list">
         <div class="data_list_title"><span class="glyphicon glyphicon-signal"></span>&nbsp;数据报表 </div>
@@ -160,7 +159,6 @@
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
     }
-
 
     /**
      * 通过用户发布的坐标查询

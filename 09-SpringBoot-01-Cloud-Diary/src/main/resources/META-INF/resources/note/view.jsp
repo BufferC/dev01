@@ -162,7 +162,7 @@
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=yrxymYTyuefnxNtXbZcMU8phABXtu6TG"></script>
     <script type="text/javascript">
-        /* 百度地图回去当前地址位置的经纬度 */
+        /* 百度地图会去当前地址位置的经纬度 */
         var geolocation = new BMap.Geolocation();
         geolocation.getCurrentPosition(function (r) {
             // 判断是否获取到

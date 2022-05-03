@@ -43,4 +43,6 @@ public interface TbNoteMapper {
     List<NoteVO> findDateInfo(@Param("userId") Integer userId);
 
     List<NoteVO> findTypeInfo(@Param("userId") Integer userId);
+
+    NoteVO getNoteById(Integer id);
 }

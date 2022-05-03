@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fc.dao.TbNoteMapper">
+    <select id="getNoteById" resultType="com.fc.vo.NoteVO">
+        select tn.*, tnt.type_name as typeName
+        from tb_note tn
+        inner join tb_note_type tnt
+        on tn.type_id = tnt.id
+        where tn.id = #{id}
+    </select>
+
     <!--类别分类查询-->
     <select id="findTypeInfo" resultType="com.fc.vo.NoteVO">
         select count(tn.id) as noteCount, tnt.id as typeId, tnt.type_name as groupName
@@ -31,7 +39,7 @@
         inner join tb_note tn on tnt.id = tn.type_id
         where tu.id = #{userId}
         <if test="title != null and title != ''">
-            and tn.title = #{title}
+            and tn.title like #{title}
         </if>
         <if test="date != null and date != ''">
             and date_format(tn.pub_time, '%Y年%m月') = #{date}
