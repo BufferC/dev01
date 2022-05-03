@@ -14,10 +14,27 @@
 
     <mvc:annotation-driven/>
 
-    <!--配置跨域-->
-    <mvc:cors>
-        <mvc:mapping path="/**" allowed-origins="*"/>
-    </mvc:cors>
+    <!--放行静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <mvc:interceptors>
+        <!--配置跨域-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.fc.interceptor.CrossInterceptor"/>
+        </mvc:interceptor>
+        <!--token验证的拦截器-->
+        <!--除了登录其他全部都要验证-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <mvc:exclude-mapping path="/user/login"/>
+            <mvc:exclude-mapping path="/swagger-ui.html/**"/>
+            <mvc:exclude-mapping path="/v2/**"/>
+            <mvc:exclude-mapping path="/webjars/**"/>
+            <mvc:exclude-mapping path="/swagger-resources/**"/>
+            <bean class="com.fc.interceptor.JwtInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
     <!--用于导入其他的配置文件-->
     <import resource="classpath:applicationContext.xml"/>

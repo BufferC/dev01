@@ -1,10 +1,14 @@
 package com.fc.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
+@ApiModel("用户实体类")
 public class User {
+    @ApiModelProperty("用户编号")
     private Long id;
     @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date createTime;
@@ -24,6 +28,8 @@ public class User {
     private String email;
 
     private String photo;
+
+    private String role;
 
     public Long getId() {
         return id;
@@ -103,5 +109,13 @@ public class User {
 
     public void setPhoto(String photo) {
         this.photo = photo == null ? null : photo.trim();
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role == null ? null : role.trim();
     }
 }

@@ -12,6 +12,7 @@
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
+    <result column="role" jdbcType="VARCHAR" property="role" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, create_time, username, password, name, age, gender, phone, email, photo
+    id, create_time, username, password, name, age, gender, phone, email, photo, role
   </sql>
   <select id="selectByExample" parameterType="com.fc.entity.UserExample" resultMap="BaseResultMap">
     select
@@ -108,11 +109,11 @@
     insert into user (id, create_time, username, 
       password, name, age, 
       gender, phone, email, 
-      photo)
+      photo, role)
     values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{username,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=VARCHAR}, 
       #{gender,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{photo,jdbcType=VARCHAR})
+      #{photo,jdbcType=VARCHAR}, #{role,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.fc.entity.User">
     insert into user
@@ -147,6 +148,9 @@
       <if test="photo != null">
         photo,
       </if>
+      <if test="role != null">
+        role,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -178,6 +182,9 @@
       </if>
       <if test="photo != null">
         #{photo,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -220,6 +227,9 @@
       <if test="record.photo != null">
         photo = #{record.photo,jdbcType=VARCHAR},
       </if>
+      <if test="record.role != null">
+        role = #{record.role,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -236,7 +246,8 @@
       gender = #{record.gender,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
-      photo = #{record.photo,jdbcType=VARCHAR}
+      photo = #{record.photo,jdbcType=VARCHAR},
+      role = #{record.role,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -271,6 +282,9 @@
       <if test="photo != null">
         photo = #{photo,jdbcType=VARCHAR},
       </if>
+      <if test="role != null">
+        role = #{role,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -284,7 +298,8 @@
       gender = #{gender,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      photo = #{photo,jdbcType=VARCHAR}
+      photo = #{photo,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>
