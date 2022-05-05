@@ -9,9 +9,7 @@ import com.fc.vo.NoteVO;
 import com.fc.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -39,7 +37,8 @@ public class NoteController {
         }
 
         if (vo.getCode() == 1) {
-            mv.setViewName("forward:/index/page");
+            // 注意，这里要使用重定向
+            mv.setViewName("redirect:/index/page");
         } else {
             mv.addObject("resultInfo", vo);
             mv.addObject("id", note.getId());
@@ -83,5 +82,11 @@ public class NoteController {
         mv.setViewName("forward:/index.jsp");
 
         return mv;
+    }
+
+    @GetMapping("delete")
+    @ResponseBody
+    public ResultVO delete(@RequestParam Integer id) {
+        return noteService.delete(id);
     }
 }

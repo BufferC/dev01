@@ -10,4 +10,6 @@ public interface NoteService {
     ResultVO update(TbNote note);
 
     ResultVO add(TbNote note);
+
+    ResultVO delete(Integer id);
 }

@@ -72,4 +72,25 @@ public class NoteServiceImpl implements NoteService {
 
         return resultVO;
     }
+
+    @Override
+    public ResultVO delete(Integer id) {
+        ResultVO resultVO = new ResultVO();
+
+        if (id == null) {
+            resultVO.setCode(0);
+            resultVO.setMessage("删除失败");
+            resultVO.setSuccess(false);
+        } else {
+            int affectedRows = noteMapper.deleteByPrimaryKey(id);
+
+            if (affectedRows > 0) {
+                resultVO.setCode(1);
+                resultVO.setSuccess(true);
+                resultVO.setMessage("删除成功");
+            }
+        }
+
+        return resultVO;
+    }
 }
