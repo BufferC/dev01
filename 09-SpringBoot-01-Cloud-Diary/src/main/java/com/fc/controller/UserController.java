@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.Cookie;
@@ -74,6 +76,37 @@ public class UserController {
 
         mv.setViewName("redirect:/login.jsp");
 
+        return mv;
+    }
+
+    @GetMapping("userCenter")
+    public ModelAndView userCenter(ModelAndView mv) {
+
+        mv.addObject("menu_page", "user");
+        mv.addObject("changePage", "/user/info.jsp");
+
+        mv.setViewName("forward:/index.jsp");
+        return mv;
+    }
+
+    @GetMapping("checkNick")
+    @ResponseBody
+    public Integer checkNick(String nick) {
+        return userService.checkNick(nick);
+    }
+
+    @PostMapping("update")
+    public ModelAndView update(MultipartFile img, TbUser user, HttpSession session, ModelAndView mv) {
+        TbUser contextUser = (TbUser) session.getAttribute("user");
+
+        // 一定要把id给传递过来
+        user.setId(contextUser.getId());
+
+        ResultVO vo = userService.update(img, user);
+
+        session.setAttribute("user", vo.getData());
+
+        mv.setViewName("redirect:userCenter");
         return mv;
     }
 }

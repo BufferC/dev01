@@ -5,6 +5,12 @@ spring:
     url: jdbc:mysql://localhost:3306/cloud_diary?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
     username: root
     password: root
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 10MB
+      # 开启多文件上传
+      enabled: true
 
 mybatis:
   # mybatis-config.xml配置文件所在的路径

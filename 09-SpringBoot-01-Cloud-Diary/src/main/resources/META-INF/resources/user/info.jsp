@@ -97,7 +97,7 @@
             },
             success: function (code) {
                 // 如果可用，清空提示信息，按钮可用
-                if (code === 1) {
+                if (code === 0) {
                     // 1. 清空提示信息
                     $("#msg").html("")
                     // 2. 按钮可用

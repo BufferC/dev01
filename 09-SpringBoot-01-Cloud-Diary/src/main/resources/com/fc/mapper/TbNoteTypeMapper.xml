@@ -103,7 +103,7 @@
     values (#{id,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.fc.entity.TbNoteType">
+  <insert id="insertSelective" keyProperty="id" useGeneratedKeys="true" parameterType="com.fc.entity.TbNoteType">
     insert into tb_note_type
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
