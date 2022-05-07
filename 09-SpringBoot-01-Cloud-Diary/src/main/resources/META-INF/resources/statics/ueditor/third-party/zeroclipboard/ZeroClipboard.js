@@ -461,10 +461,10 @@
           formatMap.text = dataFormat;
           break;
 
-         case "text/html":
+         case "text/templates":
          case "html":
-         case "air:html":
-         case "flash:html":
+         case "air:templates":
+         case "flash:templates":
           newClipData.html = clipData[dataFormat];
           formatMap.html = dataFormat;
           break;
@@ -621,7 +621,7 @@
     return this;
   };
   ZeroClipboard.prototype.setHtml = function(html) {
-    ZeroClipboard.setData("text/html", html);
+    ZeroClipboard.setData("text/templates", html);
     return this;
   };
   ZeroClipboard.prototype.setRichText = function(richText) {
@@ -817,7 +817,7 @@
   };
   var _bridge = function() {
     var flashBridge, len;
-    var container = document.getElementById("global-zeroclipboard-html-bridge");
+    var container = document.getElementById("global-zeroclipboard-templates-bridge");
     if (!container) {
       var allowScriptAccess = _determineScriptAccess(window.location.host, _globalConfig);
       var allowNetworking = allowScriptAccess === "never" ? "none" : "all";
@@ -848,7 +848,7 @@
   };
   var _createHtmlBridge = function() {
     var container = document.createElement("div");
-    container.id = "global-zeroclipboard-html-bridge";
+    container.id = "global-zeroclipboard-templates-bridge";
     container.className = "global-zeroclipboard-container";
     container.style.position = "absolute";
     container.style.left = "0px";
@@ -1038,11 +1038,11 @@
 
      case "copy":
       var textContent, htmlContent, targetEl = event.relatedTarget;
-      if (!(_clipData["text/html"] || _clipData["text/plain"]) && targetEl && (htmlContent = targetEl.value || targetEl.outerHTML || targetEl.innerHTML) && (textContent = targetEl.value || targetEl.textContent || targetEl.innerText)) {
+      if (!(_clipData["text/templates"] || _clipData["text/plain"]) && targetEl && (htmlContent = targetEl.value || targetEl.outerHTML || targetEl.innerHTML) && (textContent = targetEl.value || targetEl.textContent || targetEl.innerText)) {
         event.clipboardData.clearData();
         event.clipboardData.setData("text/plain", textContent);
         if (htmlContent !== textContent) {
-          event.clipboardData.setData("text/html", htmlContent);
+          event.clipboardData.setData("text/templates", htmlContent);
         }
       } else if (!_clipData["text/plain"] && event.target && (textContent = event.target.getAttribute("data-clipboard-text"))) {
         event.clipboardData.clearData();

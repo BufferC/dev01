@@ -743,10 +743,10 @@ var utils = UE.utils = {
      * @return { String } 转义后的字符串
      * @example
      * ```javascript
-     * var html = '<body>&</body>';
+     * var templates = '<body>&</body>';
      *
      * //output: &lt;body&gt;&amp;&lt;/body&gt;
-     * console.log( UE.utils.unhtml( html ) );
+     * console.log( UE.utils.unhtml( templates ) );
      *
      * ```
      */
@@ -788,7 +788,7 @@ var utils = UE.utils = {
     /**
      * 将str中的转义字符还原成html字符
      * @see UE.utils.unhtml(String);
-     * @method html
+     * @method templates
      * @param { String } str 需要逆转义的字符串
      * @return { String } 逆转义后的字符串
      * @example
@@ -797,7 +797,7 @@ var utils = UE.utils = {
      * var str = '&lt;body&gt;&amp;&lt;/body&gt;';
      *
      * //output: <body>&</body>
-     * console.log( UE.utils.html( str ) );
+     * console.log( UE.utils.templates( str ) );
      *
      * ```
      */
@@ -2132,7 +2132,7 @@ var domUtils = dom.domUtils = {
      *          反之， 过滤器第一次执行时的参数将是该节点的父节点。
      * @return { Node | Null } 如果找到符合过滤条件的节点， 就返回该节点， 否则返回NULL
      * @example
-     * ```html
+     * ```templates
      * <body>
      *
      *      <div id="test">
@@ -2247,7 +2247,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要删除的节点对象
      * @return { Node } 返回刚删除的节点对象
      * @example
-     * ```html
+     * ```templates
      * <div id="test">
      *     <div id="child">你好</div>
      * </div>
@@ -2266,7 +2266,7 @@ var domUtils = dom.domUtils = {
      * @param { Boolean } keepChildren 是否需要保留子节点
      * @return { Node } 返回刚删除的节点对象
      * @example
-     * ```html
+     * ```templates
      * <div id="test">
      *     <div id="child">你好</div>
      * </div>
@@ -2298,7 +2298,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要获取其后的兄弟节点的节点对象
      * @return { Node | NULL } 如果找满足条件的节点， 则返回该节点， 否则返回NULL
      * @example
-     * ```html
+     * ```templates
      *     <body>
      *      <div id="test">
      *          <span></span>
@@ -2313,7 +2313,7 @@ var domUtils = dom.domUtils = {
      * </script>
      * ```
      * @example
-     * ```html
+     * ```templates
      * <body>
      *      <div>
      *          <span></span>
@@ -2354,7 +2354,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要检测的节点对象
      * @return { Boolean } 是否是bookmark节点
      * @example
-     * ```html
+     * ```templates
      * <span id="_baidu_bookmark_1"></span>
      * <script>
      *      var bookmarkNode = document.getElementById("_baidu_bookmark_1");
@@ -2426,7 +2426,7 @@ var domUtils = dom.domUtils = {
      * @grammar UE.dom.domUtils.clearEmptySibling(node,ignoreNext)  //ignoreNext指定是否忽略右边空节点
      * @grammar UE.dom.domUtils.clearEmptySibling(node,ignoreNext,ignorePre)  //ignorePre指定是否忽略左边空节点
      * @example
-     * ```html
+     * ```templates
      * <body>
      *     <div></div>
      *     <span id="test"></span>
@@ -2487,7 +2487,7 @@ var domUtils = dom.domUtils = {
      * @param { int } offset 需要拆分的位置， 位置计算从0开始
      * @return { Node } 拆分后形成的新节点
      * @example
-     * ```html
+     * ```templates
      * <div id="test">abcdef</div>
      * <script>
      *      var newNode = UE.dom.domUtils.split( document.getElementById( "test" ).firstChild, 3 );
@@ -2518,7 +2518,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要检测的节点对象
      * @return { Boolean } 检测的节点是否为空
      * @example
-     * ```html
+     * ```templates
      * <div id="test">
      *
      * </div>
@@ -2670,7 +2670,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } nodeB 需要比较的节点
      * @return { Boolean } 两个节点是否具有相同的标签名、属性名以及属性值
      * @example
-     * ```html
+     * ```templates
      * <span style="font-size:12px">ssss</span>
      * <span style="font-size:12px">bbbbb</span>
      * <span style="font-size:13px">ssss</span>
@@ -2745,7 +2745,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } nodeB 需要比较的节点
      * @return { Boolean } 两个节点是否具有相同的style属性值
      * @example
-     * ```html
+     * ```templates
      * <span style="font-size:12px">ssss</span>
      * <span style="font-size:12px">bbbbb</span>
      * <span style="font-size:13px">ssss</span>
@@ -2805,7 +2805,7 @@ var domUtils = dom.domUtils = {
      * @warning 该方法的判断规则如下： 如果该元素原本是block元素， 则不论该元素当前的css样式是什么都会返回true；
      *          否则，检测该元素的css样式， 如果该元素当前是block元素， 则返回true。 其余情况下都返回false。
      * @example
-     * ```html
+     * ```templates
      * <span id="test1" style="display: block"></span>
      * <span id="test2"></span>
      * <div id="test3" style="display: inline"></div>
@@ -2910,7 +2910,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要检测的节点对象
      * @return { Number }  如果给定的节点是空的inline节点， 则返回1, 否则返回0。
      * @example
-     * ```html
+     * ```templates
      * <b><i></i></b> => 1
      * <b><i></i><u></u></b> => 1
      * <b></b> => 1
@@ -3048,7 +3048,7 @@ var domUtils = dom.domUtils = {
      * @method mergeToParent
      * @param { Element } node 需要提取的元素对象
      * @example
-     * ```html
+     * ```templates
      * <div id="parent">
      *     <div id="sub">
      *         <span id="child"></span>
@@ -3103,7 +3103,7 @@ var domUtils = dom.domUtils = {
      * @method mergeSibling
      * @param { Element } node 需要合并的目标节点
      * @example
-     * ```html
+     * ```templates
      * <b>xxxx</b><b id="test">ooo</b><b>xxxx</b>
      *
      * <script>
@@ -3121,7 +3121,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } node 需要合并的目标节点
      * @param { Boolean } ignorePre 是否忽略合并左节点
      * @example
-     * ```html
+     * ```templates
      * <b>xxxx</b><b id="test">ooo</b><b>xxxx</b>
      *
      * <script>
@@ -3141,7 +3141,7 @@ var domUtils = dom.domUtils = {
      * @param { Boolean } ignoreNext 是否忽略合并右节点
      * @remind 如果同时忽略左右节点， 则该操作什么也不会做
      * @example
-     * ```html
+     * ```templates
      * <b>xxxx</b><b id="test">ooo</b><b>xxxx</b>
      *
      * <script>
@@ -3214,7 +3214,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要删除属性的节点对象
      * @param { String } attrNames 可以是空格隔开的多个属性名称，该操作将会依次删除相应的属性
      * @example
-     * ```html
+     * ```templates
      * <div id="wrap">
      *      <span style="font-size:14px;" id="test" name="followMe">xxxxx</span>
      * </div>
@@ -3236,7 +3236,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要删除属性的节点对象
      * @param { Array } attrNames 需要删除的属性名数组
      * @example
-     * ```html
+     * ```templates
      * <div id="wrap">
      *      <span style="font-size:14px;" id="test" name="followMe">xxxxx</span>
      * </div>
@@ -3298,7 +3298,7 @@ var domUtils = dom.domUtils = {
      * @param { Object } attrs 需要设置的属性名-值对
      * @return { Element } 设置属性的元素对象
      * @example
-     * ```html
+     * ```templates
      * <span id="test"></span>
      *
      * <script>
@@ -3346,7 +3346,7 @@ var domUtils = dom.domUtils = {
      * @param { String } styleName 需要获取的样式名
      * @return { String } 获取到的样式值
      * @example
-     * ```html
+     * ```templates
      * <style type="text/css">
      *      #test {
      *          font-size: 15px;
@@ -3400,7 +3400,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } ele 需要删除class的元素节点
      * @param { String } classNames 需要删除的className， 多个className之间以空格分开
      * @example
-     * ```html
+     * ```templates
      * <span id="test" class="test1 test2 test3">xxx</span>
      *
      * <script>
@@ -3421,7 +3421,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } ele 需要删除class的元素节点
      * @param { Array } classNames 需要删除的className数组
      * @example
-     * ```html
+     * ```templates
      * <span id="test" class="test1 test2 test3">xxx</span>
      *
      * <script>
@@ -3455,7 +3455,7 @@ var domUtils = dom.domUtils = {
      * @param { String } classNames 需要添加的className， 多个className之间以空格分割
      * @remind 相同的类名不会被重复添加
      * @example
-     * ```html
+     * ```templates
      * <span id="test" class="cls1 cls2"></span>
      *
      * <script>
@@ -3477,7 +3477,7 @@ var domUtils = dom.domUtils = {
      * @param { Array } classNames 需要添加的className的数组
      * @remind 相同的类名不会被重复添加
      * @example
-     * ```html
+     * ```templates
      * <span id="test" class="cls1 cls2"></span>
      *
      * <script>
@@ -3508,7 +3508,7 @@ var domUtils = dom.domUtils = {
      * @param { String } classNames 需要检测的className， 多个className之间用空格分割
      * @return { Boolean } 元素是否包含所有给定的className
      * @example
-     * ```html
+     * ```templates
      * <span id="test1" class="cls1 cls2"></span>
      *
      * <script>
@@ -3530,7 +3530,7 @@ var domUtils = dom.domUtils = {
      * @param { Array } classNames 需要检测的className数组
      * @return { Boolean } 元素是否包含所有给定的className
      * @example
-     * ```html
+     * ```templates
      * <span id="test1" class="cls1 cls2"></span>
      *
      * <script>
@@ -3575,7 +3575,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } element 需要删除样式的元素
      * @param { String } styleName 需要删除的样式名
      * @example
-     * ```html
+     * ```templates
      * <span id="test" style="color: red; background: blue;"></span>
      *
      * <script>
@@ -3618,7 +3618,7 @@ var domUtils = dom.domUtils = {
      * @warning 该方法仅获取元素style属性中所标明的值
      * @return { String } 该元素包含指定的style属性值
      * @example
-     * ```html
+     * ```templates
      * <div id="test" style="color: red;"></div>
      *
      * <script>
@@ -3645,7 +3645,7 @@ var domUtils = dom.domUtils = {
      * @param { String } styleName 样式名
      * @param { String } styleValue 样式值
      * @example
-     * ```html
+     * ```templates
      * <div id="test"></div>
      *
      * <script>
@@ -3674,7 +3674,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } element 需要设置样式的元素
      * @param { Object } styles 样式名值对
      * @example
-     * ```html
+     * ```templates
      * <div id="test"></div>
      *
      * <script>
@@ -3717,7 +3717,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } node 需要检测的元素
      * @return { Number } 给定的node元素的子节点数量
      * @example
-     * ```html
+     * ```templates
      * <div id="test">
      *      <span></span>
      * </div>
@@ -3738,7 +3738,7 @@ var domUtils = dom.domUtils = {
      * @param { Function } fn 过滤器， 要求对符合条件的子节点返回true， 反之则要求返回false
      * @return { Number } 符合过滤条件的node元素的子节点数量
      * @example
-     * ```html
+     * ```templates
      * <div id="test">
      *      <span></span>
      * </div>
@@ -3917,7 +3917,7 @@ var domUtils = dom.domUtils = {
      * @param { Element } node 需要判断的元素
      * @return { Boolean } 是否是空元素
      * @example
-     * ```html
+     * ```templates
      * <div id="test"></div>
      *
      * <script>
@@ -3958,7 +3958,7 @@ var domUtils = dom.domUtils = {
      *                                  现有的位置上向水平方向偏移offset.left的距离， 在竖直方向上偏移
      *                                  offset.top的距离
      * @example
-     * ```html
+     * ```templates
      * <div id="test" style="top: 100px; left: 50px; position: absolute;"></div>
      *
      * <script>
@@ -3997,7 +3997,7 @@ var domUtils = dom.domUtils = {
      * @param { DomDocument } doc 填充的节点所在的docment对象
      * @param { Node } node 需要填充的节点对象
      * @example
-     * ```html
+     * ```templates
      * <div id="test"></div>
      *
      * <script>
@@ -4026,7 +4026,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } src 源节点， 该节点下的所有子节点将被移除
      * @param { Node } tag 目标节点， 从源节点移除的子节点将被追加到该节点下
      * @example
-     * ```html
+     * ```templates
      * <div id="test1">
      *      <span></span>
      * </div>
@@ -4058,7 +4058,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } tag 目标节点， 从源节点移除的子节点将被附加到该节点下
      * @param { Boolean } dir 附加方式， 如果为true， 则附加进去的节点将被放到目标节点的顶部， 反之，则放到末尾
      * @example
-     * ```html
+     * ```templates
      * <div id="test1">
      *      <span></span>
      * </div>
@@ -4099,7 +4099,7 @@ var domUtils = dom.domUtils = {
      * @param { Node } node 需要检测的节点对象
      * @return { Boolean } 节点是否不包含任何属性
      * @example
-     * ```html
+     * ```templates
      * <div id="test"><span>xxxx</span></div>
      *
      * <script>
@@ -4136,7 +4136,7 @@ var domUtils = dom.domUtils = {
      * @param { String } tagName 标签
      * @return { Boolean } 节点的标签是否是给定的标签
      * @example
-     * ```html
+     * ```templates
      * <div id="test"></div>
      *
      * <script>
@@ -4524,7 +4524,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @method cloneContents
          * @return { DocumentFragment | NULL } 如果选区是闭合的将返回null， 否则， 返回包含所clone内容的DocumentFragment元素
          * @example
-         * ```html
+         * ```templates
          * <body>
          *      <!-- 中括号表示选区 -->
          *      <b>x<i>x[x</i>xx]x</b>
@@ -4553,7 +4553,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @remind 执行完该操作后， 当前Range对象变成了闭合状态
          * @return { UE.dom.Range } 当前操作的Range对象
          * @example
-         * ```html
+         * ```templates
          * <body>
          *      <!-- 中括号表示选区 -->
          *      <b>x<i>x[x</i>xx]x</b>
@@ -4604,7 +4604,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @warning 执行该操作后， 原来选区所选中的内容将从dom树上剥离出来
          * @return { DocumentFragment } 返回包含所提取内容的DocumentFragment对象
          * @example
-         * ```html
+         * ```templates
          * <body>
          *      <!-- 中括号表示选区 -->
          *      <b>x<i>x[x</i>xx]x</b>
@@ -4654,7 +4654,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { int } offset 选区的开始位置偏移量
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区 -->
          * <b>xxx<i>x<span>xx</span>xx<em>xx</em>xxx</i>[xxx]</b>
          *
@@ -4669,7 +4669,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * </script>
          * ```
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区 -->
          * <b>xxx<img>[xx]x</b>
          *
@@ -4707,7 +4707,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Node } node 选区的开始边界将紧接着该节点之后
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>xx[x</span>xxx]</b>
          *
@@ -4746,7 +4746,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @see UE.dom.Range:setStartAfter(Node)
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>[xx<i>xxx</i><span>xx]x</span>xxx</b>
          *
@@ -4786,7 +4786,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @see UE.dom.Range:setStartBefore(Node)
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>[xx]x</span>xxx</b>
          *
@@ -4852,7 +4852,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Node } node 需要选中的节点
          * @return { UE.dom.Range } 当前range对象，此时的range仅包含当前给定的节点对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>[xx]x</span>xxx</b>
          *
@@ -4879,7 +4879,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Node } node 目标节点， 当前range将包含该节点内的所有节点
          * @return { UE.dom.Range } 当前range对象， 此时range仅包含给定节点的所有子节点
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>[xx]x</span>xxx</b>
          *
@@ -4915,7 +4915,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @method  collapse
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>[xx]x</span>xxx</b>
          *
@@ -4940,7 +4940,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @return { UE.dom.Range } 当前range对象，此时range对象处于闭合状态
          * @see UE.dom.Range:collapse()
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>xx<i>xxx</i><span>[xx]x</span>xxx</b>
          *
@@ -4974,12 +4974,12 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @method  shrinkBoundary
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          * <span>xx<b>xx[</b>xxxxx]</span> => <span>xx<b>xx</b>[xxxxx]</span>
          * ```
          *
          * @example
-         * ```html
+         * ```templates
          * <!-- 选区示例 -->
          * <b>x[xx</b><i>]xxx</i>
          *
@@ -4994,7 +4994,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * ```
          *
          * @example
-         * ```html
+         * ```templates
          * [<b><i>xxxx</i>xxxxxxx</b>] => <b><i>[xxxx</i>xxxxxxx]</b>
          * ```
          */
@@ -5038,7 +5038,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @remind 返回的公共祖先节点一定不是range自身的容器节点， 但有可能是一个文本节点
          * @return { Node } 当前range对象内所有节点的公共祖先节点
          * @example
-         * ```html
+         * ```templates
          * //选区示例
          * <span>xxx<b>x[x<em>xx]x</em>xxx</b>xx</span>
          * <script>
@@ -5062,7 +5062,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @return { Node } 当前range对象内所有节点的公共祖先节点
          * @see UE.dom.Range:getCommonAncestor()
          * @example
-         * ```html
+         * ```templates
          * <body>
          *
          *     <!-- 选区示例 -->
@@ -5094,7 +5094,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @see UE.dom.Range:getCommonAncestor()
          * @see UE.dom.Range:getCommonAncestor(Boolean)
          * @example
-         * ```html
+         * ```templates
          * <body>
          *
          *     <!-- 选区示例 -->
@@ -5134,7 +5134,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @remind 该操作有可能会引起文本节点被切开
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          *
          * //选区示例
          * <b>xxx<i>[xxxxx]</i>xxx</b>
@@ -5157,7 +5157,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Boolean } ignoreEnd 是否忽略对结束边界的调整
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          *
          * //选区示例
          * <b>xxx<i>[xxxxx]</i>xxx</b>
@@ -5487,7 +5487,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @method applyInlineStyle
          * @param { String } tagName 需要添加的标签名
          * @example
-         * ```html
+         * ```templates
          * <p>xxxx[xxxx]x</p>  ==>  range.applyInlineStyle("strong")  ==>  <p>xxxx[<strong>xxxx</strong>]x</p>
          * ```
          */
@@ -5499,7 +5499,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Object } attrs 跟随新添加的标签的属性
          * @return { UE.dom.Range } 当前选区
          * @example
-         * ```html
+         * ```templates
          * <p>xxxx[xxxx]x</p>
          *
          * ==>
@@ -5584,7 +5584,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { String } tagName 需要移除的标签名
          * @return { UE.dom.Range } 当前的range对象
          * @example
-         * ```html
+         * ```templates
          * xx[x<span>xxx<em>yyy</em>zz]z</span>  => range.removeInlineStyle(["em"])  => xx[x<span>xxxyyyzz]z</span>
          * ```
          */
@@ -5865,7 +5865,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @private
          * @return { Boolean } 返回开始和结束的位置
          * @example
-         * ```html
+         * ```templates
          * <body>
          *     <p>
          *         aaaa
@@ -5949,7 +5949,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @private
          * @return { Boolean } 返回开始和结束的位置
          * @example
-         * ```html
+         * ```templates
          * <body>
          *     <p>
          *         aaaa
@@ -6027,7 +6027,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { Function }  doFn 对每个遍历的节点要执行的方法， 该方法接受当前遍历的节点作为其参数
          * @return { UE.dom.Range } 当前range对象
          * @example
-         * ```html
+         * ```templates
          *
          * <body>
          *
@@ -6071,7 +6071,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @return { UE.dom.Range } 当前range对象
          * @see UE.dom.Range:traversal(Function)
          * @example
-         * ```html
+         * ```templates
          *
          * <body>
          *
@@ -6913,8 +6913,8 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
 
                 container.style.zIndex = options.zIndex;
 
-                var html = ( ie && browser.version < 9  ? '' : '<!DOCTYPE html>') +
-                    '<html xmlns=\'http://www.w3.org/1999/xhtml\' class=\'view\' ><head>' +
+                var html = ( ie && browser.version < 9  ? '' : '<!DOCTYPE templates>') +
+                    '<templates xmlns=\'http://www.w3.org/1999/xhtml\' class=\'view\' ><head>' +
                     '<style type=\'text/css\'>' +
                     //设置四周的留边
                     '.view{padding:0;word-wrap:break-word;cursor:text;height:90%;}\n' +
@@ -6928,7 +6928,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                     '</head><body class=\'view\' ></body>' +
                     '<script type=\'text/javascript\' ' + (ie ? 'defer=\'defer\'' : '' ) +' id=\'_initialScript\'>' +
                     'setTimeout(function(){editor = window.parent.UE.instants[\'ueditorInstant' + me.uid + '\'];editor._setup(document);},0);' +
-                    'var _tmpScript = document.getElementById(\'_initialScript\');_tmpScript.parentNode.removeChild(_tmpScript);</script></html>';
+                    'var _tmpScript = document.getElementById(\'_initialScript\');_tmpScript.parentNode.removeChild(_tmpScript);</script></templates>';
                 container.appendChild(domUtils.createElement(document, 'iframe', {
                     id: 'ueditor_' + me.uid,
                     width: "100%",
@@ -7249,7 +7249,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @return { String } 编辑器的内容html文档字符串
          * @eaxmple
          * ```javascript
-         * editor.getAllHtml(); //返回格式大致是: <html><head>...</head><body>...</body></html>
+         * editor.getAllHtml(); //返回格式大致是: <templates><head>...</head><body>...</body></templates>
          * ```
          */
         getAllHtml: function () {
@@ -7267,9 +7267,9 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
                 });
 
             }
-            return '<html><head>' + (me.options.charset ? '<meta http-equiv="Content-Type" content="text/html; charset=' + me.options.charset + '"/>' : '')
+            return '<templates><head>' + (me.options.charset ? '<meta http-equiv="Content-Type" content="text/templates; charset=' + me.options.charset + '"/>' : '')
                 + (headHtmlForIE9 || me.document.getElementsByTagName('head')[0].innerHTML) + headHtml.join('\n') + '</head>'
-                + '<body ' + (ie && browser.version < 9 ? 'class="view"' : '') + '>' + me.getContent(null, null, true) + '</body></html>';
+                + '<body ' + (ie && browser.version < 9 ? 'class="view"' : '') + '>' + me.getContent(null, null, true) + '</body></templates>';
         },
 
         /**
@@ -8421,11 +8421,11 @@ UE.ajax = function() {
  * @module UE
  * @since 1.2.6.1
  * @method filterWord
- * @param { String } html html字符串
+ * @param { String } templates html字符串
  * @return { String } 已过滤后的结果字符串
  * @example
  * ```javascript
- * UE.filterWord(html);
+ * UE.filterWord(templates);
  * ```
  */
 var filterWord = UE.filterWord = function () {
@@ -12550,9 +12550,9 @@ UE.commands['preview'] = {
         var w = window.open('', '_blank', ''),
             d = w.document;
         d.open();
-        d.write('<!DOCTYPE html><html><head><meta charset="utf-8"/><script src="'+this.options.UEDITOR_HOME_URL+'ueditor.parse.js"></script><script>' +
+        d.write('<!DOCTYPE templates><templates><head><meta charset="utf-8"/><script src="'+this.options.UEDITOR_HOME_URL+'ueditor.parse.js"></script><script>' +
             "setTimeout(function(){uParse('div',{rootPath: '"+ this.options.UEDITOR_HOME_URL +"'})},300)" +
-            '</script></head><body><div>'+this.getContent(null,null,true)+'</div></body></html>');
+            '</script></head><body><div>'+this.getContent(null,null,true)+'</div></body></templates>');
         d.close();
     },
     notNeedUndo : 1
@@ -16227,7 +16227,7 @@ UE.plugins['list'] = function () {
         codemirror: function (editor, holder){
 
             var codeEditor = window.CodeMirror(holder, {
-                mode: "text/html",
+                mode: "text/templates",
                 tabMode: "indent",
                 lineNumbers: true,
                 lineWrapping:true
@@ -27800,30 +27800,30 @@ UE.ui = baidu.editor.ui = {};
     };
 
     var iframeUrlMap = {
-        'anchor':'~/dialogs/anchor/anchor.html',
-        'insertimage':'~/dialogs/image/image.html',
-        'link':'~/dialogs/link/link.html',
-        'spechars':'~/dialogs/spechars/spechars.html',
-        'searchreplace':'~/dialogs/searchreplace/searchreplace.html',
-        'map':'~/dialogs/map/map.html',
-        'gmap':'~/dialogs/gmap/gmap.html',
-        'insertvideo':'~/dialogs/video/video.html',
-        'help':'~/dialogs/help/help.html',
-        'preview':'~/dialogs/preview/preview.html',
-        'emotion':'~/dialogs/emotion/emotion.html',
-        'wordimage':'~/dialogs/wordimage/wordimage.html',
-        'attachment':'~/dialogs/attachment/attachment.html',
-        'insertframe':'~/dialogs/insertframe/insertframe.html',
-        'edittip':'~/dialogs/table/edittip.html',
-        'edittable':'~/dialogs/table/edittable.html',
-        'edittd':'~/dialogs/table/edittd.html',
-        'webapp':'~/dialogs/webapp/webapp.html',
-        'snapscreen':'~/dialogs/snapscreen/snapscreen.html',
-        'scrawl':'~/dialogs/scrawl/scrawl.html',
-        'music':'~/dialogs/music/music.html',
-        'template':'~/dialogs/template/template.html',
-        'background':'~/dialogs/background/background.html',
-        'charts': '~/dialogs/charts/charts.html'
+        'anchor':'~/dialogs/anchor/anchor.templates',
+        'insertimage':'~/dialogs/image/image.templates',
+        'link':'~/dialogs/link/link.templates',
+        'spechars':'~/dialogs/spechars/spechars.templates',
+        'searchreplace':'~/dialogs/searchreplace/searchreplace.templates',
+        'map':'~/dialogs/map/map.templates',
+        'gmap':'~/dialogs/gmap/gmap.templates',
+        'insertvideo':'~/dialogs/video/video.templates',
+        'help':'~/dialogs/help/help.templates',
+        'preview':'~/dialogs/preview/preview.templates',
+        'emotion':'~/dialogs/emotion/emotion.templates',
+        'wordimage':'~/dialogs/wordimage/wordimage.templates',
+        'attachment':'~/dialogs/attachment/attachment.templates',
+        'insertframe':'~/dialogs/insertframe/insertframe.templates',
+        'edittip':'~/dialogs/table/edittip.templates',
+        'edittable':'~/dialogs/table/edittable.templates',
+        'edittd':'~/dialogs/table/edittd.templates',
+        'webapp':'~/dialogs/webapp/webapp.templates',
+        'snapscreen':'~/dialogs/snapscreen/snapscreen.templates',
+        'scrawl':'~/dialogs/scrawl/scrawl.templates',
+        'music':'~/dialogs/music/music.templates',
+        'template':'~/dialogs/template/template.templates',
+        'background':'~/dialogs/background/background.templates',
+        'charts': '~/dialogs/charts/charts.templates'
     };
     //为工具栏添加按钮，以下都是统一的按钮触发命令，所以写在一起
     var btnCmds = ['undo', 'redo', 'formatmatch',

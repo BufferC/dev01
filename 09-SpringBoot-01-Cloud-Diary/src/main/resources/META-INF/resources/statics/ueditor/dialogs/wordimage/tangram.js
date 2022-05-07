@@ -4,7 +4,7 @@
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 // 
-//      http:// tangram.baidu.com/license.html
+//      http:// tangram.baidu.com/license.templates
 // 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS-IS" BASIS,
@@ -171,7 +171,7 @@ baidu.browser.opera = /opera(\/| )(\d+(\.\d+)?)(.+?(version\/(\d+(\.\d+)?)))?/i.
  * 在目标元素的指定位置插入HTML代码
  * @name baidu.dom.insertHTML
  * @function
- * @grammar baidu.dom.insertHTML(element, position, html)
+ * @grammar baidu.dom.insertHTML(element, position, templates)
  * @param {HTMLElement|string} element 目标元素或目标元素的id
  * @param {string} position 插入html的位置信息，取值为beforeBegin,afterBegin,beforeEnd,afterEnd
  * @param {string} html 要插入的html

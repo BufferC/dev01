@@ -16,7 +16,7 @@
 
             if (token === null) {
                 alert("token不存在，请重新登录");
-                $(location).attr('href', "/login.html");
+                $(location).attr('href', "/login.templates");
             } else {
                 $.ajax({
                     type: "post",
@@ -28,7 +28,7 @@
                         } else {
                             alert(resp.message);
 
-                            $(location).attr('href', "/login.html");
+                            $(location).attr('href', "/login.templates");
                         }
                     }
                 })

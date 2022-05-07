@@ -3010,7 +3010,7 @@ CodeMirror.defineMode("xml", function(config, parserConfig) {
 });
 
 CodeMirror.defineMIME("application/xml", "xml");
-CodeMirror.defineMIME("text/html", {name: "xml", htmlMode: true});
+CodeMirror.defineMIME("text/templates", {name: "xml", htmlMode: true});
 CodeMirror.defineMode("javascript", function(config, parserConfig) {
     var indentUnit = config.indentUnit;
     var jsonMode = parserConfig.json;
@@ -3578,4 +3578,4 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
     }
 });
 
-CodeMirror.defineMIME("text/html", "htmlmixed");
+CodeMirror.defineMIME("text/templates", "htmlmixed");

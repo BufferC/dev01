@@ -2683,7 +2683,7 @@ vjs.MenuButton.prototype.unpressButton = function(){
  *
  * In the follwing example, the `data-setup` attribute tells the Video.js library to create a player instance when the library is ready.
  *
- * ```html
+ * ```templates
  * <video id="example_video_1" data-setup='{}' controls>
  *   <source src="my-source.mp4" type="video/mp4">
  * </video>
@@ -5498,7 +5498,7 @@ vjs.Flash = vjs.MediaTechController.extend({
 
       // Tried an actual local iframe just to make sure that works, but it kills the easiness of the CDN version if you require the user to host an iframe
       // We should add an option to host the iframe locally though, because it could help a lot of issues.
-      // iFrm.src = "iframe.html";
+      // iFrm.src = "iframe.templates";
 
       // Wait until iFrame has loaded to write into it.
       vjs.on(iFrm, 'load', vjs.bind(this, function(){

@@ -218,7 +218,7 @@ if (XRegExp) {
     // to search within the matches of the previous regex. The array of regexes can also contain
     // objects with `regex` and `backref` properties, in which case the named or numbered back-
     // references specified are passed forward to the next regex or returned. E.g.:
-    // var xregexpImgFileNames = XRegExp.matchChain(html, [
+    // var xregexpImgFileNames = XRegExp.matchChain(templates, [
     //     {regex: /<img\b([^>]+)>/i, backref: 1}, // <img> tag attributes
     //     {regex: XRegExp('(?ix) \\s src=" (?<src> [^"]+ )'), backref: "src"}, // src attribute values
     //     {regex: XRegExp("^http://xregexp\\.com(/[^#?]+)", "i"), backref: 1}, // xregexp.com paths
@@ -747,7 +747,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
                 help : '?',
                 alert: 'SyntaxHighlighter\n\n',
                 noBrush : 'Can\'t find brush for: ',
-                brushNotHtmlScript : 'Brush wasn\'t configured for html-script option: ',
+                brushNotHtmlScript : 'Brush wasn\'t configured for templates-script option: ',
 
                 // this is populated by the build script
                 aboutDialog : '@ABOUT@'
@@ -2251,7 +2251,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
 
             // find matches in the code using brushes regex list
             matches = this.findMatches(this.regexList, code);
-            // processes found matches into the html
+            // processes found matches into the templates
             html = this.getMatchesHtml(code, matches);
             // finally, split all lines so that they wrap well
             html = this.getCodeLinesHtml(html, lineNumbers);
@@ -2351,7 +2351,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
         },
 
         /**
-         * Makes a brush compatible with the `html-script` functionality.
+         * Makes a brush compatible with the `templates-script` functionality.
          * @param {Object} regexGroup Object containing `left` and `right` regular expressions.
          */
         forHtmlScript: function(regexGroup)
@@ -2793,7 +2793,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: SyntaxHighlighter.regexLib.multiLineCComments,		css: 'comments' },	// multiline comments
 			{ regex: SyntaxHighlighter.regexLib.doubleQuotedString,		css: 'string' },	// double quoted strings
 			{ regex: SyntaxHighlighter.regexLib.singleQuotedString,		css: 'string' },	// single quoted strings
-			{ regex: /\#[a-fA-F0-9]{3,6}/g,								css: 'value' },		// html colors
+			{ regex: /\#[a-fA-F0-9]{3,6}/g,								css: 'value' },		// templates colors
 			{ regex: /(-?\d+)(\.\d+)?(px|em|pt|\:|\%|)/g,				css: 'value' },		// sizes
 			{ regex: /!important/g,										css: 'color3' },	// !important
 			{ regex: new RegExp(getKeywordsCSS(keywords), 'gm'),		css: 'keyword' },	// keywords
@@ -3129,7 +3129,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			'has extends with before after around override augment';
     
 		this.regexList = [
-			{ regex: /(<<|&lt;&lt;)((\w+)|(['"])(.+?)\4)[\s\S]+?\n\3\5\n/g,	css: 'string' },	// here doc (maybe html encoded)
+			{ regex: /(<<|&lt;&lt;)((\w+)|(['"])(.+?)\4)[\s\S]+?\n\3\5\n/g,	css: 'string' },	// here doc (maybe templates encoded)
 			{ regex: /#.*$/gm,										css: 'comments' },
 			{ regex: /^#!.*\n/g,									css: 'preprocessor' },	// shebang
 			{ regex: /-?\w+(?=\s*=(>|&gt;))/g,	css: 'string' }, // fat comma
@@ -3456,7 +3456,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: r.singleLineCComments,								css: 'comments' },		// singleline comments
 			{ regex: r.doubleQuotedString,								css: 'string' },		// double quoted strings
 			{ regex: r.singleQuotedString,								css: 'string' },		// single quoted strings
-			{ regex: /\#[a-fA-F0-9]{3,6}/g,								css: 'value' },			// html colors
+			{ regex: /\#[a-fA-F0-9]{3,6}/g,								css: 'value' },			// templates colors
 			{ regex: /\b(-?\d+)(\.\d+)?(px|em|pt|\:|\%|)\b/g,			css: 'value' },			// sizes
 			{ regex: /\$\w+/g,											css: 'variable' },		// variables
 			{ regex: new RegExp(this.getKeywords(statements), 'g'),		css: 'color3' },		// statements

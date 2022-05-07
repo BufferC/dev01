@@ -7,6 +7,6 @@ public class HelloController {
     @RequestMapping("/")
     public String goHome() {
         System.out.println("执行此方法");
-        return "hello.html";
+        return "hello.templates";
     }
 }

@@ -105,12 +105,12 @@
 		// 2. 判断用户名或密码是否为空
 		/*if (isEmpty(userName)) {
 			// 如果为空，则提示用户
-			$("#msg").html("用户名称不能为空！");
+			$("#msg").templates("用户名称不能为空！");
 			return;
 		}
 		if (isEmpty(userPwd)) {
 			// 如果为空，则提示用户
-			$("#msg").html("用户密码不能为空！");
+			$("#msg").templates("用户密码不能为空！");
 			return;
 		}*/
 
