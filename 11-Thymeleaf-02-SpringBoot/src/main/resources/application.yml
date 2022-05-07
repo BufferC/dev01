@@ -1,0 +1,23 @@
+spring:
+  thymeleaf:
+    # 关闭thymeleaf的缓存，相当于开启了热部署
+    # 不需要重启服务器
+    cache: false
+    # 开启模板引擎
+    enabled: true
+    # 编码集
+    encoding: UTF-8
+    # 模板的类型
+    mode: "HTML"
+    # 指定的前缀，默认就是templates下
+    prefix: "classpath:/templates/"
+    # 指定的后缀
+    suffix: ".html"
+    # 检查模板是否存在
+    check-template-location: true
+    # 排除不会渲染的视图的名称
+#    excluded-view-names:
+#    # 默认解析器的执行顺序
+#    template-resolver-order:
+#    # 视图的名称
+#    view-names:

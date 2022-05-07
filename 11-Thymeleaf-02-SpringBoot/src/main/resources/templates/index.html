@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试SpringBoot使用Thymeleaf</title>
+</head>
+<body>
+    <!--刚刚用的th:value，和value属性差不多，只不过它能够被thymeleaf所识别-->
+    <!--刚刚用的th:text，和text属性差不多，只不过它能够被thymeleaf所识别-->
+    <h1 th:text="${data}" align="center" style="color: greenyellow;">展示数据</h1>
+    <h1 th:text="${data}" align="center" style="color: greenyellow;">展示数据</h1>
+    <h1 th:text="${data}" align="center" style="color: greenyellow;">展示数据</h1>
+    <h1 th:text="${data}" align="center" style="color: greenyellow;">展示数据</h1>
+
+    <h1 align="center" style="color: greenyellow;"><input type="text" th:value="${data}"></h1>
+
+</body>
+</html>
