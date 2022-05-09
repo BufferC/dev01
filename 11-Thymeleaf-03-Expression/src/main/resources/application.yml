@@ -1,0 +1,4 @@
+spring:
+  thymeleaf:
+    # 关闭缓存，开启热部署
+    cache: false

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试链接表达式传递参数</title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+</head>
+<script>
+    $(function () {
+        alert("链接表达式导入静态资源也没问题")
+    })
+</script>
+<body>
+    <table align="center">
+        <tr>
+            <th>编号</th>
+            <th>账号</th>
+            <th>密码</th>
+        </tr>
+        <tr>
+            <th><p th:text="${person.id}"></p></th>
+            <th><p th:text="${person.username}"></p></th>
+            <th><p th:text="${person.password}"></p></th>
+        </tr>
+    </table>
+
+
+    <a th:href="@{getParam}">测试无参跳转</a>
+    <br/>
+    <a th:href="@{'getParam?id=123&username=易烊千玺&password=123456'}">测试带参跳转</a>
+    <br/>
+    <!--一般情况下，我们需要把用户的id传递给后端，根据id获取对应的需要被修改的内容-->
+    <a th:href="@{'getParam?id=' + ${person.id} + '&username=' + ${person.username} + '&password=' + ${person.password}}">修改个人信息</a>
+    <br/>
+    <a th:href="@{getParam(id=${person.id}, username=${person.username}, password=${person.password})}">更优雅的方式传递参数</a>
+    <br/>
+    <a th:href="@{'getRestful/' + ${person.id} + '/' + ${person.username} + '/' + ${person.password}}">测试Restful</a>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试链接表达式跳转</title>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+</head>
+<body>
+    <a th:href="@{url}">当前路径下的url</a>
+    <br/>
+    <a th:href="@{/url}">绝对路径下的url</a>
+    <br/>
+    <a th:href="@{./url}">当前路径下的url</a>
+    <br/>
+    <a th:href="@{../url}">上级路径下的url</a>
+    <br/>
+    <a th:href="@{https://www.baidu.com}">外部路径</a>
+</body>
+</html>

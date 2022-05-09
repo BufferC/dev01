@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试选择表达式</title>
+</head>
+<body>
+    <table align="center" th:object="${user}">
+        <tr>
+            <td>姓名</td>
+            <td><p th:text="*{id}"></p></td>
+        </tr>
+        <tr>
+            <td>姓名</td>
+            <td><p th:text="*{name}"></p></td>
+        </tr>
+        <tr>
+            <td>年龄</td>
+            <td><p th:text="*{age}"></p></td>
+        </tr>
+        <tr>
+            <td>性别</td>
+            <td><p th:text="*{gender}"></p></td>
+        </tr>
+        <tr>
+            <td>信息</td>
+            <td><p th:text="*{info}"></p></td>
+        </tr>
+        <div th:object="${user.car}">
+            <tr>
+                <td>汽车的品牌</td>
+                <td><p th:text="*{brand}"></p></td>
+            </tr>
+            <tr>
+                <td>汽车的颜色</td>
+                <td><p th:text="*{getColor()}"></p></td>
+            </tr>
+        </div>
+    </table>
+
+    <p th:text="*{user.id}"></p>
+    <p th:text="*{user.name}"></p>
+    <p th:text="*{user.age}"></p>
+    <p th:text="*{user.gender}"></p>
+</body>
+</html>
