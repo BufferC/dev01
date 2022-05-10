@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:action</title>
+</head>
+<body>
+    <!--th:action、th:href一般情况下会和链接表达式相配合-->
+    <!--disabled和readonly有区别吗？
+    disable不能被传递，
+    hidden：隐藏，只是看不到了源码中还有，也能够被当做参数进行传递-->
+    <form th:method="${method}" th:action="@{update}">
+        <label hidden>
+            ID：<input type="text" name="id" th:value="${user.id}">
+        </label>
+
+        姓名：<input type="text" name="name" th:value="${user.name}">
+        年龄：<input type="text" name="age" th:value="${user.age}">
+        信息：<input type="text" name="info" th:value="${user.info}">
+        <input type="submit" value="修改用户">
+        <!--内联表达式，能用，后面再说-->
+        <!--<button th:onclick="fun([[${user.name}]]);" type="button">点我一下</button>-->
+        <button th:onclick="|fun(${user.id});|" type="button">点我一下</button>
+    </form>
+</body>
+<script>
+    function fun(id) {
+        alert('弹窗:' + id);
+    }
+</script>
+</html>

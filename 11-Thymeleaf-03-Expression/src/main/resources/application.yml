@@ -2,3 +2,7 @@ spring:
   thymeleaf:
     # 关闭缓存，开启热部署
     cache: false
+  messages:
+    encoding: UTF-8
+    # 对应国际化核心字典配置文件的路径
+    basename: messages/messages

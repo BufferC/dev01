@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试文本字面量</title>
+</head>
+<body>
+    <p th:text="你好">能够直接识别内容，会替换掉原本的内容</p>
+    <!--如果我们的文本中还有空格，就必须两种方式：单引号引用一下作为一个空格-->
+    <p th:text="'你好 世界'"></p>
+    <p th:text="'你好' + 'XinL'"></p>
+    <p th:text="'你好' + ${name}"></p>
+
+    <!--常见的文本字面量的用法：-->
+    <p th:text="'欢迎 ' + ${name} + ' 登录成功！'"></p>
+
+    <!--这种直接往上拼接的方式有点low-->
+    <!--thymeleaf提供的更加优雅的方式-->
+    <p th:text="|欢迎 ${name} 登录成功|"></p>
+</body>
+</html>

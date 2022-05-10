@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试null字面量</title>
+</head>
+<body>
+    <!--如果我们使用的是null字面量，只要字面量的值为null，就不会显示了-->
+    <!--标签还存在，我们就可以dom去获取这个元素-->
+    <p th:text="null">不显示</p>
+    <p th:text="${value}">不显示？</p>
+
+    <!--Thymeleaf对null做了一个小优化。如果我们使用了空字符串也会被当做null，但也不仅仅是当做null-->
+    <p th:text="${string}">不显示</p>
+
+    <p th:if="${value} eq null">1√</p>
+    <p th:if="${string} eq ''">2√</p>
+    <p th:if="${string} eq ('')">3√</p>
+
+    <!--虽然进行了优化，但是空字符串和null还是有区别的，并不能相提并论-->
+    <p th:if="${string} eq null">不会显示，因为空字符串不等于null</p>
+
+    <!--对我们来说是比较方便的，我们不需要再去做两次判断，只需要判断一次就够了-->
+</body>
+</html>

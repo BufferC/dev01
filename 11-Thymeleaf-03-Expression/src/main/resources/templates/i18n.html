@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{title}">测试消息表达式</title>
+</head>
+<body>
+<form>
+    <table align="center">
+        <caption><h1 align="center" style="color: yellowgreen" th:text="#{welcome}">测试国际化</h1></caption>
+
+        <tr>
+            <td th:text="#{username}">用户名</td>
+            <td><input type="text" th:placeholder="#{username_placeholder}"></td>
+        </tr>
+        <tr>
+            <td th:text="#{password}">密码</td>
+            <td><input type="password" th:placeholder="#{password_placeholder}"></td>
+        </tr>
+        <tr>
+            <td align="right">
+                <input type="checkbox">
+            </td>
+            <td align="center">
+                <span th:text="#{rememberMe}">记住我</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" th:value="#{login}">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <a th:href="@{i18n(lang=zh_CN)}">简体中文</a>
+                <a th:href="@{i18n(lang=zh_TW)}">繁体中文</a>
+                <a th:href="@{i18n(lang=en_US)}">美式英语</a>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

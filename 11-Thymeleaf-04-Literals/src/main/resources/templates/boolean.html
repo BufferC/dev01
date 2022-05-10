@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试布尔字面量</title>
+</head>
+<body>
+    <!--th:if类似我们jstl中的c:if标签-->
+    <!--如果if中的条件为false，那么整个标签都不会存在-->
+    <!--此时将无法根据id获取到标签dom元素-->
+    <p th:if="true">true显示</p>
+    <p th:if="false">false不显示</p>
+
+    <p th:if="${boolean}">显示</p>
+    <p th:if="not ${boolean}">不显示</p>
+
+    <!--测试等于：eq-->
+    <p th:if="${age} eq 22">年龄等于22岁</p>
+    <p th:if="${age} neq 100">年龄不等于100岁</p>
+    <p th:if="${age} == 22">年龄等于22岁</p>
+    <!--用不了-->
+
+
+    <p th:if="${age} gt 20">年龄大于20岁</p>
+    <p th:if="${age} lt 30">年龄小于30岁</p>
+
+    <p th:if="${age} ge 20">年龄大于等于20岁</p>
+    <p th:if="${age} le 30">年龄小于等于30岁</p>
+
+    <p th:if="${age} &gt; 20">年龄大于20岁&gt;</p>
+    <p th:if="${age} &lt; 30">年龄小于30岁&lt;</p>
+
+    <!--会报错的-->
+    <!--<p th:if="${age} &ge; 20">年龄大于等于20岁&ge;</p>-->
+    <!--<p th:if="${age} &le; 30">年龄小于等于30岁&le;</p>-->
+
+    <!--可以配合逻辑字面量实现多个条件的判断-->
+    <p th:if="${boolean} and ${age} &lt; 30">boolean为真并且年龄小于30岁&lt;</p>
+    <p th:if="!${boolean} or ${age} &gt; 20">boolean为真或者年龄大于20岁&lt;</p>
+
+    <!--下面的null字面量先用着-->
+    <p th:if="${notes} eq null or ${notes.size} eq 0">
+        当前的日记个数为空
+    </p>
+    <p th:if="${notes} neq null and ${notes.size} gt 0">
+        日记1
+        日记2
+        日记3
+    </p>
+</body>
+</html>

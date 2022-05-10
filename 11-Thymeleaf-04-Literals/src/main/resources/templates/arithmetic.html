@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试算术字面量</title>
+</head>
+<body>
+    <p th:text="1 + 1">如果加号两边是数字，就能够直接进行加减乘除取余运算</p>
+    <p th:text="${num} + 1">如果加号两边是数字，就能够直接进行加减乘除取余运算</p>
+
+    <p th:text="${num} + 100 + '字符串' + 100 + ${num}">200字符串100100</p>
+    <p th:text="${num} + 100 + '字符串' + (100 + ${num})">200字符串200</p>
+
+    <p th:text="(${num} * 10 - 1) % 10">结果是：9</p>
+</body>
+</html>

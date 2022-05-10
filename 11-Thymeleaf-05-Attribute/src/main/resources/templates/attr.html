@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:attr</title>
+</head>
+<body>
+
+    <form th:attr="action=${action}, method=${method}">
+        <label hidden>
+            ID：<input type="text" name="id" th:attr="value=${student.id}">
+        </label>
+
+        姓名：<input type="text" name="name" th:attr="value=${student.name}">
+        年龄：<input type="text" name="age" th:attr="value=${student.age}">
+        信息：<input type="text" name="info" th:attr="value=${student.info}">
+        唱：<input th:attr="type='checkbox', name='hobby', value='唱', checked='true'">
+        跳：<input th:type="checkbox" th:name="hobby" value="跳" th:checked="${checked}">
+        <button type="submit">提交</button>
+    </form>
+</body>
+<script>
+    // th:attr类似jquery这种写法，但是更加方便了不需要再写js了，直接在标签上写就行
+    $("#id").attr("value", "123");
+</script>
+
+</html>
