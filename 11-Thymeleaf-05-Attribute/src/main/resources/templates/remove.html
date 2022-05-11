@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:remove</title>
+</head>
+<body>
+    <p>测试all：删除全部：包括所在的标签全部都没了</p>
+    <div th:remove="all">
+        <h1 align="center" style="color: red">删除全部1</h1>
+        <h1 align="center" style="color: red">删除全部2</h1>
+    </div>
+    <p>测试body：删除其中包含的所有子项，但是所在标签还在</p>
+    <div th:remove="body">
+        <h1 align="center" style="color: red">删除子项1</h1>
+        <h1 align="center" style="color: red">删除子项2</h1>
+    </div>
+    <p>测试tag：不删除其中包含的所有子项，标签没了</p>
+    <div th:remove="tag">
+        <h1 align="center" style="color: red">不删除子项1</h1>
+        <h1 align="center" style="color: red">不删除子项2</h1>
+    </div>
+    <p>测试all-but-first：除了包含的第一个子项，其他子项全删，标签还在</p>
+    <div th:remove="all-but-first">
+        <h1 align="center" style="color: red">只留第一个子项</h1>
+        <h1 align="center" style="color: red">不删除子项2</h1>
+    </div>
+    <p>测试none：什么也不做</p>
+    <div th:remove="none">
+        <h1 align="center" style="color: red">什么也不做</h1>
+        <h1 align="center" style="color: red">什么也不做</h1>
+    </div>
+</body>
+</html>

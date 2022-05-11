@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:with</title>
+</head>
+<body>
+    <!--mybatis中有个标签叫sql-->
+    <!--声明一个变量，在当前标签以及子标签中可用-->
+    <div th:with="person = '易烊千玺'">
+        <span th:text="${person}"></span>
+    </div>
+
+    <table align="center">
+        <tr th:with="person = ${persons[0]}">
+            <td th:text="${person.id}"></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.age}"></td>
+            <td th:text="${person.gender}"></td>
+            <td th:text="${person.info}"></td>
+        </tr>
+    </table>
+</body>
+</html>

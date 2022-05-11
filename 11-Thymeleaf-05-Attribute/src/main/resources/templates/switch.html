@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:switch和th:case</title>
+</head>
+<body>
+    <ul th:switch="${user.age}">
+        <li th:case="1">年轻</li>
+        <li th:case="22">还行</li>
+        <li th:case="30">太老了</li>
+        <!--类似default-->
+        <li th:case="*">不太行</li>
+    </ul>
+</body>
+</html>

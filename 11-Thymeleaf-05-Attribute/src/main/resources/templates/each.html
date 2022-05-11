@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试th:each</title>
+</head>
+<body>
+    <!--<table align="center">-->
+    <!--    <caption>测试th:each，遍历list</caption>-->
+    <!--    <tr>-->
+    <!--        <th>ID</th>-->
+    <!--        <th>姓名</th>-->
+    <!--        <th>年龄</th>-->
+    <!--        <th>性别</th>-->
+    <!--        <th>信息</th>-->
+    <!--    </tr>-->
+    <!--    &lt;!&ndash;第一个参数就是迭代获取到的每一个对象，第二个参数就是被迭代的内容&ndash;&gt;-->
+    <!--    <tr th:each="person:${persons}">-->
+    <!--        <td th:text="${person.id}"></td>-->
+    <!--        <td th:text="${person.name}"></td>-->
+    <!--        <td th:text="${person.age}"></td>-->
+    <!--        <td th:text="${person.gender}"></td>-->
+    <!--        <td th:text="${person.info}"></td>-->
+    <!--    </tr>-->
+    <!--</table>-->
+
+    <!--<hr/>-->
+
+    <!--<table align="center">-->
+    <!--    <caption>测试遍历Map</caption>-->
+    <!--    <tr>-->
+    <!--        <th>key</th>-->
+    <!--        <th>value</th>-->
+    <!--    </tr>-->
+    <!--    <tr th:each="person:${map}">-->
+    <!--        <th th:text="${person.key}"></th>-->
+    <!--        <th th:text="${person.value}"></th>-->
+    <!--    </tr>-->
+    <!--</table>-->
+
+    <!--<hr/>-->
+
+    <!--<table align="center">-->
+    <!--    <caption>测试遍历Map中包含了对象</caption>-->
+    <!--    <tr>-->
+    <!--        <th>ID</th>-->
+    <!--        <th>姓名</th>-->
+    <!--        <th>年龄</th>-->
+    <!--        <th>性别</th>-->
+    <!--        <th>信息</th>-->
+    <!--    </tr>-->
+    <!--    &lt;!&ndash;如果map中包含了一个对象，可以通过遍历map中所有的值的方式获取到每个对象&ndash;&gt;-->
+    <!--    <tr th:each="person:${mapContainsObject.values()}">-->
+    <!--        <td th:text="${person.id}"></td>-->
+    <!--        <td th:text="${person.name}"></td>-->
+    <!--        <td th:text="${person.age}"></td>-->
+    <!--        <td th:text="${person.gender}"></td>-->
+    <!--        <td th:text="${person.info}"></td>-->
+    <!--    </tr>-->
+    <!--</table>-->
+
+    <hr/>
+
+    <table align="center" th:each="map:${maps}">
+        <tr>
+            <th>ID</th>
+            <th>姓名</th>
+            <th>年龄</th>
+            <th>性别</th>
+            <th>信息</th>
+        </tr>
+        <!--如果map中包含了一个对象，可以通过遍历map中所有的值的方式获取到每个对象-->
+        <tr th:each="person:${map.values}">
+            <td th:text="${person.id}"></td>
+            <td th:text="${person.name}"></td>
+            <td th:text="${person.age}"></td>
+            <td th:text="${person.gender}"></td>
+            <td th:text="${person.info}"></td>
+        </tr>
+    </table>
+
+    <hr/>
+
+    <ul th:each="text:${array}">
+        <li th:text="${text}"></li>
+    </ul>
+
+    <hr/>
+
+    <table align="center" border="1px">
+        <tr>
+            <th>下标</th>
+            <th>计数</th>
+            <th>总数</th>
+            <th>是否是奇数</th>
+            <th>是否是偶数</th>
+            <th>是否是第一个</th>
+            <th>是否是最后一个</th>
+            <th>当前对象</th>
+        </tr>
+        <!--第一个参数是迭代获取到的每一个对象，第二个参数为状态，第三个参数为迭代的内容-->
+        <tr th:each="person, status:${persons}">
+            <td th:text="${status.index}"></td>
+            <td th:text="${status.count}"></td>
+            <td th:text="${status.size}"></td>
+            <td th:text="${status.odd}"></td>
+            <td th:text="${status.even}"></td>
+            <td th:text="${status.first}"></td>
+            <td th:text="${status.last}"></td>
+            <td th:text="${status.current}"></td>
+        </tr>
+        <!--假如我们有一个热搜的功能，热搜第一的消息变成红色-->
+    </table>
+</body>
+</html>
