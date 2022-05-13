@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试自定义代码片段</title>
+</head>
+<body>
+    <!--自定义模板片段-->
+    <div th:fragment="current">
+        <h1 style="color: red" align="center">自定义模板片段</h1>
+    </div>
+
+    <div th:insert="~{::current}"></div>
+    <!--省略写法-->
+    <div th:insert="::current"></div>
+</body>
+</html>

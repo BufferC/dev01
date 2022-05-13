@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试参数化模板</title>
+</head>
+<body>
+    <div th:insert="fragment/param.html::welcome('纲手', '木叶')"></div>
+    <div th:insert="fragment/param.html::welcome('大蛇丸', '木叶')"></div>
+    <div th:insert="fragment/param.html::welcome('自来也', '木叶')"></div>
+    <div th:insert="fragment/param.html::welcome(${name}, ${address})"></div>
+</body>
+</html>

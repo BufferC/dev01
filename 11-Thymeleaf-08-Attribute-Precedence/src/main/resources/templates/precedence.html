@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试优先级</title>
+</head>
+<body>
+    <ol>
+        <!--可读性比较差，建议优先级高的往前放-->
+        <li th:text="${student.name}" th:each="student:${students}"></li>
+    </ol>
+
+    <ol>
+        <!--可读性比较差，建议优先级高的往前放-->
+        <li th:text="*{name}" th:object="${student}" th:each="student:${students}"></li>
+        <li th:if="false" th:each="student:${students}" th:object="${student}" th:text="*{name}"></li>
+    </ol>
+
+    <label>
+        <select>
+            <option th:selected="${location.value} eq ${selected}"
+                    th:each="location:${location}"
+                    th:value="${location.key}"
+                    th:text="${location.value}"></option>
+        </select>
+    </label>
+</body>
+</html>

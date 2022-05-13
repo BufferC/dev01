@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试自定义代码片段</title>
+</head>
+<body>
+    <!--导入自定义的模板片段需要使用片段表达式-->
+    <!--文件名加id的形式-->
+    <!--自定义模板片段和jsp中的包含差不多-->
+    <!--云日记里面就是用的包含-->
+    <div th:insert="~{header.html::header}"></div>
+
+    <!--省略写法，不需要写~{}-->
+    <div th:insert="header.html::header"></div>
+    <!--把当前的标签整个替换调了-->
+    <div th:replace="header.html::header"></div>
+    <!--这个用得不多，最好别用-->
+    <div th:include="header.html::header"></div>
+
+    <div th:insert="~{footer.html::footer}"></div>
+
+    <div th:insert="footer.html::footer"></div>
+</body>
+</html>

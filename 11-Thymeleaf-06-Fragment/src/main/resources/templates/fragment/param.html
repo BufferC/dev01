@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>参数模板</title>
+</head>
+<body>
+
+    <!--方法的声明很像-->
+    <div th:fragment="welcome(name, address)">
+        <h1 th:text="|欢迎来自${address}的${name}登录游戏|" align="center" style="color: yellowgreen"></h1>
+    </div>
+</body>
+</html>
