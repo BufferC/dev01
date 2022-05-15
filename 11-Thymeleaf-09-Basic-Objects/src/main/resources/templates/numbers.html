@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试numbers</title>
+</head>
+<body th:with="num = 123.456">
+
+<p th:text="${num}"></p>
+
+formatInteger:显示指定的位数，如果不够就补0
+<p th:text="${#numbers.formatInteger(num, 0)}"></p>
+<p th:text="${#numbers.formatInteger(num, 1)}"></p>
+<p th:text="${#numbers.formatInteger(num, 4)}"></p>
+
+formatDecimal:显示指定的位数，第二个参数为小数点前的长度，如果不够就补0；第三个参数为小数点后的长度，如果不够就补0
+<p th:text="${#numbers.formatDecimal(num, 0, 3)}"></p>
+<p th:text="${#numbers.formatDecimal(num, 1, 4)}"></p>
+<p th:text="${#numbers.formatDecimal(num, 4, 0)}"></p>
+
+formatCurrency:格式化货币
+<p th:text="${#numbers.formatCurrency(num)}"></p>
+
+formatPercent:格式化百分数，第二个参数为小数点前的长度，如果不够就补0；第三个参数为小数点后的长度，如果不够就补0
+<p th:text="${#numbers.formatPercent(num, 8, 2)}"></p>
+</body>
+</html>

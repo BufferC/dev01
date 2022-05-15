@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试表达式基本对象</title>
+</head>
+<body>
+    <!--域对象获取参数会依次在model、request、session、ServletContext-->
+    <p th:text="${attr}"></p>
+    <p th:text="${value}"></p>
+    <p th:text="${#session.getAttribute('attr')}"></p>
+    <p th:text="${#servletContext.getAttribute('attr')}"></p>
+
+    <!--pageContext的作用：获取其他域对象-->
+    <!--加上#拿到的就是对象，作为一个对象除了能够获取域对象参数，还可以调用其他方法-->
+    <!--不加#只能获取域对象参数，但是很方便，直接点参数名即可-->
+    <p th:text="${#ctx.session.attr}"></p>
+    <p th:text="${#ctx.#session.getAttribute('attr')}"></p>
+    <p th:text="${#ctx.#session.getAttribute('attr')}"></p>
+    <p th:text="${#ctx.#request.getAttribute('attr')}"></p>
+    <p th:text="${#ctx.application.attr}"></p>
+    <p th:text="${#ctx.#servletContext.getAttribute('attr')}"></p>
+
+    <p th:text="${#request.scheme +
+    '://' +
+    #request.serverName +
+    ':' +
+    #request.serverPort +
+    #request.contextPath +
+    '/' +
+    #request.servletPath +
+    '?' +
+    #request.queryString}"></p>
+
+    是否为空：<p th:text="${param.isEmpty()}"></p>
+    个数：<p th:text="${param.size()}"></p>
+    <p th:text="${#request.getParameter('username')}"></p>
+
+    <hr/>
+
+    JSESSIONID：<p th:text="${#session.getId()}"></p>
+    获取创建时间
+    <p th:text="${#dates.format(#session.getCreationTime())}"></p><br>
+
+    获取上次访问时间
+    <p th:text="${#dates.format(#session.getLastAccessedTime())}"></p><br>
+
+    获取过期时间
+    <p th:text="${#session.getMaxInactiveInterval()}"></p><br>
+</body>
+</html>

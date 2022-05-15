@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试dates日期方法</title>
+</head>
+<body>
+原始日期：<p th:text="${date}"></p>
+格式化日期：<p th:text="${#dates.format(date)}"></p>
+使用指定模板格式化日期：<p th:text="${#dates.format(date, 'yyyy-MM-dd')}"></p>
+格式化数组日期：
+<ul>
+    <li th:each="date: ${#dates.arrayFormat(array)}" th:text="${date}"></li>
+</ul>
+格式化list日期：
+<ul th:each="date: ${#dates.listFormat(array)}">
+    <li th:text="${date}"></li>
+</ul>
+格式化set日期：
+<ul th:each="date: ${#dates.listFormat(set)}">
+    <li th:text="${date}"></li>
+</ul>
+
+获取指定日期的年月日时分秒：
+<p th:text="${#dates.year(date)} + '年' + ${#dates.month(date)} + '月' + ${#dates.day(date)} + '日' + ${#dates.hour(date)} + '时' + ${#dates.minute(date)} + '分' + ${#dates.second(date)} + '秒'"></p>
+
+创建当前日期时间：
+<!--Date date = new Date(System.currentTimeMillis)-->
+<p th:with="now = ${#dates.createNow()}" th:text="${now}"></p>
+创建当前日期，没有时间：
+<p th:with="today = ${#dates.createToday()}" th:text="${today}"></p>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试uris转义/非转义方法</title>
+</head>
+<body>
+<!--th:with用于声明一个局部变量-->
+<div th:with="url='https://localhost:8080/dev01?username=易烊千玺&password=123456'">
+
+    <!-- 转义/非转义路径后面的所有内容（包括 ?） -->
+    转义：<span th:text="${#uris.escapePath(url)}"></span><br><br>
+    非转义：<span th:text="${#uris.unescapePath(url)}"></span><br><br>
+
+    <!-- 转义/非转义全部内容（包括 /） -->
+    转义：<span th:text="${#uris.escapePathSegment(url)}"></span><br><br>
+    非转义：<span th:text="${#uris.unescapePathSegment(url)}"></span><br><br>
+
+    <!-- 转义/非转义请求参数部分 -->
+    转义：<span th:text="${#uris.escapeQueryParam(url)}"></span><br><br>
+    非转义：<span th:text="${#uris.unescapeQueryParam(url)}"></span><br><br>
+
+</div>
+</body>
+</html>

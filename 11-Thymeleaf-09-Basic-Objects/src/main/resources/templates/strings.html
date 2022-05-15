@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>测试strings</title>
+</head>
+<body>
+toString:对象转字符串
+<p th:text="${#strings.toString(user)}"></p>
+
+contains:是否包含
+<p th:text="${#strings.contains(text, 'ow')}"></p>
+
+contains:是否忽略大小写包含
+<p th:text="${#strings.containsIgnoreCase(text, 'ow')}"></p>
+
+prepend:开头拼接
+<p th:text="${#strings.prepend(text, 'Java ')}"></p>
+
+prepend:结尾拼接
+<p th:text="${#strings.append(text, ' Java')}"></p>
+
+capitalize:首字母转大写
+<p th:text="${#strings.capitalize('capitalize')}"></p>
+
+length:字符串长度
+<p th:text="${#strings.length('length')}"></p>
+
+trim:去两端空格
+<p th:text="${#strings.trim('  trim  ')}"></p>
+
+endsWith:以指定内容结尾
+<p th:text="${#strings.endsWith('endsWith', 'th')}"></p>
+
+startsWith:以指定内容开头
+<p th:text="${#strings.startsWith('startsWith', 'star')}"></p>
+
+indexOf:获取指定字符所在的下标
+<p th:text="${#strings.indexOf('indexOf', 'xO')}"></p>
+
+substring:截取字符串
+<p th:text="${#strings.substring('substring', 3, 5)}"></p>
+
+replace:替换
+<p th:text="${#strings.replace('replace', 'ace', 'aces')}"></p>
+</body>
+</html>

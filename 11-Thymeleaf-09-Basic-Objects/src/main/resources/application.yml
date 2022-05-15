@@ -1,0 +1,6 @@
+spring:
+  thymeleaf:
+    cache: false
+server:
+  servlet:
+    context-path: /dev01
