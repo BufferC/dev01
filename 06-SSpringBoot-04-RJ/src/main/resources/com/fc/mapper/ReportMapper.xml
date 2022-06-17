@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.dao.ReportMapper">
+    <select id="getMonth" resultType="com.fc.vo.NoteVo">
+        select count(1) as noteCount , date_format(pub_time,'%Y年%m月') as groupName
+        from tb_note tn
+        inner join tb_note_type tnt on tn.type_id = tnt.id
+        where tnt.user_id = #{id}
+        group by date_format(pub_time, '%Y年%m月')
+        order by date_format(pub_time, '%Y年%m月') asc
+    </select>
+
+    <select id="getLocation" resultType="com.fc.entity.TbNote">
+        select tn.lat ,tn.lon from tb_note tn
+        inner join tb_note_type tnt on tn.type_id = tnt.id
+        where tnt.user_id = #{id}
+    </select>
+</mapper>

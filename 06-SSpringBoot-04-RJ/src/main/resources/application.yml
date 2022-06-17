@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloud_diary?useSSL=false&useUnicode=true&characterEncoding=utf8&serverTimeZone=GTM+8
+    username: root
+    password: 958824
+
+  servlet:
+    multipart:
+      max-request-size: 50MB
+      max-file-size: 10MB
+      # 开启多文件上传
+      enabled: true
+
+mybatis:
+  # mybatis-config.xml配置文件所在的路径
+  #  config-location:
+  # 扫描指定路径下的映射文件（sql）
+  mapper-locations: classpath:com/fc/mapper/*.xml
+  configuration:
+    # 加sql执行日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    # 二级缓存
+    cache-enabled: true
+    # 主键回填
+    use-generated-keys: true
+    # 驼峰映射
+    map-underscore-to-camel-case: true
+    # 懒加载
+    lazy-loading-enabled: true
+    # 积极加载
+    aggressive-lazy-loading: false
+  # 别名所在的包
+  type-aliases-package: com.fc.entity
+# 分页插件
+pagehelper:
+  reasonable: true
+  auto-dialect: true

@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fc.dao.TbNoteMapper">
+  <resultMap id="BaseResultMap" type="com.fc.entity.TbNote">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="pub_time" jdbcType="TIMESTAMP" property="pubTime" />
+    <result column="lon" jdbcType="REAL" property="lon" />
+    <result column="lat" jdbcType="REAL" property="lat" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.fc.entity.TbNote">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+
+  <select id="getNoteById" resultType="com.fc.vo.NoteVo">
+    select tn.*, tnt.type_name as typeName
+    from tb_note tn
+           inner join tb_note_type tnt
+                      on tn.type_id = tnt.id
+    where tn.id = #{id}
+  </select>
+
+  <!--类别分类查询-->
+  <select id="selectDateType" resultType="com.fc.vo.NoteVo">
+    select count(1) as noteCount, tnt.id as typeId, tnt.type_name as groupName
+    from tb_note tn
+           right join tb_note_type tnt on tn.type_id = tnt.id
+    where tnt.user_id = #{userId}
+    group by tnt.id
+    order by count(1) desc
+  </select>
+
+  <!--日期分类查询
+    获取从1开始数据总数 别名 noteCount
+    格式化 pub_time 像 %Y年%m月 别名 groupName
+    从表 tb_note 查询与表 tb_note_type 的字段 id 相等的字段对于字段 type_id
+    条件为表 tb_note_type 的字段 user_id 等于 #{userId}
+    依据格式化后的 pub_time 像 %Y年%m月 进行分组
+    依据格式化后的 pub_time 像 %Y年%m月 进行降序排序
+   -->
+  <select id="selectTimeType" resultType="com.fc.vo.NoteVo">
+    select count(1) as noteCount, date_format(pub_time, '%Y年%m月') as groupName
+    from tb_note tn inner join tb_note_type tnt on tn.type_id = tnt.id
+    where tnt.user_id = #{userId}
+    group by date_format(pub_time, '%Y年%m月')
+    order by date_format(pub_time, '%Y年%m月') desc
+  </select>
+  <!--分页查询所有的日记-->
+  <select id="selectUserPageAll" resultType="com.fc.entity.TbNote">
+    select tn.* from tb_user tu
+    inner join tb_note_type tnt on tu.id = tnt.user_id
+    inner join tb_note tn on tnt.id = tn.type_id
+    where tu.id = #{userId}
+    <if test="title != null and title != ''">
+      and tn.title like #{title}
+    </if>
+    <if test="date != null and date != ''">
+      and date_format(tn.pub_time, '%Y年%m月') = #{date}
+    </if>
+    <if test="id != null">
+      and tnt.id = #{id}
+    </if>
+    order by tn.pub_time desc
+  </select>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, title, type_id, pub_time, lon, lat
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.TbNoteExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.fc.entity.TbNoteExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from tb_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from tb_note
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_note
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.fc.entity.TbNoteExample">
+    delete from tb_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.fc.entity.TbNote">
+    insert into tb_note (id, title, type_id, 
+      pub_time, lon, lat, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{typeId,jdbcType=INTEGER}, 
+      #{pubTime,jdbcType=TIMESTAMP}, #{lon,jdbcType=REAL}, #{lat,jdbcType=REAL}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fc.entity.TbNote">
+    insert into tb_note
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="pubTime != null">
+        pub_time,
+      </if>
+      <if test="lon != null">
+        lon,
+      </if>
+      <if test="lat != null">
+        lat,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="pubTime != null">
+        #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lon != null">
+        #{lon,jdbcType=REAL},
+      </if>
+      <if test="lat != null">
+        #{lat,jdbcType=REAL},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.fc.entity.TbNoteExample" resultType="java.lang.Long">
+    select count(*) from tb_note
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update tb_note
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null">
+        title = #{record.title,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeId != null">
+        type_id = #{record.typeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.pubTime != null">
+        pub_time = #{record.pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lon != null">
+        lon = #{record.lon,jdbcType=REAL},
+      </if>
+      <if test="record.lat != null">
+        lat = #{record.lat,jdbcType=REAL},
+      </if>
+      <if test="record.content != null">
+        content = #{record.content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update tb_note
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      pub_time = #{record.pubTime,jdbcType=TIMESTAMP},
+      lon = #{record.lon,jdbcType=REAL},
+      lat = #{record.lat,jdbcType=REAL},
+      content = #{record.content,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update tb_note
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=VARCHAR},
+      type_id = #{record.typeId,jdbcType=INTEGER},
+      pub_time = #{record.pubTime,jdbcType=TIMESTAMP},
+      lon = #{record.lon,jdbcType=REAL},
+      lat = #{record.lat,jdbcType=REAL}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fc.entity.TbNote">
+    update tb_note
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="pubTime != null">
+        pub_time = #{pubTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lon != null">
+        lon = #{lon,jdbcType=REAL},
+      </if>
+      <if test="lat != null">
+        lat = #{lat,jdbcType=REAL},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fc.entity.TbNote">
+    update tb_note
+    set title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      pub_time = #{pubTime,jdbcType=TIMESTAMP},
+      lon = #{lon,jdbcType=REAL},
+      lat = #{lat,jdbcType=REAL},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fc.entity.TbNote">
+    update tb_note
+    set title = #{title,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=INTEGER},
+      pub_time = #{pubTime,jdbcType=TIMESTAMP},
+      lon = #{lon,jdbcType=REAL},
+      lat = #{lat,jdbcType=REAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
