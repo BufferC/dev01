@@ -1,6 +1,7 @@
 package com.fc.service.impl;
 
 import com.fc.dao.AlleviationMapper;
+import com.fc.entity.AlleviationExample;
 import com.fc.entity.AlleviationWithBLOBs;
 import com.fc.service.AlleviationService;
 import com.fc.vo.ResultVo;
@@ -54,23 +55,29 @@ public class AlleviationServiceImpl implements AlleviationService {
     }
 
     @Override
-    public ResultVo list(Integer pageNo, Integer pageSize) {
-        List<AlleviationWithBLOBs> arrayList;
+    public ResultVo list(Integer pageNo, Integer pageSize,String type) {
+        List<AlleviationWithBLOBs> arrayList = null;
         PageInfo<AlleviationWithBLOBs> userPageInfo;
         ResultVo resultVo ;
-
+        PageHelper.startPage(pageNo, pageSize);
         try {
-            PageHelper.startPage(pageNo, pageSize);
-            arrayList = alleviationMapper.selectByExampleWithBLOBs(null);
-            //DataVo<Object> dataVo = new DataVo<>();
-            userPageInfo = new PageInfo<>(arrayList);
-            if (userPageInfo.getPageNum() != 0) {
-                resultVo = new ResultVo("获取成功!", userPageInfo, true, 200);
+            if (type == null||type.equals("")){
+                arrayList = alleviationMapper.selectByExampleWithBLOBs(null);
+                //DataVo<Object> dataVo = new DataVo<>();
             }else {
-                resultVo = new ResultVo("获取失败!",null,false,404);
+                AlleviationExample alleviationExample = new AlleviationExample();
+                AlleviationExample.Criteria criteria = alleviationExample.createCriteria();
+                criteria.andTypeLike("%"+type+"%");
+                arrayList = alleviationMapper.selectByExampleWithBLOBs(alleviationExample);
             }
         }catch (Exception e){
             resultVo = new ResultVo("获取异常!",null,false,500);
+        }
+        userPageInfo = new PageInfo<>(arrayList);
+        if (!arrayList.isEmpty()) {
+            resultVo = new ResultVo("获取成功!", userPageInfo, true, 200);
+        }else {
+            resultVo = new ResultVo("获取失败!",null,false,404);
         }
 
         return resultVo;

@@ -15,18 +15,18 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DuplicateKeyException.class)
     @ResponseBody
     public ResultVo handleDuplicateKeyException(DuplicateKeyException e) {
-        return new ResultVo( "当前用户名已存在，不会用请联系系统管理员", e.getMessage(),false,4000);
+        return new ResultVo( "当前用户名已存在，请联系系统管理员", e.getMessage(),false,4000);
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseBody
     public ResultVo handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
-        return new ResultVo( "请输入json格式的参数，不会用找管理员教教你", e.getMessage(), false,8621);
+        return new ResultVo( "请输入json格式的参数", e.getMessage(), false,8621);
     }
 
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
     public ResultVo handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
-        return new ResultVo("缺少了必要的参数，不会用找管理员", e.getMessage(), false,1314);
+        return new ResultVo("缺少了必要的参数", e.getMessage(), false,1314);
     }
 
     @ExceptionHandler(RuntimeException.class)

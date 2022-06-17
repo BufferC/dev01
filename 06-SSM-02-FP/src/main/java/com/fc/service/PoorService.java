@@ -13,7 +13,7 @@ public interface PoorService {
 
     ResultVo update(PoorWithBLOBs poor);
 
-    ResultVo list(Integer pageNo, Integer pageSize,Long id);
+    ResultVo list(Integer pageNo, Integer pageSize,String member);
 
     ResultVo click(Long id, Date clickTime);
 }

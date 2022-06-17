@@ -8,7 +8,7 @@ public interface MessageBoardService {
 
     ResultVo del(Long id);
 
-    ResultVo list(Integer pageNo, Integer pageSize, Long id);
+    ResultVo list(Integer pageNo, Integer pageSize, String username);
 
-    ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs, String isDel);
+    ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs/*, String isDel*/);
 }

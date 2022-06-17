@@ -76,10 +76,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, create_time, user_id, username, picture, reply_picture
+    id, create_time, user_id, username, `picture`, reply_picture
   </sql>
   <sql id="Blob_Column_List">
-    content, reply
+    `content`,`reply`
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.MessageBoardExample" resultMap="ResultMapWithBLOBs">
     select
@@ -158,7 +158,7 @@
       <if test="replyPicture != null">
         reply_picture,
       </if>
-      <if test="content != null">
+      <if test="condition != null">
         content,
       </if>
       <if test="reply != null">

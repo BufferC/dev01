@@ -21,7 +21,7 @@ public class RecruitmentController {
         return recruitmentService.add(volunteerRecruitment);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVo del(Long id){
         return recruitmentService.del(id);
     }
@@ -32,8 +32,8 @@ public class RecruitmentController {
     }
 
     @RequestMapping("getlist")
-    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
-        return recruitmentService.list(pageNum,pageSize,id);
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,@RequestParam(value = "position",required = false)String position){
+        return recruitmentService.list(pageNum,pageSize,position);
     }
 
 }

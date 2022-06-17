@@ -303,7 +303,7 @@
         click_num = #{record.clickNum,jdbcType=INTEGER},
       </if>
       <if test="record.condition != null">
-        condition = #{record.condition,jdbcType=LONGVARCHAR},
+        `condition` = #{record.condition,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.introduce != null">
         introduce = #{record.introduce,jdbcType=LONGVARCHAR},
@@ -397,7 +397,7 @@
         click_num = #{clickNum,jdbcType=INTEGER},
       </if>
       <if test="condition != null">
-        condition = #{condition,jdbcType=LONGVARCHAR},
+        `condition` = #{condition,jdbcType=LONGVARCHAR},
       </if>
       <if test="introduce != null">
         introduce = #{introduce,jdbcType=LONGVARCHAR},

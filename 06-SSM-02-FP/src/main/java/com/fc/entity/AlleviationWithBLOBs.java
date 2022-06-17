@@ -1,5 +1,6 @@
 package com.fc.entity;
 
+
 public class AlleviationWithBLOBs extends Alleviation{
     private String content;
     public String getContent() {

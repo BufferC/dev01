@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.CollectionMapper;
 import com.fc.entity.Collection;
+import com.fc.entity.CollectionExample;
 import com.fc.service.CollectionService;
 import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
@@ -9,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,25 +56,24 @@ public class CollectionServiceImpl implements CollectionService {
     }
 
     @Override
-    public ResultVo list(Integer pageNo, Integer pageSize, Long id) {
+    public ResultVo list(Integer pageNo, Integer pageSize, String name) {
         List<Collection> arrayList;
         PageInfo<Collection> userPageInfo;
         ResultVo resultVo ;
-
+        PageHelper.startPage(pageNo, pageSize);
         try {
-            if (id == null){
-                PageHelper.startPage(pageNo, pageSize);
+            if (name == null||name.equals("")){
                 arrayList = collectionMapper.selectByExample(null);
             }else {
-                Collection collection = collectionMapper.selectByPrimaryKey(id);
-                arrayList = new ArrayList<>();
-                if(collection != null){
-                    arrayList.add(collection);
-                }
+                CollectionExample collectionExample = new CollectionExample();
+                CollectionExample.Criteria criteria = collectionExample.createCriteria();
+                criteria.andNameLike("%"+name+"%");
+                arrayList = collectionMapper.selectByExample(collectionExample);
+
             }
             //DataVo<Object> dataVo = new DataVo<>();
             userPageInfo = new PageInfo<>(arrayList);
-            if (userPageInfo.getPageNum() != 0) {
+            if (!arrayList.isEmpty()) {
                 resultVo = new ResultVo("用户获取成功!", userPageInfo, true, 200);
             }else {
                 resultVo = new ResultVo("用户获取失败!",null,false,404);

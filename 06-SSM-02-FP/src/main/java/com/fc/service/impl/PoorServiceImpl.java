@@ -1,6 +1,7 @@
 package com.fc.service.impl;
 
 import com.fc.dao.PoorMapper;
+import com.fc.entity.PoorExample;
 import com.fc.entity.PoorWithBLOBs;
 import com.fc.service.PoorService;
 import com.fc.vo.ResultVo;
@@ -9,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,25 +57,24 @@ public class PoorServiceImpl implements PoorService {
     }
 
     @Override
-    public ResultVo list(Integer pageNo, Integer pageSize,Long id) {
+    public ResultVo list(Integer pageNo, Integer pageSize,String member) {
         List<PoorWithBLOBs> arrayList;
         PageInfo<PoorWithBLOBs> userPageInfo;
         ResultVo resultVo ;
 
         try {
-            if (id == null){
+            if (member == null||member.equals("")){
                 PageHelper.startPage(pageNo, pageSize);
                 arrayList = poorMapper.selectByExampleWithBLOBs(null);
             }else {
-                PoorWithBLOBs poor = poorMapper.selectByPrimaryKey(id);
-                arrayList = new ArrayList<>();
-                if(poor != null){
-                    arrayList.add(poor);
-                }
+                PoorExample poorExample = new PoorExample();
+                PoorExample.Criteria criteria = poorExample.createCriteria();
+                criteria.andMemberLike("%"+member+"%");
+                arrayList = poorMapper.selectByExampleWithBLOBs(poorExample);
             }
             //DataVo<Object> dataVo = new DataVo<>();
             userPageInfo = new PageInfo<>(arrayList);
-            if (userPageInfo.getPageNum() != 0) {
+            if (!arrayList.isEmpty()) {
                 resultVo = new ResultVo("用户获取成功!", userPageInfo, true, 200);
             }else {
                 resultVo = new ResultVo("用户获取失败!",null,false,404);

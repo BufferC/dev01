@@ -18,14 +18,14 @@ public class CollectionController {
         return collectionService.add(collection);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVo del(Long id){
         return collectionService.del(id);
     }
 
     @RequestMapping("getlist")
-    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, Long id){
-        return collectionService.list(pageNum,pageSize,id);
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, @RequestParam(value = "name",required = false)String name){
+        return collectionService.list(pageNum,pageSize,name);
     }
     @RequestMapping("update")
     public ResultVo update(@RequestBody Collection collection){

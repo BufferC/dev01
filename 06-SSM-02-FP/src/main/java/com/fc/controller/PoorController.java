@@ -29,8 +29,8 @@ public class PoorController {
     }
 
     @RequestMapping("getlist")
-    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,Long id){
-        return poorService.list(pageNum,pageSize,id);
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,@RequestParam(value = "member",required = false)String member){
+        return poorService.list(pageNum,pageSize,member);
     }
 
     @RequestMapping("click")

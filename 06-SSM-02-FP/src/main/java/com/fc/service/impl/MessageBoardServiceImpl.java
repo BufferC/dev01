@@ -10,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -57,28 +56,23 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     }
 
     @Override
-    public ResultVo list(Integer pageNo, Integer pageSize, Long id) {
+    public ResultVo list(Integer pageNo, Integer pageSize,String username) {
         List<MessageBoardWithBLOBs> arrayList;
         PageInfo<MessageBoardWithBLOBs> userPageInfo;
         ResultVo resultVo ;
-
+        PageHelper.startPage(pageNo, pageSize);
         try {
-            if (id == null){
-                PageHelper.startPage(pageNo, pageSize);
+            if (username == null||username.equals("")){
                 arrayList = messageBoardMapper.selectByExampleWithBLOBs(null);
             }else {
                 MessageBoardExample messageBoardExample = new MessageBoardExample();
                 MessageBoardExample.Criteria criteria = messageBoardExample.createCriteria();
-                criteria.andIdEqualTo(id);
-                List<MessageBoardWithBLOBs> messageBoardWithBLOBs = messageBoardMapper.selectByExampleWithBLOBs(messageBoardExample);
-                arrayList = new ArrayList<>();
-                if(messageBoardWithBLOBs != null){
-                    arrayList.add(messageBoardWithBLOBs.get(0));
-                }
+                criteria.andUsernameLike("%"+username+"%");
+                arrayList = messageBoardMapper.selectByExampleWithBLOBs(messageBoardExample);
             }
             //DataVo<Object> dataVo = new DataVo<>();
             userPageInfo = new PageInfo<>(arrayList);
-            if (userPageInfo.getPageNum() != 0) {
+            if (!arrayList.isEmpty()) {
                 resultVo = new ResultVo("用户获取成功!", userPageInfo, true, 200);
             }else {
                 resultVo = new ResultVo("用户获取失败!",null,false,404);
@@ -91,28 +85,29 @@ public class MessageBoardServiceImpl implements MessageBoardService {
     }
 
     @Override
-    public ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs, String isDel) {
+    public ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs/*, String isDel*/) {
         if (messageBoardWithBLOBs.getId() == null){
             return new ResultVo("请求参数异常",null,false,404);
         }
-        //删除回复
-        int delReply = -86;
+        /*//删除回复
+        int delReply = -86;*/
         //修改
-        int upReply = -13;
+        int upReply ;
 
         ResultVo resultVo;
 
         try{
             //不删除,只修改
-            if (isDel == null || isDel.equals("false")||isDel.equals("")){
-                upReply = messageBoardMapper.updateByPrimaryKeyWithBLOBs(messageBoardWithBLOBs);
-            }else if(messageBoardWithBLOBs.getReply()== null){//删除，修改
+            /*if (isDel == null || isDel.equals("false")||isDel.equals("")){*/
+                /*upReply = messageBoardMapper.updateByPrimaryKeyWithBLOBs(messageBoardWithBLOBs);*/
+                upReply = messageBoardMapper.updateByPrimaryKeySelective(messageBoardWithBLOBs);
+          /*  }else if(messageBoardWithBLOBs.getReply()== null){//删除，修改
                 delReply = messageBoardMapper.upReply(messageBoardWithBLOBs.getId(), messageBoardWithBLOBs.getReplyPicture());
             }else {//只修改，不删除
                 upReply = messageBoardMapper.updateByPrimaryKeyWithBLOBs(messageBoardWithBLOBs);
-            }
+            }*/
 
-            if (delReply != -86 || upReply != -13){
+            if (/*delReply != -86 || */upReply != 0){
                 resultVo = new ResultVo("修改成功!",1, true, 200);
             }else {
                 resultVo = new ResultVo("修改失败!",null,false,404);

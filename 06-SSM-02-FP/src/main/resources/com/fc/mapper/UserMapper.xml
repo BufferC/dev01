@@ -13,6 +13,9 @@
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="photo" jdbcType="VARCHAR" property="photo" />
   </resultMap>
+  <select id="findLogin" parameterType="java.lang.String" resultType="int">
+    select id from user where username = #{username} and password = #{password}
+  </select>
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">

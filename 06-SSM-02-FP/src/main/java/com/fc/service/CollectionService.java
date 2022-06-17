@@ -8,7 +8,7 @@ public interface CollectionService {
 
     ResultVo del(Long id);
 
-    ResultVo list(Integer pageNo, Integer pageSize, Long id);
+    ResultVo list(Integer pageNo, Integer pageSize,String name);
 
     ResultVo update(Collection collection);
 }

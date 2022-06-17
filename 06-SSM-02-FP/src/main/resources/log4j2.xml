@@ -12,7 +12,7 @@
     <!-- 定义logger,只有定义了logger并引入了appender,appender才会有效 -->
     <Loggers>
         <!-- 将dao接口所在的包填写进去,并用在控制台和文件中输出 -->
-        <logger name="com.fc.dao" level="TRACE" additivity="false">
+        <logger name="com.com.fc.dao" level="TRACE" additivity="false">
             <AppenderRef ref="Console"/>
         </logger>
 

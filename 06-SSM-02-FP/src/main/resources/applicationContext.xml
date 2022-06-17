@@ -44,7 +44,7 @@
 
     <!--用于扫描dao的接口，并且生成代理对象注入到容器中-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.fc.dao"/>
+        <property name="basePackage" value="com.com.fc.dao"/>
     </bean>
     <!--事务平台管理器-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

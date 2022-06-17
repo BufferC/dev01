@@ -24,12 +24,12 @@ public class CommentController {
     }
 
     @RequestMapping("getlist")
-    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, Long id){
-        return messageBoardService.list(pageNum,pageSize,id);
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize, @RequestParam(value = "username",required = false) String username){
+        return messageBoardService.list(pageNum,pageSize,username);
     }
 
-    @RequestMapping("reply")
-    public ResultVo reply(MessageBoardWithBLOBs messageBoardWithBLOBs,@RequestParam(value = "isDel",required = false) String isDel){
-        return messageBoardService.reply(messageBoardWithBLOBs,isDel);
+    @RequestMapping("update")
+    public ResultVo reply(@RequestBody MessageBoardWithBLOBs messageBoardWithBLOBs/*,@RequestParam(value = "isDel",required = false) String isDel*/){
+        return messageBoardService.reply(messageBoardWithBLOBs/*,isDel*/);
     }
 }

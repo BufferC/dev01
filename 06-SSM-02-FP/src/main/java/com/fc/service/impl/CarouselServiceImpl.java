@@ -2,6 +2,7 @@ package com.fc.service.impl;
 
 import com.fc.dao.CarouselMapper;
 import com.fc.entity.Carousel;
+import com.fc.entity.CarouselExample;
 import com.fc.service.CarouselService;
 import com.fc.vo.ResultVo;
 import com.github.pagehelper.PageHelper;
@@ -9,7 +10,6 @@ import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,25 +18,23 @@ public class CarouselServiceImpl implements CarouselService {
     private CarouselMapper carouselMapper;
 
     @Override
-    public ResultVo getList(Integer pageNo, Integer pageSize, Integer id) {
+    public ResultVo getList(Integer pageNo, Integer pageSize, String name) {
         List<Carousel> arrayList;
         PageInfo<Carousel> userPageInfo;
         ResultVo resultVo ;
-
+        PageHelper.startPage(pageNo, pageSize);
         try {
-            if (id == null){
-                PageHelper.startPage(pageNo, pageSize);
+            if (name == null||name.equals("")){
                 arrayList = carouselMapper.selectByExample(null);
             }else {
-                Carousel carousel = carouselMapper.selectByPrimaryKey(id);
-                arrayList = new ArrayList<>();
-                if(carousel != null){
-                    arrayList.add(carousel);
-                }
+                CarouselExample carouselExample = new CarouselExample();
+                CarouselExample.Criteria criteria = carouselExample.createCriteria();
+                criteria.andNameLike("%"+name+"%");
+                arrayList = carouselMapper.selectByExample(carouselExample);
             }
             //DataVo<Object> dataVo = new DataVo<>();
             userPageInfo = new PageInfo<>(arrayList);
-            if (userPageInfo.getPageNum() != 0) {
+            if (!arrayList.isEmpty()) {
                 resultVo = new ResultVo("获取成功!", userPageInfo, true, 200);
             }else {
                 resultVo = new ResultVo("获取失败!",null,false,404);

@@ -10,5 +10,5 @@ public interface RecruitmentService {
 
     ResultVo update(VolunteerRecruitmentWithBLOBs volunteerRecruitment);
 
-    ResultVo list(Integer pageNo, Integer pageSize,Long id);
+    ResultVo list(Integer pageNo, Integer pageSize,String position);
 }

@@ -24,17 +24,18 @@ public class AlleviationController {
 
     @RequestMapping("update")
     public ResultVo update(@RequestBody AlleviationWithBLOBs alleviation){
+        System.out.println(alleviation.getContent()+"**************************");
         return alleviationService.update(alleviation);
     }
 
-    @RequestMapping("del")
+    @RequestMapping("delete")
     public ResultVo del(Long id){
         return alleviationService.del(id);
     }
 
     @RequestMapping("getlist")
-    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize){
-        return alleviationService.list(pageNum,pageSize);
+    public ResultVo list(@RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5") Integer pageSize,@RequestParam(value = "type",required = false) String type){
+        return alleviationService.list(pageNum,pageSize,type);
     }
 
     @RequestMapping("click")

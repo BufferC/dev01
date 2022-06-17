@@ -76,10 +76,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, create_time, title, type, release_time, cover, last_click_time, click_num
+    id, create_time, title, `type`, release_time, cover, last_click_time, click_num
   </sql>
   <sql id="Blob_Column_List">
-    content
+    `content`
   </sql>
   <select id="selectByExampleWithBLOBs" parameterType="com.fc.entity.AlleviationExample" resultMap="ResultMapWithBLOBs">
     select
@@ -234,7 +234,7 @@
         click_num = #{record.clickNum,jdbcType=INTEGER},
       </if>
       <if test="record.content != null">
-        content = #{record.content,jdbcType=LONGVARCHAR},
+        `content` = #{record.content,jdbcType=LONGVARCHAR},
       </if>
     </set>
     <if test="_parameter != null">

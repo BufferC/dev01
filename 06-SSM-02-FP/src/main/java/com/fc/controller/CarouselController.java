@@ -14,8 +14,8 @@ public class CarouselController {
     private CarouselService carouselService;
 
     @RequestMapping("getlist")
-    public ResultVo getList(@RequestParam(value = "id",required = false)Integer id, @RequestParam(value = "pageNum",defaultValue = "1",required = false) Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize){
-        return carouselService.getList(pageNum, pageSize,id);
+    public ResultVo getList(@RequestParam(value = "name",required = false)String name, @RequestParam(value = "pageNum",defaultValue = "1",required = false) Integer pageNum, @RequestParam(value = "pageSize",defaultValue = "5",required = false) Integer pageSize){
+        return carouselService.getList(pageNum, pageSize,name);
     }
 
     @RequestMapping("add")

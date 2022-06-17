@@ -12,7 +12,8 @@ public interface AlleviationService {
 
     ResultVo del(Long id);
 
-    ResultVo list(Integer pageNo, Integer pageSize);
+    ResultVo list(Integer pageNo, Integer pageSize,String type);
 
     ResultVo click(Long id, Date lastClickTime);
+
 }

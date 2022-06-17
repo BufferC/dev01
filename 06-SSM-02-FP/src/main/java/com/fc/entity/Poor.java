@@ -1,10 +1,12 @@
 package com.fc.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Poor {
     private Long id;
-
+    @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date createTime;
 
     private String sn;
@@ -24,7 +26,7 @@ public class Poor {
     private String name;
 
     private String audit;
-
+    @JsonFormat(pattern = "yyyy年MM月dd日 HH时mm分ss秒")
     private Date lastClickTime;
 
     private Integer clickNum;
