@@ -1,0 +1,17 @@
+server:
+  port: 8686
+
+spring:
+  application:
+    name: springcloud-provider-blog
+
+# Eureka配置：配置服务注册中心地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:1314/eureka/,http://localhost:1315/eureka/,http://localhost:1316/eureka/
+  instance:
+    instance-id: springcloud-provider-dept-8686 #修改Eureka上的默认描述信息
+info:
+  app.name: GGBOY
+  company.name: 小天才

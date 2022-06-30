@@ -1,0 +1,30 @@
+server:
+  port: 1315
+# Eureka配置
+eureka:
+  instance:
+    # Eureka服务端的实例名字
+    hostname: localhost
+    #lease-renewal-interval-in-seconds: 30      # 心跳时间，即服务续约间隔时间（缺省为30s）
+    #lease-expiration-duration-in-seconds: 90  # 发呆时间，即服务续约到期时间（缺省为90s）
+
+  client:
+    # 表示是否向 Eureka 注册中心注册自己(这个模块本身是服务器,所以不需要)
+    register-with-eureka: false
+    # fetch-registry如果为false,则表示自己为注册中心,客户端的话为 ture
+    fetch-registry: false
+    #registry-fetch-interval-seconds: 5 # eureka client间隔多久去拉取服务注册信息,默认为30秒
+    #healthcheck:
+      #enabled: true  # 开启健康检查（依赖spring-boot-starter-actuator）
+    # Eureka监控页面~
+    service-url:
+      defaultZone: http://127.0.0.1:1314/eureka/,http://127.0.0.1:1316/eureka/
+        # 集群（关联）：1315关联1314,1316
+      # 单机： defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      #相当于：http://localhost:1314/eureka/
+
+  server:
+     enable-self-preservation: false           # 关闭自我保护模式（缺省为打开）
+      #eviction-interval-timer-in-ms: 60000       # 续期时间，即扫描失效服务的间隔时间（缺省为60*1000ms）
+
+
