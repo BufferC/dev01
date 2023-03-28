@@ -1,0 +1,20 @@
+server:
+  port: 8111
+spring:
+  rabbitmq:
+    port: 5672
+    host: 192.168.254.128
+    username: admin
+    password: admin
+    #\u8FD9\u4E2A\u914D\u7F6E\u662F\u4FDD\u8BC1\u63D0\u4F9B\u8005\u786E\u4FDD\u6D88\u606F\u63A8\u9001\u5230\u4EA4\u6362\u673A\u4E2D\uFF0C\u4E0D\u7BA1\u6210\u4E0D\u6210\u529F\uFF0C\u90FD\u4F1A\u56DE\u8C03
+    publisher-confirm-type: correlated
+    #\u4FDD\u8BC1\u4EA4\u6362\u673A\u80FD\u628A\u6D88\u606F\u63A8\u9001\u5230\u961F\u5217\u4E2D
+    publisher-returns: true
+    virtual-host: /
+    #\u8FD9\u4E2A\u914D\u7F6E\u662F\u4FDD\u8BC1\u6D88\u8D39\u8005\u4F1A\u6D88\u8D39\u6D88\u606F\uFF0C\u624B\u52A8\u786E\u8BA4
+    listener:
+      simple:
+        acknowledge-mode: manual
+    template:
+      mandatory: true
+
